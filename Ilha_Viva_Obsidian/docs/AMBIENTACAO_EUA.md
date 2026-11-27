@@ -1,0 +1,56 @@
+# Ambientação continental norte-americana | Decisão 27/11/2026
+
+## Vigência
+Aprovado pelo usuário: substituir Madagascar por uma região rural fictícia continental inspirada nos EUA, tendo os Apalaches/Blue Ridge e Ridge and Valley como referência inicial proposta. Madagascar deixa de ser cenário ativo; manter todo o acervo e a base v0.47 como histórico, sem espécies, biomas ou parâmetros malgaxes na nova campanha. Não deletar os assets antigos. Ilha Viva permanece codinome até escolha de título. Preservar o protagonista aprovado e suas animações; reconstruir terreno, flora, fauna, arquitetura e dados científicos. Aproveitar somente infraestrutura e algoritmos genéricos após auditoria, sem portar parâmetros antigos por padrão. Esta decisão prevalece sobre GDD, NARRATIVA, ILHA_VIVA, MADAGASCAR_v0.29, ROADMAP, CLAUDE e notas anteriores em conflito.
+
+## Mundo
+Vale rural fictício habitado, conectado a outras cidades por estradas e comércio, sem obrigação de ilha ou porto. Proposta narrativa: protagonista muda de vida e assume uma propriedade antiga mediante cooperativa local; comunidade autônoma, história escrita com conclusão e pós-história indefinido. Origem pessoal, época, nomes e mapa final pendentes. Quatro estações com clima regional, neve onde condições permitirem, fotoperíodo, congelamento e degelo; não aplicar neve uniformemente. Casa, celeiro, galinheiro, curral, silo, oficinas, estradas, pontes, escolas e comércio em escala coerente; construção por custo, tempo, trabalho, materiais, propriedade e demanda. NPCs independentes, sem crescimento garantido.
+
+## Macro-regiões propostas
+- Apalaches/Blue Ridge e Ridge and Valley: mosaico de floresta temperada, riachos, pastagem, lavoura e pomares; piloto.
+- Nordeste/Grandes Lagos: floresta mista, lagos, inverno mais rigoroso.
+- Grandes Planícies/Meio-Oeste: pradarias, lavoura, pastagem e zonas úmidas.
+- Sudeste/Golfo: clima quente, pântanos e planícies costeiras.
+- Montanhas Rochosas: coníferas, altitude e neve.
+- Noroeste do Pacífico: florestas úmidas, rios e montanhas.
+- Sudoeste: deserto, vegetação xerófita, escassez de água.
+- Alasca e Havaí: módulos futuros separados, não obrigatórios nem misturados por proximidade artificial.
+Cada região terá perfil de clima, relevo, solo, água, conectividade e ocorrência de espécies. O mapa é fictício, não cópia cartográfica 1:1. Migração, introdução doméstica/invasora, corredores e barreiras explicitamente modelados. Não juntar jacarés, bisões e alces no mesmo habitat sem justificativa ecológica. Escopo, dimensões e biomas dependem de testes.
+
+## Motor científico novo
+A unidade de estado regional é uma célula ecológica (área em m²) com camadas solo, água, vegetação e organismos; dados externos versionados com ID taxonômico, unidade, região, estação, fonte e intervalo de incerteza. Células distantes usam coortes, grupos funcionais microbianos e fluxos agregados; indivíduos próximos conservam identidade, idade, sexo, condição corporal e memória. Simular tempo de jogo, não tempo real com aplicativo fechado. Usar ticks fixos e RNG seeded; replay e save com migração explícita, nunca carregar um save de Madagascar como se fosse americano.
+
+| Camada | Estado/processos mínimos |
+|---|---|
+| Meteorologia | radiação, fotoperíodo, precipitação, vento, temperatura, umidade, neve e degelo; extremos plausíveis |
+| Terreno/hidrologia | elevação, declive, textura, infiltração, escoamento, água subterrânea simplificada, rios, erosão, retenção |
+| Solo | carbono orgânico, N mineral e orgânico, P disponível, pH, temperatura, umidade e oxigenação; estoques e fluxos |
+| Microbiologia | bactérias e fungos decompositores, micorrizas, nitrificantes, desnitrificantes, fixadores, protozoários e nematoides por grupos funcionais; crescimento limitado por substrato, ambiente e recursos |
+| Flora | fenologia, germinação, fotossíntese, respiração, raízes, nutrientes, sementes, polinização, competição, sucessão e dormência |
+| Fauna | dieta por espécie/idade/estação, energia, água, abrigo, reprodução sexuada quando aplicável, cuidado parental, dispersão, predadores e presas, doenças e parasitas abstratos |
+| Pecuária | raças e espécies domésticas, alimentação, água, pasto, reprodução, gestação/incubação, lactação, ovos, bem-estar e manejo |
+| IA | percepção local, memória, utilidade, rotinas, território, fuga, caça/forrageio, sociabilidade, aprendizado e decisões com custos; NPCs com objetivos e conhecimento parcial |
+| Economia | trabalho, estoques, preços, transporte, contratos, recursos e construção; ações de NPCs continuam sem jogador |
+
+### Conservação e interfaces
+Fotossíntese incorpora carbono a partir do CO2 atmosférico, usando energia luminosa, água e nutrientes; respiração e decomposição devolvem carbono. Consumo transfere biomassa do recurso para consumidor, fezes e perdas respiratórias; cadáver e serapilheira entram em detritos. Mineralização disponibiliza nutrientes, imobilização os retém; lixiviação/erosão exportam para água ou fronteira. Energia não é reciclada como matéria. Registrar entradas/saídas, unidades e tolerâncias numéricas; não gerar nutrientes, comida, nascimento ou estoque do nada. Ações concorrentes reservam recurso e resolvem em ordem determinística. Separar motor, dados, apresentação, narrativa e persistência.
+Reprodução depende de espécie, estação, maturidade, energia, saúde, parceiro/estratégia e capacidade de suporte. Não usar chance universal de nascimento. Herança simples validada por espécie, sem alegar genética completa. IA do jogador limitada a comandos assistidos, necessidades e animações contextuais, não tomar decisões pessoais; IA dos NPCs e animais offline.
+
+## Piloto e gates
+M48-A: inventário, arquivo histórico, isolamento do novo perfil; terreno temperado com relevo, solo, água, luz e clima; construir fatia mínima em HTML separada do Campo 05.
+M48-B: teia do solo e vegetação; pasto, carvalho regional, detritos, grupos decompositores e polinizadores, testes de balanço.
+M48-C: animais domésticos e selvagens candidatos (galinha, bovino, cervo-de-cauda-branca, coelho, raposa, insetos) somente após ficha e validação de ocorrência/dieta; testes de fome, energia, morte, reprodução e relação predador-presa.
+M48-D: IA autônoma de NPCs, produção, logística, construção e integração causal. Expandir regiões por gate, não por lista de centenas de sprites.
+Testar invariantes de massa/água/nutrientes, ausência de estados negativos, reprodutibilidade, continuidade LOD sem duplicações, clima sazonal, compatibilidade geográfica, reprodução, populações em simulação plurianual, ausência do jogador, save/reload, regressões, render/pivô/escala e desempenho em Android. Metas anteriores de 60 FPS Galaxy S23/30 FPS intermediário não são medições. Interface oferece sinais naturais e diário opcional; não exigir planilha do jogador. Não migrar a Godot nesta etapa. Arte nova original, perspectiva oblíqua consistente. HTML jogável e evidência real antes de declarar implementação.
+
+## Fontes oficiais iniciais (consultadas em 27/11/2026)
+- EPA, ecorregiões III/IV: https://www.epa.gov/eco-research/level-iii-and-iv-ecoregions-continental-united-states
+- NOAA NCEI, normais climáticas 1991–2020: https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+- USDA NRCS, Soil Biology Primer: https://www.nrcs.usda.gov/resources/education-and-teaching-materials/soil-biology-primer
+- USDA NRCS, Soil Health Management: https://www.nrcs.usda.gov/conservation-basics/soil/soil-health/soil-health-management
+- USGS GAP, ocorrência e habitat: https://www.usgs.gov/programs/gap-analysis-project/science/species-data-overview
+- US Forest Service FEIS, história de vida/ecologia: https://research.fs.usda.gov/feis/about
+Estas fontes fundamentam o desenho inicial, não fornecem parâmetros já calibrados. Fichas por espécie e sítio, dados agrícolas e veterinários de extensão universitária/USDA e validação adicional pendentes.
+
+## Estado
+Decisão e arquitetura documental, não implementação. Nenhum código, HTML, sprite ou teste alterado neste checkpoint. Base histórica v0.47, commit 90a601a86ed489704568dd9b6df8a9338265a197. Protagonista preservado.
