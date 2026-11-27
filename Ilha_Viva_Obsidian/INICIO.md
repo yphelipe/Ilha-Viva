@@ -1,19 +1,24 @@
 ---
 tags: [ilha-viva, indice]
-versao: "0.33"
+versao: "CP-2026-11-27-01"
 ---
 
-> **Decisão vigente 27/11/2026:** ambientação continental rural fictícia dos EUA, piloto nos Apalaches, com outras ecorregiões em expansão. Madagascar e Amazônia são históricos e não ativos. Protagonista aprovado preservado; terreno, fauna, flora e dados científicos serão reconstruídos. Ver [[AMBIENTACAO_EUA]] para requisitos e gates. Checkpoint documental; build v0.47 ainda histórico, motor novo não implementado.
+> **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
 
 
-> **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
+
+
+> **Histórico v0.29 (26/11/2026, superado):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevaleceu naquela versão. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 # Ilha Viva | Central do projeto
 YNOVIQ Studios • 26/11/2026
 
-**Fase atual:** v0.33. [[docs/TEIA_ECOLOGICA_v0.33]]. [Ecossistema 04](prototypes/ecology_04/Ilha_Viva_Ecossistema_04.html). Madagascar oficial; [[docs/MADAGASCAR_v0.29]] e enciclopédia científica vigentes. Laboratório 15 preservado; roupa pendente.
+**Fase atual:** M48-A parcial (transição continental EUA). Base jogável histórica v0.47; célula científica experimental nova, sem HTML continental. **Começar por [[docs/CHECKPOINT_CONTINUIDADE]].**
 
 ## Navegação
+- [[docs/CHECKPOINT_CONTINUIDADE]] • retomada obrigatória
+- [[docs/checkpoints/CP-2026-11-27-01]] • snapshot imutável inicial
+- [[docs/AMBIENTACAO_EUA]] • ambientação e ciência vigentes
 - [[GDD]] • especificação principal
 - [[ARTE]] • direção artística
 - [[PROTAGONISTA]] • catálogo de sprites com imagens
