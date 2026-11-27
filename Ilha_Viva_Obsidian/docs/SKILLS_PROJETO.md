@@ -13,9 +13,14 @@ A biblioteca é memória operacional versionada, complementar ao GDD e ao checkp
 | IA de mundo autônomo | `.agents/skills/ia-mundo-autonomo/SKILL.md` |
 | QA, build e continuidade | `.agents/skills/qa-build-continuidade/SKILL.md` |
 
-As seis skills são procedimentos iniciais, não prova de execução ou certificação. A pasta segue formato SKILL.md com frontmatter name/description; leitura explícita via repositório é obrigatória quando a ferramenta não oferece descoberta automática. Não afirmar instalação global ou treinamento permanente do modelo. Criar novas skills somente quando houver necessidade repetível; próximos candidatos: terreno procedural orgânico, agricultura e pecuária, narrativa contextual, economia e performance mobile.
+As sete skills são procedimentos iniciais, não prova de execução ou certificação. A pasta segue formato SKILL.md com frontmatter name/description; leitura explícita via repositório é obrigatória quando a ferramenta não oferece descoberta automática. Não afirmar instalação global ou treinamento permanente do modelo. Criar novas skills somente quando houver necessidade repetível; próximos candidatos: terreno procedural orgânico, agricultura e pecuária, narrativa contextual, economia e performance mobile.
+
+| Economia de sessão | `.agents/skills/economia-de-sessao/SKILL.md` |
 
 ## Aplicação imediata
 M48-A usa pesquisa-ecologica, motor-cientifico, pixel-art-rural, animacao-biomecanica quando houver integração do protagonista e qa-build-continuidade. Arte autoral pixel art bem desenhada, realismo anatômico/ecológico seletivo, escala relativa e perspectiva coerentes com protagonista aprovado. Complexidade interna, legibilidade externa.
 
 [[CHECKPOINT_CONTINUIDADE]] | [[GDD]] | [[AMBIENTACAO_EUA]]
+
+## CP-2026-11-27-04 | Entrega ao Codex e economia de sessão
+Missão vigente: [[MISSAO_CODEX_M48A]], arquivo `Ilha_Viva_Obsidian/docs/MISSAO_CODEX_M48A.md`. Nova skill `.agents/skills/economia-de-sessao/SKILL.md`: leitura seletiva, trabalho agrupado, testes direcionados e regressão no marco integrado, automação, recuperação de bloqueios e atualização por evidências. Sete skills no total. Base técnica permanece CP-03; nesta revisão apenas procedimentos e documentação, sem novo build, código de jogo, arte ou testes. Próxima ação: executar a missão no checkout do Codex, recuperar atlas original e integrar campo continental em HTML. Não afirmar que Codex executou ou que economia foi medida.
