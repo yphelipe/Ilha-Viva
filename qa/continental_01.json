@@ -10,5 +10,11 @@
     "N": 6.344894118310472
   },
   "environment": "JavaScript tool runtime; same source functions; not Node CLI or browser",
-  "htmlBytes": 11271
+  "htmlBytes": 11310,
+  "htmlMock": {
+    "assertions": 15,
+    "environment": "mock DOM/canvas, not browser",
+    "htmlBytes": 11310,
+    "blob": "170de602406d7b03bcb6578bc974c5f792c7f062"
+  }
 }
