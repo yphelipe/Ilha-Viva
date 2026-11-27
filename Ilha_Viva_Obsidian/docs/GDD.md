@@ -1,11 +1,14 @@
 # Game Design Document | Ilha Viva
 
+> **Decisão vigente 27/11/2026:** ambientação continental rural fictícia dos EUA, piloto nos Apalaches, com outras ecorregiões em expansão. Madagascar e Amazônia são históricos e não ativos. Protagonista aprovado preservado; terreno, fauna, flora e dados científicos serão reconstruídos. Ver [[AMBIENTACAO_EUA]] para requisitos e gates. Checkpoint documental; build v0.47 ainda histórico, motor novo não implementado.
+
+
 > **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 **v0.29 • YNOVIQ Studios • 26/11/2026 • Documento vivo**
 
 ## 1. Visão
-RPG de sobrevivência rural de pixel art 2D numa ilha parcialmente habitada, sobre reconstruir uma propriedade rural e estabelecer vínculos com uma comunidade que também está se transformando. A terra não é cenário: tem memória. O jogador observa, aprende, decide e colhe consequências. Realismo funcional sem transformar o lazer em trabalho repetitivo.
+RPG de sobrevivência rural de pixel art 2D numa região continental fictícia habitada, sobre reconstruir uma propriedade rural e estabelecer vínculos com uma comunidade que também está se transformando. A terra não é cenário: tem memória. O jogador observa, aprende, decide e colhe consequências. Realismo funcional sem transformar o lazer em trabalho repetitivo.
 
 **Promessa:** cada estação conta uma história diferente porque o clima, a água, a fauna, a economia e as pessoas respondem umas às outras. O ciclo não acaba com o arco principal.
 
@@ -33,9 +36,7 @@ RPG de sobrevivência rural de pixel art 2D numa ilha parcialmente habitada, sob
 Dados de sucesso não garantem viralidade. Hipóteses testáveis: histórias emergentes compartilháveis, comparação visual da fazenda entre anos, animais reconhecíveis por personalidade e eventos ambientais memoráveis. Medir retenção consentida ou playtests locais, não viciar jogadores. Fontes em ../research/FONTES.md.
 
 ## 4. Mundo e ambientação
-Ilha fluvial amazônica fictícia parcialmente habitada, inspirada tecnicamente no sudoeste amazônico (Purus/Juruá), com clima tropical, friagens episódicas e ciclo hidrológico de enchente, cheia, vazante e seca. Sem neve nem gelo sazonal. Espécies e mapa dependem de confirmação regional.
-
-Zonas: margem e porto fluvial, propriedade elevada, vila e praça, trilhas e igarapés, floresta, várzea, lagoas, praias fluviais, interiores; outras zonas sujeitas a validação geológica e ecológica. Conexões lógicas, transições naturais, caminhos curvos, pontos de referência e atalhos descobertos. Mapa começa compacto, cresce com conteúdo aprovado; interiores com função real.
+Região continental fictícia inspirada nos EUA; piloto proposto nos Apalaches/Blue Ridge e Ridge and Valley, expansão por ecorregiões. Vale agrícola com floresta temperada, pastos, rios, estradas, comunidades e relevo. Quatro estações regionais; neve, gelo e degelo condicionados ao clima. Espécies por ocorrência e habitat verificados. Consulte [[AMBIENTACAO_EUA]].
 
 ## 5. Ciclos de jogo
 - Minuto: observar, selecionar ferramenta, agir, receber resposta visual/sonora e informação.
@@ -85,7 +86,7 @@ Fora do slice: multiplayer, gerações completas de filhos, todas as raças, map
 Pixel art com proporções humanas estilizadas, 32 px por tile como proposta e sprites 32–48 px de altura útil. A grade organiza a lógica, não a aparência. Animar mãos, pés, ferramentas, água, folhas, olhos e animais; paleta controlada, iluminação consistente, sem efeito plástico. Trilha autoral por hora, estação e lugar, transições suaves, ambiência de vento/água/aves; SFX específicos por superfície, animal e ferramenta. Arte e áudio devem ter fonte editável e histórico.
 
 ## 11. Narrativa e identidade
-Tema: pertencer a um lugar, aprender a cuidar da terra e lidar com mudanças coletivas. O personagem chega por uma escolha de vida e recebe oportunidade de assumir propriedade antiga da cooperativa; sem copiar a herança narrativa de referências. O conflito principal é a fragilidade do abastecimento e os interesses conflitantes sobre o futuro do vale. Veja NARRATIVA.md. Título público pendente; YNOVIQ Studios é a assinatura de desenvolvimento.
+Tema: pertencer a um lugar, aprender a cuidar da terra e lidar com mudanças coletivas. O personagem chega ao vale por uma escolha de vida e recebe oportunidade de assumir propriedade antiga da cooperativa; sem copiar a herança narrativa de referências. O conflito principal é a fragilidade do abastecimento e os interesses conflitantes sobre o futuro do vale. Veja NARRATIVA.md. Título público pendente; YNOVIQ Studios é a assinatura de desenvolvimento.
 
 ## 12. Potencial de compartilhamento e qualidade
 Eventos emergentes com causalidade, composição visual antes/depois, registro de estações e diário de animais, modo foto sem HUD e pequenos relatos de descoberta. Testar se jogadores entendem as consequências e desejam contar suas histórias, sem prometer viralização. Critérios: retorno voluntário, clareza do primeiro dia, diversidade de rotinas, ausência de repetição excessiva, estabilidade e identidade visual. Todo sistema só é considerado pronto após pesquisa, contrato de dados, arte, implementação, testes e revisão manual onde aplicável.
