@@ -1,0 +1,14 @@
+{
+  "days": 1095,
+  "cells": 192,
+  "cellDays": 210240,
+  "assertions": 4423,
+  "routed": 88936.61149278298,
+  "final": {
+    "water": 27088.321746554713,
+    "C": 55.60584560147158,
+    "N": 6.344894118310472
+  },
+  "environment": "JavaScript tool runtime; same source functions; not Node CLI or browser",
+  "htmlBytes": 11271
+}
