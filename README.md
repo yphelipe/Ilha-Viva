@@ -14,3 +14,6 @@ Base v0.47 importada da versão aprovada Campo 05. RPG 2D de simulação ecológ
 
 ## Continuidade
 `AGENTS.md`, `ESTADO_ATUAL.md` e `Ilha_Viva_Obsidian/INICIO.md` são pontos de entrada. A fonte ativa é `src/field.template.html` + `src/ecosystem/` + `assets/runtime/`. O HTML é saída gerada. O Obsidian mantém toda a documentação e o histórico; scripts antigos são referência, não pipeline ativo. O pacote original do Gemini fica em `assets/original/lemur_catta/` após importar as partes.
+
+## Biblioteca de skills | CP-2026-11-27-02
+Ler `Ilha_Viva_Obsidian/docs/SKILLS_PROJETO.md` e `.agents/skills/` antes de cada missão. Seis skills iniciais versionadas: pixel art rural, animação biomecânica, pesquisa ecológica, motor científico, IA autônoma e QA/build/continuidade. Atualizar procedimentos com aprendizado comprovado e regressões; criar skills novas quando houver necessidade reutilizável. Não assumir descoberta automática. Preservar pixel art autoral, realismo, escala e protagonista. Nesta revisão, somente documentação/procedimentos; M48-A continua parcial, sem novo HTML, arte ou testes executados.
