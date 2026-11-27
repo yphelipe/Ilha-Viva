@@ -103,3 +103,7 @@ Ilha fluvial amazônica fictícia aprovada pelo usuário; sem neve, friagem epis
 
 
 - v0.26: sem neve; vestuário frio por temperatura, limiares experimentais com histerese; sem substituir base aprovada.
+
+## v0.48 · Continuidade do Campo
+
+Campo 06 mantém a engine HTML5 e os atlas. A mesma geometria governa a margem renderizada e a entrada na água. O detalhe social diminui com a distância, e as transferências ecológicas continuam em toda a ilha. O salvamento v0.48 tem chave própria e lê a v0.47 como origem inicial. [[docs/missoes/v0.48_Vida_e_Oficina]]

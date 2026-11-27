@@ -6,9 +6,14 @@ versao: "0.33"
 > **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 # Ilha Viva | Central do projeto
+
+## Versão ativa v0.48
+
+[Campo 06](../play/Ilha_Viva_Campo_06.html) · [[docs/missoes/v0.48_Vida_e_Oficina|Vida animal, lavoura e oficina]] · [[docs/GDD]] · [[docs/ROADMAP]]. Campo 05 continua como referência histórica.
+
 YNOVIQ Studios • 26/11/2026
 
-**Fase atual:** v0.33. [[docs/TEIA_ECOLOGICA_v0.33]]. [Ecossistema 04](prototypes/ecology_04/Ilha_Viva_Ecossistema_04.html). Madagascar oficial; [[docs/MADAGASCAR_v0.29]] e enciclopédia científica vigentes. Laboratório 15 preservado; roupa pendente.
+**Registro histórico:** v0.33. [[docs/TEIA_ECOLOGICA_v0.33]]. [Ecossistema 04](prototypes/ecology_04/Ilha_Viva_Ecossistema_04.html). Madagascar oficial; [[docs/MADAGASCAR_v0.29]] e enciclopédia científica vigentes. Laboratório 15 preservado; roupa pendente.
 
 ## Navegação
 - [[GDD]] • especificação principal

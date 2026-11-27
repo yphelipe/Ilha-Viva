@@ -1,5 +1,18 @@
 # Roadmap e gates de produção
 
+## Campo 06 · v0.48
+
+| Marco | Gate |
+| --- | --- |
+| Vida animal local, agricultura e oficina jogáveis | Regressões v0.47, testes novos por módulo e fluxo de interação móvel no Chromium |
+| Margens, colisões e setores | Concordância entre desenho e natação, obstáculos sem atravessamento e processamento ecológico fora da câmera |
+| Próxima validação em aparelho | Android físico, legibilidade dos controles, revisão de oclusão e medição de quadros por segundo |
+| Próxima validação ecológica | Equilíbrio plurianual em múltiplas sementes, retenção de nutrientes, efeito de clima extremo e ajuste social |
+| Expansão do mundo | Persistência por setor, carregamento sob demanda, paridade de simulação e orçamento medido de memória |
+
+A rastreabilidade e os resultados medidos constam em [[docs/missoes/v0.48_Vida_e_Oficina]]. As fases abaixo são mantidas como planejamento e histórico.
+
+
 > **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 

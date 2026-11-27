@@ -1,5 +1,20 @@
 # Game Design Document | Ilha Viva
 
+## v0.48 · Campo 06
+
+A ilha fictícia de referência continua Madagascar. A missão [[docs/missoes/v0.48_Vida_e_Oficina]] documenta as regras jogáveis vigentes, os parâmetros experimentais e as fontes.
+
+| Sistema | Contrato da v0.48 |
+| --- | --- |
+| Vida animal | Os lêmures têm traços individuais e aprendem a partir do resultado de experiências. Alertas terrestres são locais e têm duração limitada. Relações familiares, precedência alimentar, higiene e cuidado materno entram nas decisões. |
+| Lavoura | Drenos movem água entre células. Resíduos alimentam a composteira ou retornam ao solo. O clima e a atividade microbiana limitam o processo. Cada planta madura pode ser colhida para alimento ou reservada para propágulos. |
+| Oficina | O jogador fabrica malho, recipientes, cercas e fogareiros com recursos locais. Construções blocam passagem na base e baús mantêm estoques independentes. O fogareiro transforma água bruta e cultivos em itens utilizáveis. |
+| Geometria e tempo | Água e natação usam a mesma margem interpolada. Pés e bases ordenam o desenho. Setores limitam consultas; eventos sociais distantes têm cadência reduzida e os balanços ecológicos seguem em todos os setores. |
+| Continuidade | O HTML autossuficiente mantém o atlas existente e migra localmente o salvamento da v0.47. A gravação nova é independente. |
+
+Os capítulos a seguir registram a evolução do projeto. As decisões oficiais de ambientação e missão estão nas seções versionadas mais recentes.
+
+
 > **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 **v0.29 • YNOVIQ Studios • 26/11/2026 • Documento vivo**
