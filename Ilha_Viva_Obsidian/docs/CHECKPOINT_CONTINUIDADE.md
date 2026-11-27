@@ -1,12 +1,12 @@
 ---
 tags: [ilha-viva, continuidade, checkpoint]
-checkpoint: CP-2026-11-27-01
+checkpoint: CP-2026-11-27-02
 status: ativo
 ---
-# Checkpoint mestre de continuidade | CP-2026-11-27-01
+# Checkpoint mestre de continuidade | CP-2026-11-27-02
 
 ## Retomada obrigatória
-Repositório: https://github.com/yphelipe/Ilha-Viva ; branch main. Leia o HEAD atual e este arquivo, [[GDD]], [[AMBIENTACAO_EUA]], [[DECISOES]], [[ROADMAP]], [[PROTAGONISTA]], [[QA_SPRITES]] e ESTADO_ATUAL.md na raiz. Este checkpoint referencia a base anterior ao registro documental: 02c14200c9c423341c9c71fa12dfe00f57f0c2fd. Não recriar o projeto, não pedir novamente decisões já registradas, não voltar a builds antigos como se fossem novos. Se houver checkpoint posterior confirmado, ele prevalece.
+Repositório: https://github.com/yphelipe/Ilha-Viva ; branch main. Leia o HEAD atual e este arquivo, [[GDD]], [[AMBIENTACAO_EUA]], [[DECISOES]], [[ROADMAP]], [[PROTAGONISTA]], [[QA_SPRITES]] e ESTADO_ATUAL.md na raiz. Este checkpoint referencia a base documental anterior 81b5e0eb022dae8b589717e983af1d76938e6e5e e preserva CP-2026-11-27-01. Não recriar o projeto, não pedir novamente decisões já registradas, não voltar a builds antigos como se fossem novos. Se houver checkpoint posterior confirmado, ele prevalece.
 
 ## Decisões vigentes
 - Ilha Viva é codinome; YNOVIQ Studios. Fazenda/RPG 2D, inspiração afetiva Harvest Moon Back to Nature, identidade original, simulação científica e sociedade autônoma.
@@ -39,3 +39,5 @@ Mundo autônomo sem entidade jogador; causalidade auditável; matéria/energia c
 
 ## Estado desta entrega
 Checkpoint documental; nenhuma nova implementação, build ou teste de jogo nesta missão de documentação. Nome comercial, época, localização exata e extensão final pendentes. O usuário aprovou continuidade e checkpoints.
+## Biblioteca de skills | CP-2026-11-27-02
+Ler `Ilha_Viva_Obsidian/docs/SKILLS_PROJETO.md` e `.agents/skills/` antes de cada missão. Seis skills iniciais versionadas: pixel art rural, animação biomecânica, pesquisa ecológica, motor científico, IA autônoma e QA/build/continuidade. Atualizar procedimentos com aprendizado comprovado e regressões; criar skills novas quando houver necessidade reutilizável. Não assumir descoberta automática. Preservar pixel art autoral, realismo, escala e protagonista. Nesta revisão, somente documentação/procedimentos; M48-A continua parcial, sem novo HTML, arte ou testes executados.
