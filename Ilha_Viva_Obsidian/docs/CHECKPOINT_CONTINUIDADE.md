@@ -1,9 +1,9 @@
 ---
 tags: [ilha-viva, continuidade, checkpoint]
-checkpoint: CP-2026-11-27-04
+checkpoint: CP-2026-11-27-05
 status: ativo
 ---
-# Checkpoint mestre de continuidade | CP-2026-11-27-04
+# Checkpoint mestre de continuidade | CP-2026-11-27-05
 
 ## Retomada obrigatória
 Repositório: https://github.com/yphelipe/Ilha-Viva ; branch main. Leia o HEAD atual e este arquivo, [[GDD]], [[AMBIENTACAO_EUA]], [[DECISOES]], [[ROADMAP]], [[PROTAGONISTA]], [[QA_SPRITES]] e ESTADO_ATUAL.md na raiz. Este checkpoint referencia a base documental anterior 81b5e0eb022dae8b589717e983af1d76938e6e5e e preserva CP-2026-11-27-01. Não recriar o projeto, não pedir novamente decisões já registradas, não voltar a builds antigos como se fossem novos. Se houver checkpoint posterior confirmado, ele prevalece.
@@ -49,3 +49,8 @@ QA: 1.095 dias × 192 células = 210.240 células-dia; 4.423 verificações apro
 
 ## CP-2026-11-27-04 | Entrega ao Codex e economia de sessão
 Missão vigente: [[MISSAO_CODEX_M48A]], arquivo `Ilha_Viva_Obsidian/docs/MISSAO_CODEX_M48A.md`. Nova skill `.agents/skills/economia-de-sessao/SKILL.md`: leitura seletiva, trabalho agrupado, testes direcionados e regressão no marco integrado, automação, recuperação de bloqueios e atualização por evidências. Sete skills no total. Base técnica permanece CP-03; nesta revisão apenas procedimentos e documentação, sem novo build, código de jogo, arte ou testes. Próxima ação: executar a missão no checkout do Codex, recuperar atlas original e integrar campo continental em HTML. Não afirmar que Codex executou ou que economia foi medida.
+
+## Adendo obrigatório: MCP artístico e inteligência auxiliar de desenvolvimento
+Usar MCPs e ferramentas gratuitas disponíveis quando houver ganho demonstrável em desenho pixel art autoral, pesquisa visual, anatomia, animação, paleta, perspectiva, escala, atlas, alfa, pivôs, oclusão, costuras e QA visual. Verificar compatibilidade, licenças, custo e permissões; não instalar serviços pagos nem pedir segredos. Produzir elementos úteis em lotes sem sacrificar acabamento; preservar protagonista aprovado. Revisar no tamanho de jogo e registrar evidência visual. A IA de mundo aprende localmente no save por experiências e memória limitada; agentes adaptam decisões, sem alterar leis naturais ou agência do jogador. Separadamente, desenvolver ferramentas de diagnóstico da simulação, análise de eventos causais, detecção de desequilíbrios, relatórios e sugestões de melhorias para Codex e skills. Nenhuma alteração autônoma irrestrita de código ou regras científicas; propostas passam por validação, testes e versionamento. Não confundir aprendizado persistente com treinamento global do modelo. Priorizar primeiro um comportamento adaptativo demonstrável e um diagnóstico reproduzível. Atualizar skills com resultados reais e economia observada.
+
+CP-2026-11-27-05: adendo documental à missão Codex, base técnica CP-03 inalterada. Sem MCP instalado, arte, código, HTML ou teste novo nesta revisão.
