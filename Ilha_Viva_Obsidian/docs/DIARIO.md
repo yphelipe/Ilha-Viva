@@ -1,6 +1,9 @@
 # Diário de desenvolvimento
 
-> **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
+> **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
+
+
+> **Histórico v0.29 (26/11/2026, superado):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevaleceu naquela versão. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 [[INICIO]] | [[DECISOES]] | [[QA_SPRITES]]
 ## 2026-11-26 • Pré-produção e laboratório
@@ -144,3 +147,6 @@ Ilha fluvial amazônica fictícia aprovada pelo usuário; sem neve, friagem epis
 
 ## 26/11/2026 — v0.26
 Laboratório 13: vestuário automático, sem gelo, 70 testes de navegador aprovados. Ver [[VESTUARIO_FRIAGEM_v0.26]].
+
+## 27/11/2026 | CP-2026-11-27-01
+Mudança continental registrada; célula de solo experimental já implementada em commits anteriores c1385aa e 6422b75, 4.387 verificações em 1.095 dias sintéticos na sessão anterior (não reexecutadas). Nesta entrega documental, checkpoint mestre e snapshot, regras de continuidade e GDD alinhados. Sem código, sprites, build ou testes novos. Próximo: M48-A espacial e HTML continental. [[CHECKPOINT_CONTINUIDADE]].
