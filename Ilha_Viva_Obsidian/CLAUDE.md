@@ -1,5 +1,7 @@
 # Instruções de projeto | YNOVIQ Studios
 
+> **Vigência 27/11/2026:** cenário continental fictício dos EUA substitui Madagascar e Amazônia; ler `Ilha_Viva_Obsidian/docs/AMBIENTACAO_EUA.md` (ou `docs/AMBIENTACAO_EUA.md` dentro do vault). Campo 05/v0.47 é base histórica. Preservar protagonista e animações, substituir terreno, fauna, flora e dados ecológicos; não confundir piloto científico com build jogável.
+
 > **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 
