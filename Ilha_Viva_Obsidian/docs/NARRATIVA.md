@@ -1,10 +1,13 @@
 # Bíblia narrativa | v0.2
 
+> **Decisão vigente 27/11/2026:** ambientação continental rural fictícia dos EUA, piloto nos Apalaches, com outras ecorregiões em expansão. Madagascar e Amazônia são históricos e não ativos. Protagonista aprovado preservado; terreno, fauna, flora e dados científicos serão reconstruídos. Ver [[AMBIENTACAO_EUA]] para requisitos e gates. Checkpoint documental; build v0.47 ainda histórico, motor novo não implementado.
+
+
 > **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 
 ## Premissa proposta
-O jogador muda de vida e assume uma pequena propriedade ligada à cooperativa da ilha, numa época em que o abastecimento e os serviços rurais se tornaram frágeis. A vila não é unanimidade: moradores divergem sobre como crescer, proteger a terra e repartir oportunidades. Não existe vilão unidimensional. A propriedade se torna parte dessa rede; o modo como é conduzida abre alianças, tensões e alternativas. O título e nomes são provisórios.
+O jogador muda de vida e assume uma pequena propriedade ligada à cooperativa do vale, numa época em que o abastecimento e os serviços rurais se tornaram frágeis. A vila não é unanimidade: moradores divergem sobre como crescer, proteger a terra e repartir oportunidades. Não existe vilão unidimensional. A propriedade se torna parte dessa rede; o modo como é conduzida abre alianças, tensões e alternativas. O título e nomes são provisórios.
 
 ## Arco principal
 - Chegada: aprender a ler a terra, encontrar vizinhos, receber tarefas com objetivos úteis, escolher estilo de produção. Primeiro dia ensina por interação, não exposição extensa.
@@ -52,4 +55,4 @@ Histórias secundárias, relações entre NPCs e acontecimentos públicos evolue
 
 
 ## Contexto insular v0.4
-A fragilidade logística da ilha sustenta o conflito de abastecimento, conservação e autonomia; não depende de catástrofe constante. O porto e os ofícios locais conectam histórias. A comunidade pode resolver problemas sozinha, mas o jogador tem escolhas pessoais exclusivas no arco principal. Sem final obrigatório da simulação.
+A fragilidade logística regional sustenta o conflito de abastecimento, conservação e autonomia; não depende de catástrofe constante. Estradas, comércio e ofícios locais conectam histórias. A comunidade pode resolver problemas sozinha, mas o jogador tem escolhas pessoais exclusivas no arco principal. Sem final obrigatório da simulação.
