@@ -150,3 +150,6 @@ Laboratório 13: vestuário automático, sem gelo, 70 testes de navegador aprova
 
 ## 27/11/2026 | CP-2026-11-27-01
 Mudança continental registrada; célula de solo experimental já implementada em commits anteriores c1385aa e 6422b75, 4.387 verificações em 1.095 dias sintéticos na sessão anterior (não reexecutadas). Nesta entrega documental, checkpoint mestre e snapshot, regras de continuidade e GDD alinhados. Sem código, sprites, build ou testes novos. Próximo: M48-A espacial e HTML continental. [[CHECKPOINT_CONTINUIDADE]].
+
+## Biblioteca de skills | CP-2026-11-27-02
+Ler `Ilha_Viva_Obsidian/docs/SKILLS_PROJETO.md` e `.agents/skills/` antes de cada missão. Seis skills iniciais versionadas: pixel art rural, animação biomecânica, pesquisa ecológica, motor científico, IA autônoma e QA/build/continuidade. Atualizar procedimentos com aprendizado comprovado e regressões; criar skills novas quando houver necessidade reutilizável. Não assumir descoberta automática. Preservar pixel art autoral, realismo, escala e protagonista. Nesta revisão, somente documentação/procedimentos; M48-A continua parcial, sem novo HTML, arte ou testes executados.
