@@ -1,6 +1,9 @@
 # Registro de decisões
 
-> **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
+> **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
+
+
+> **Histórico v0.29 (26/11/2026, superado):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevaleceu naquela versão. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 [[INICIO]] | [[GDD]]
 
@@ -103,3 +106,12 @@ Ilha fluvial amazônica fictícia aprovada pelo usuário; sem neve, friagem epis
 
 
 - v0.26: sem neve; vestuário frio por temperatura, limiares experimentais com histerese; sem substituir base aprovada.
+
+## CP-2026-11-27-01 | 27/11/2026
+| ID | Decisão | Estado |
+|---|---|---|
+| D-EUA-01 | Região continental fictícia dos EUA, Apalaches como piloto, outras ecorregiões em expansão; arquivar Madagascar/Amazônia | Aprovada; substitui decisões geográficas anteriores |
+| D-EUA-02 | Preservar protagonista; reconstruir cenário e dados ecológicos; auditar algoritmos genéricos | Aprovada |
+| D-EUA-03 | Ecossistema autônomo multiescala, da microbiologia à sociedade; causalidade, realismo funcional, IA offline, agência do jogador | Aprovada como objetivo; implementação parcial |
+| D-EUA-04 | Atualizar GDD/Obsidian e manter checkpoint mestre mais snapshots históricos a cada missão | Obrigatória |
+Referências: [[AMBIENTACAO_EUA]], [[CHECKPOINT_CONTINUIDADE]]. Gate técnico: M48-A; não confundir documentação com entrega jogável.
