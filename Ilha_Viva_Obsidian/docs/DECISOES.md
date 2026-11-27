@@ -115,3 +115,6 @@ Ilha fluvial amazônica fictícia aprovada pelo usuário; sem neve, friagem epis
 | D-EUA-03 | Ecossistema autônomo multiescala, da microbiologia à sociedade; causalidade, realismo funcional, IA offline, agência do jogador | Aprovada como objetivo; implementação parcial |
 | D-EUA-04 | Atualizar GDD/Obsidian e manter checkpoint mestre mais snapshots históricos a cada missão | Obrigatória |
 Referências: [[AMBIENTACAO_EUA]], [[CHECKPOINT_CONTINUIDADE]]. Gate técnico: M48-A; não confundir documentação com entrega jogável.
+
+## Biblioteca de skills | CP-2026-11-27-02
+Ler `Ilha_Viva_Obsidian/docs/SKILLS_PROJETO.md` e `.agents/skills/` antes de cada missão. Seis skills iniciais versionadas: pixel art rural, animação biomecânica, pesquisa ecológica, motor científico, IA autônoma e QA/build/continuidade. Atualizar procedimentos com aprendizado comprovado e regressões; criar skills novas quando houver necessidade reutilizável. Não assumir descoberta automática. Preservar pixel art autoral, realismo, escala e protagonista. Nesta revisão, somente documentação/procedimentos; M48-A continua parcial, sem novo HTML, arte ou testes executados.
