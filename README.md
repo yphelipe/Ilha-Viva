@@ -1,5 +1,7 @@
 # Ilha Viva | YNOVIQ Studios
 
+**Retomada obrigatória entre conversas:** abra `Ilha_Viva_Obsidian/docs/CHECKPOINT_CONTINUIDADE.md` (no Obsidian, `docs/CHECKPOINT_CONTINUIDADE.md`) e confira o HEAD de main antes de executar qualquer missão. Atualize o checkpoint mestre e crie snapshot datado após cada missão.
+
 > **Vigência 27/11/2026:** cenário continental fictício dos EUA substitui Madagascar e Amazônia; ler `Ilha_Viva_Obsidian/docs/AMBIENTACAO_EUA.md` (ou `docs/AMBIENTACAO_EUA.md` dentro do vault). Campo 05/v0.47 é base histórica. Preservar protagonista e animações, substituir terreno, fauna, flora e dados ecológicos; não confundir piloto científico com build jogável.
 
 Base v0.47 importada da versão aprovada Campo 05. RPG 2D de simulação ecológica e vida rural inspirado em Madagascar, offline, Android prioritário.
