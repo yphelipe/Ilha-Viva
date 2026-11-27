@@ -1,0 +1,32 @@
+<details class="panel choice" id="homestead">
+  <summary>Lavoura e oficina</summary>
+  <p id="soilStatus" class="small"></p>
+  <div class="row">
+    <label for="farmCommand">Lavoura</label>
+    <select id="farmCommand">
+      <option value="drain">Abrir dreno na parcela</option>
+      <option value="gather">Recolher serapilheira</option>
+      <option value="deposit">Adicionar à composteira</option>
+      <option value="compost">Recolher composto</option>
+      <option value="fertilize">Aplicar composto</option>
+      <option value="fertilizeOrganic">Aplicar serapilheira</option>
+      <option value="seeds">Colher sementes</option>
+      <option value="seedDeposit">Guardar semente no banco</option>
+      <option value="seedWithdraw">Retirar semente do banco</option>
+    </select>
+    <button id="farmApply">Executar</button>
+  </div>
+  <div class="row">
+    <label for="recipe">Receita</label><select id="recipe"></select><button id="craft">Fabricar</button>
+  </div>
+  <p id="recipeCost" class="small"></p>
+  <div class="row">
+    <label for="structure">Construção</label><select id="structure"></select><button id="place">Instalar</button>
+    <button id="collectRaw">Coletar água bruta</button><button id="collectWood">Recolher madeira caída</button><button id="collectStone">Recolher pedra</button>
+  </div>
+  <p id="storageStatus" class="small"></p>
+  <div class="row">
+    <label for="storageItem">Item do baú</label><select id="storageItem"></select>
+    <button id="storeItem">Guardar 1</button><button id="takeItem">Retirar 1</button>
+  </div>
+</details>

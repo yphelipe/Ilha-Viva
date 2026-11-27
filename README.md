@@ -1,12 +1,24 @@
 # Ilha Viva | YNOVIQ Studios
 
-Base v0.47 importada da versão aprovada Campo 05. RPG 2D de simulação ecológica e vida rural inspirado em Madagascar, offline, Android prioritário.
+RPG 2D de simulação ecológica e vida rural inspirado em Madagascar. O Campo 06 integra vida animal, lavoura e oficina rural. O jogo usa HTML autossuficiente, sem serviços externos, com prioridade para Android.
 
-## Executar
-`python tools/build.py` gera o HTML autônomo `play/Ilha_Viva_Campo_05.html`. Abra o arquivo no navegador. O visualizador do lêmure está em `play/Ilha_Viva_Lemur_Movimentos_05.html`.
+## Jogar
 
-## QA
-`python -m pip install -r requirements.txt` e `python -m playwright install chromium`. Execute `python tests/regression.py` e `python tests/test_new.py`. Se houver Chromium instalado, use a variável `CHROMIUM_PATH`. Resultados históricos: 72 verificações na v0.47, não confundí-los com resultados novos.
+Abra `play/Ilha_Viva_Campo_06.html` no navegador. Use setas, WASD ou o controle tátil. As ações de lavoura e oficina usam o alvo à frente do jogador. Fabricação, construção, tratamento de água e movimentação de estoque ficam no painel **Lavoura e oficina**.
 
-## Continuidade
-`AGENTS.md`, `ESTADO_ATUAL.md` e `Ilha_Viva_Obsidian/INICIO.md` são pontos de entrada. A fonte ativa é `src/field.template.html` + `src/ecosystem/` + `assets/runtime/`. O HTML é saída gerada. O Obsidian mantém toda a documentação e o histórico; scripts antigos são referência, não pipeline ativo. O pacote original do Gemini fica em `assets/original/lemur_catta/` após importar as partes.
+`python tools/build.py` regenera o Campo 06. `python tools/build_viewer.py` regenera `play/Ilha_Viva_Lemur_Movimentos_05.html`. O Campo 05 da v0.47 segue em `play/`.
+
+## Qualidade e continuidade
+
+Instale `python -m pip install -r requirements.txt` e `python -m playwright install chromium`, ou indique um Chromium existente com `CHROMIUM_PATH`. Execute:
+
+```sh
+python tests/regression.py
+python tests/test_new.py
+python tests/test_campo048.py
+node --test tests/test_*048.js
+```
+
+O Campo 06 importa o salvamento do Campo 05 quando a origem do navegador é a mesma e ainda não existe uma partida v0.48. A gravação da v0.48 usa uma chave independente.
+
+[Orientações do projeto](AGENTS.md) · [Estado atual](ESTADO_ATUAL.md) · [Obsidian](Ilha_Viva_Obsidian/INICIO.md)

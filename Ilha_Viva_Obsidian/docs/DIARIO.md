@@ -144,3 +144,7 @@ Ilha fluvial amazônica fictícia aprovada pelo usuário; sem neve, friagem epis
 
 ## 26/11/2026 — v0.26
 Laboratório 13: vestuário automático, sem gelo, 70 testes de navegador aprovados. Ver [[VESTUARIO_FRIAGEM_v0.26]].
+
+## 27/11/2026 · v0.48 · Campo 06
+
+Vida animal, lavoura, oficina e setores integrados na missão [[docs/missoes/v0.48_Vida_e_Oficina]].
