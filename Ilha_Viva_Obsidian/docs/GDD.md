@@ -1,11 +1,13 @@
 # Game Design Document | Ilha Viva
 
-> **Decisão vigente 27/11/2026:** ambientação continental rural fictícia dos EUA, piloto nos Apalaches, com outras ecorregiões em expansão. Madagascar e Amazônia são históricos e não ativos. Protagonista aprovado preservado; terreno, fauna, flora e dados científicos serão reconstruídos. Ver [[AMBIENTACAO_EUA]] para requisitos e gates. Checkpoint documental; build v0.47 ainda histórico, motor novo não implementado.
+> **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
 
 
-> **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
-**v0.29 • YNOVIQ Studios • 26/11/2026 • Documento vivo**
+
+> **Histórico v0.29 (26/11/2026, superado):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevaleceu naquela versão. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
+
+**Revisão documental CP-2026-11-27-01 • YNOVIQ Studios • Documento vivo**
 
 ## 1. Visão
 RPG de sobrevivência rural de pixel art 2D numa região continental fictícia habitada, sobre reconstruir uma propriedade rural e estabelecer vínculos com uma comunidade que também está se transformando. A terra não é cenário: tem memória. O jogador observa, aprende, decide e colhe consequências. Realismo funcional sem transformar o lazer em trabalho repetitivo.
@@ -13,6 +15,9 @@ RPG de sobrevivência rural de pixel art 2D numa região continental fictícia h
 **Promessa:** cada estação conta uma história diferente porque o clima, a água, a fauna, a economia e as pessoas respondem umas às outras. O ciclo não acaba com o arco principal.
 
 **Público:** fãs de farming/life sims, RPGs sociais e jogos aconchegantes; jogadores casuais e interessados em sistemas profundos. Protótipo HTML5 offline quando instalado/servido localmente; Android horizontal offline como prioridade final proposta; PC secundário. Single-player primeiro; sem serviços obrigatórios, FOMO ou monetização definida.
+
+## 1A. Identidade vinculante: ecossistema vivo
+O mundo existe antes, durante e depois da intervenção do jogador. Clima, hidrologia, solo, microbiologia, flora, fauna, sociedade e economia compartilham estados e fluxos; cada consequência deve ter causa verificável. A simulação distingue energia (dissipada) de matéria (transferida), com fronteiras e balanços explícitos. IA animal e humana respeita percepção local, memória, capacidade cognitiva, necessidades, objetivos e custos. O jogador mantém agência. Complexidade interna, simplicidade externa: evidenciar consequências por comportamento, paisagem e diálogo, sem obrigar o usuário a gerenciar fórmulas. Simular microrganismos em grupos funcionais, indivíduos próximos e coortes distantes com continuidade. A inovação será demonstrada por evidências e playtests, não alegada como inédita. [[AMBIENTACAO_EUA]] define arquitetura; [[CHECKPOINT_CONTINUIDADE]] define retomada obrigatória.
 
 ## 2. Pilares e não objetivos
 - Ecossistema causal, compreensível, com recuperação possível.
