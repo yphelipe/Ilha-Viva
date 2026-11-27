@@ -1,0 +1,126 @@
+{
+  "passed": 10,
+  "tests": [
+    "28 trechos e fauna inicial preservada",
+    "determinismo e serialização",
+    "luz controla fixação",
+    "peixe consome invertebrados",
+    "escoamento conecta terra e rio",
+    "excesso de matéria orgânica reduz oxigênio",
+    "pesca e aportes contabilizados",
+    "30 dias auto",
+    "30 dias drought",
+    "30 dias storm"
+  ],
+  "results": {
+    "oxygen": {
+      "control": 0.9054528428551183,
+      "organic": 0.10093102222733694
+    },
+    "auto": {
+      "max": 2.546585164964199e-10,
+      "o": 0.8509025163331164,
+      "wet": 27,
+      "n": 5.17200140198801,
+      "p": 1.2350272929196802,
+      "algae": 9.596770681898244,
+      "plankton": 1.6905813648876007,
+      "larvae": 0.194336666530626,
+      "shrimp": 0.0721267223849883,
+      "fish": 1.0680850955686154,
+      "detritus": 3.467334872121455,
+      "events": {
+        "fixed": 19.638221724373583,
+        "feeding": 11.83294593088567,
+        "fishMeals": 2.0980395862412444,
+        "landN": 4.329890762834667,
+        "landP": 1.0167373719478727,
+        "landC": 2.1077575809249725,
+        "decomp": 10.786330087725641,
+        "oxygenStress": 20,
+        "harvestC": 0
+      },
+      "land": {
+        "count": [
+          20,
+          8,
+          10,
+          2
+        ],
+        "total": 40,
+        "nests": 0,
+        "juveniles": 0
+      }
+    },
+    "drought": {
+      "max": 2.0736479200422764e-10,
+      "o": 0.002810752116701993,
+      "wet": 0,
+      "n": 1.033965355389552,
+      "p": 0.27842870452676954,
+      "algae": 0.05658615182330334,
+      "plankton": 0.004405988618228533,
+      "larvae": 0.0029612262832196955,
+      "shrimp": 0.0017265614105203629,
+      "fish": 0.0009115818275797498,
+      "detritus": 13.317204147694518,
+      "events": {
+        "fixed": 8.39793486322305,
+        "feeding": 3.65499143853914,
+        "fishMeals": 0.9066088810814267,
+        "landN": 0,
+        "landP": 0.00003162290446105859,
+        "landC": 0.00008945209293540978,
+        "decomp": 3.128604855364575,
+        "oxygenStress": 0,
+        "harvestC": 0
+      },
+      "land": {
+        "count": [
+          20,
+          8,
+          10,
+          2
+        ],
+        "total": 40,
+        "nests": 0,
+        "juveniles": 0
+      }
+    },
+    "storm": {
+      "max": 8.731149137020111e-10,
+      "o": 0.788032614012299,
+      "wet": 28,
+      "n": 48.50973475868603,
+      "p": 7.592778767213508,
+      "algae": 4.877254903935918,
+      "plankton": 1.0865153404265437,
+      "larvae": 0.16991323203648345,
+      "shrimp": 0.14886981067031363,
+      "fish": 1.1145358378725931,
+      "detritus": 8.65175460126224,
+      "events": {
+        "fixed": 10.059436360652372,
+        "feeding": 9.566276827119752,
+        "fishMeals": 2.1054195677727336,
+        "landN": 47.792593938154035,
+        "landP": 7.789882053472776,
+        "landC": 34.957708963989546,
+        "decomp": 34.497455591786434,
+        "oxygenStress": 0,
+        "harvestC": 0
+      },
+      "land": {
+        "count": [
+          9,
+          4,
+          5,
+          1
+        ],
+        "total": 19,
+        "nests": 0,
+        "juveniles": 0
+      }
+    }
+  }
+}

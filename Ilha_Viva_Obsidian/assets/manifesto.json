@@ -1,0 +1,178 @@
+[
+  {
+    "file": "assets/protagonista/base.png",
+    "source": "fazendeiro_pixel_art_em_traje_azul.png",
+    "dimensions": [
+      1086,
+      1448
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "d27fb4ea9d9d6b1dd32f2aae95d802ca59d48920e0230ab273411b135bc71700",
+    "status": "Base visual aprovada"
+  },
+  {
+    "file": "assets/protagonista/idle_experimental.png",
+    "source": "folha_de_sprites_do_fazendeiro_em_pixel_art.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "a881d4924f5650f4d149f5ee1779a8510bcf22d5a10fd0e964cc8270f95b57bd",
+    "status": "Repouso frontal; outras direções pendentes"
+  },
+  {
+    "file": "assets/protagonista/andar.png",
+    "source": "fazendeiro_em_caminhada_pixel_art.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "b3b38174e6484ada2569025d91b03cf81d75f14c863375b2b3a39d446832172f",
+    "status": "4 direções, 4 quadros; revisão dinâmica pendente"
+  },
+  {
+    "file": "assets/protagonista/correr.png",
+    "source": "sprite_de_corrida_do_fazendeiro_em_16_quadros.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "c428e95d4232b4d08fae17a1a4f156c43dba51270bb610ca0d1a8fa21daa2ee5",
+    "status": "Visual aprovado; 4 direções × 4 quadros"
+  },
+  {
+    "file": "assets/protagonista/enxada_v2.png",
+    "source": "folha_de_sprites_fazendeiro_capinando.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "7cd02f30957744bd3f830bc01d10264f0b8363cf6558d02406078d00b0a9c504",
+    "status": "Substitui enxada v1; ação precisa de validação"
+  },
+  {
+    "file": "assets/protagonista/regador.png",
+    "source": "fazendeiro_regando_em_quatro_direções.png",
+    "dimensions": [
+      1086,
+      1448
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "c59373a1a6264a14421e10a093a225a5913ef17cb50e67fcbd388524ff14966b",
+    "status": "4 direções × 3 quadros"
+  },
+  {
+    "file": "assets/protagonista/machado.png",
+    "source": "sprite_sheet_de_machado_em_pixel_art.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "5e6250c617ff6bfaaa229064a73a947c7c6c5d7581ecf7fc22742b7cbbba4d0d",
+    "status": "Visual aprovado; 4 direções × 3 quadros"
+  },
+  {
+    "file": "assets/protagonista/foice.png",
+    "source": "sprite_de_agricultor_ceifando_em_4_direções.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "5fdbc9a089aa66d4ce24dd99f063814e6abd82adfc319799d74c4dabdd8fd57e",
+    "status": "Visual aprovado; 4 direções × 3 quadros"
+  },
+  {
+    "file": "assets/protagonista/sono_entrada_agua.png",
+    "source": "fazendeiro_em_descanso_e_na_água.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "3b74f85dcf606203b3d0906389af2bda01b02d39790bc331ec6abbc700f5ccba",
+    "status": "Duas poses de cada ação, não ciclos completos"
+  },
+  {
+    "file": "assets/protagonista/nado_roupa.png",
+    "source": "folha_de_sprites_de_natação_em_pixel_art.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "5fa22def12d801f02bc70599042eb7112ee1112bb2f9f49a2955abdc60073c39",
+    "status": "4 direções × 4 quadros; validar"
+  },
+  {
+    "file": "assets/protagonista/nado_calca.png",
+    "source": "ciclo_de_natação_em_pixel_art.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "sha256": "5de941f1b41eed87b6ce8c7204ee8adbb7b075dd5be536e4f551d3545f74ada9",
+    "status": "Sem camisa e descalço; 4 direções × 4 quadros; validar"
+  },
+  {
+    "file": "assets/terreno/conceito_sitio_mata.png",
+    "source": "conceito autoral v0.9",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "sha256": "abffe6043b9d4fb2a980f7631ec1b2cdab59a7ce0a311f6a2937e3804bb805b5",
+    "status": "Referência aproximada aceita; não importável como asset final"
+  }
+]

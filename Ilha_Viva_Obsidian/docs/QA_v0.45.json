@@ -1,0 +1,25 @@
+{
+  "passed": 19,
+  "checks": [
+    "1120 cells from v0.42",
+    "52 original vertebrates",
+    "103 sprites loaded",
+    "movement",
+    "target and irrigation",
+    "stationary action and single commit",
+    "world time advances",
+    "numeric balance after integrated tick",
+    "rest",
+    "harvest and inventory",
+    "eat",
+    "save load",
+    "river uses swimming and blocks tools",
+    "four candidate poses loaded",
+    "observer tracks existing animal",
+    "orientation from ecological displacement",
+    "nearest state visible",
+    "no JS errors",
+    "mobile no horizontal overflow"
+  ],
+  "errors": []
+}

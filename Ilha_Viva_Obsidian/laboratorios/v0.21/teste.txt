@@ -1,0 +1,1 @@
+870 verificações: 581 estáticas (incluindo preservação dos PNGs anteriores), 289 no Chromium. Sem erros de JavaScript. Não valida biomecânica ou aprovação artística.

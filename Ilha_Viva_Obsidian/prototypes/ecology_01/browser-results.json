@@ -1,0 +1,17 @@
+{
+  "passed": 11,
+  "tests": [
+    "mapa 1120 células",
+    "sem overflow horizontal",
+    "avanço diário",
+    "tempestade 7 dias",
+    "camada microbiana",
+    "composto",
+    "save/load com armazenamento simulado",
+    "reiniciar",
+    "sem luz",
+    "30 dias",
+    "sem erros JS"
+  ],
+  "errors": []
+}

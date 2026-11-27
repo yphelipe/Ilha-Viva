@@ -1,0 +1,12 @@
+const I=require('./insects'),F=require('./flora'),a=require('node:assert/strict');let tests=[];function test(n,f){f();tests.push(n)}function run(s,n){for(let i=0;i<n;i++){I.tick(s);for(let e of Object.values(s.last))a.ok(Math.abs(e)<1e-6,JSON.stringify(s.last));}return s}
+test('96 agentes e habitats corretos',()=>{let s=I.create();a.equal(I.metrics(s).total,96);for(let x of s.insects)a.ok(I.P[x.sp].hab.includes(s.cells[x.pos].kind))});
+// snapshot test with independent copies
+ test('continuidade após carregar',()=>{let s=run(I.create(),80),t=JSON.parse(JSON.stringify(s));a.deepEqual(run(s,80),run(t,80))});
+test('sem insetos não há polinização sexual',()=>{let s=I.create();s.insectMode='none';run(s,800);a.equal(s.insects.length,0);a.equal(s.floraEvents.pollinated,0);a.ok(s.floraEvents.propagules>0)});
+test('sem mariposa não há fruto de orquídea',()=>{let s=I.create();s.insectMode='noMoth';run(s,1000);a.ok(s.cells.every(c=>c.sp!==3||c.phase!=='fruto'));a.equal(I.metrics(s).count[0],0);a.ok(s.insectEvents.pollinations>0)});
+test('visitas cruzadas geram polinização',()=>{let s=run(I.create(),900);a.ok(s.insectEvents.pollinations>0);a.equal(s.insectEvents.pollinations,s.floraEvents.pollinated);a.ok(s.insectEvents.visits>=s.insectEvents.pollinations)});
+test('recursos externos contabilizados',()=>{let s=I.create(),b=I.totals(s);a.ok(I.edit(s,0,'dung'));a.ok(I.edit(s,0,'wood'));let t=I.totals(s);a.ok(Math.abs(t.c-b.c-.2)<1e-8&&Math.abs(t.n-b.n-.013)<1e-8)});
+test('decompositores consomem recursos distintos',()=>{let s=run(I.create(),120);a.ok(s.insectEvents.processedDung>0&&s.insectEvents.processedWood>0)});
+test('ausência de fezes impede refeições de besouro',()=>{let s=I.create();for(let c of s.cells)c.dung=c.dungN=0;run(s,120);a.equal(s.insectEvents.meals[2],0)});
+test('tempestade impede visitas florais',()=>{let s=I.create();s.weather='storm';run(s,120);a.equal(s.insectEvents.visits,0)});
+let summaries={};test('um ano em três climas: balanços, limites e estados finitos',()=>{for(let w of ['auto','drought','storm']){let s=I.create();s.weather=w;run(s,1460);let m=I.metrics(s);a.ok(m.count.every(n=>n<=60));for(let x of s.insects){a.ok(x.c>=0&&x.n>=0&&Number.isFinite(x.c));a.ok(!s.cells[x.pos].channel)}for(let c of s.cells)for(let k of ['nectar','background','dung','dungN','wood','woodN'])a.ok(c[k]>=-1e-12&&Number.isFinite(c[k]));summaries[w]={...m,events:s.insectEvents,flora:F.metrics(s)}}});console.log(JSON.stringify({passed:tests.length,tests,summaries},null,2));

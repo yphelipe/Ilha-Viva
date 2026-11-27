@@ -1,0 +1,470 @@
+[
+  {
+    "name": "walk",
+    "source": "adulto/animacoes/lemur_catta_walk.png",
+    "sha256": "79e5ebc0008b9ae5adbb2d9018952cf1b2f440715b8f9e176fa8a7a8ca827bb7",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 826531,
+    "opaque_pixels": 230237,
+    "output": "lemur_catta_walk.png"
+  },
+  {
+    "name": "run",
+    "source": "adulto/animacoes/lemur_catta_run.png",
+    "sha256": "914db730f6c4bf8149ec592e9ca625aa48bb10f5d5db38e1549294dd8d2f5f94",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 760689,
+    "opaque_pixels": 296079,
+    "output": "lemur_catta_run.png"
+  },
+  {
+    "name": "eat_fruit",
+    "source": "adulto/animacoes/lemur_catta_eat_fruit.png",
+    "sha256": "a54dce7dfdcb59dc661a5e6af65a40fda71aa890d65ab99a99646d65f9df810f",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 762814,
+    "opaque_pixels": 293954,
+    "output": "lemur_catta_eat_fruit.png"
+  },
+  {
+    "name": "idle",
+    "source": "adulto/animacoes/lemur_catta_idle.png",
+    "sha256": "ff56b1364d4fc68a38b76cdc9e3cba760107360d32904a781840bf9cf5c959ea",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 713984,
+    "opaque_pixels": 342784,
+    "output": "lemur_catta_idle.png"
+  },
+  {
+    "name": "eat_flowers",
+    "source": "adulto/animacoes/lemur_catta_eat_flowers.png",
+    "sha256": "f1b69f4d2bf25265a37be63f06e2b3464e4820f2fa27bb64b1391ef28b0b3453",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 770376,
+    "opaque_pixels": 286392,
+    "output": "lemur_catta_eat_flowers.png"
+  },
+  {
+    "name": "sleep",
+    "source": "adulto/animacoes/lemur_catta_sleep.png",
+    "sha256": "1a4ea72e8af8333b90ee60f9be3614ba5a047165f58e382e97ec03cf20e7c6ba",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 782244,
+    "opaque_pixels": 274524,
+    "output": "lemur_catta_sleep.png"
+  },
+  {
+    "name": "eat_leaves",
+    "source": "adulto/animacoes/lemur_catta_eat_leaves.png",
+    "sha256": "0c7ee371e6aa90337225c4728723e46b13ab4b61df2be2462361bcb7ff596099",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 746856,
+    "opaque_pixels": 309912,
+    "output": "lemur_catta_eat_leaves.png"
+  },
+  {
+    "name": "drink",
+    "source": "adulto/animacoes/lemur_catta_drink.png",
+    "sha256": "562a1979301576e28ff7cc6be59b6cd3f9168c3e0fcfac0392eee63845d48821",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 654602,
+    "opaque_pixels": 402166,
+    "output": "lemur_catta_drink.png"
+  },
+  {
+    "name": "jump",
+    "source": "adulto/animacoes/lemur_catta_jump.png",
+    "sha256": "4bfe804f278461e50ce2657bb62f53b622aa8054e8ad9e9118da42ad1a619907",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 675274,
+    "opaque_pixels": 381494,
+    "output": "lemur_catta_jump.png"
+  },
+  {
+    "name": "eat_insects",
+    "source": "adulto/animacoes/lemur_catta_eat_insects.png",
+    "sha256": "8276a6cb92bb7db7792f574655ead64e3209aac59484229d5a0c43ca3c80597c",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 786652,
+    "opaque_pixels": 270116,
+    "output": "lemur_catta_eat_insects.png"
+  },
+  {
+    "name": "sunbathe",
+    "source": "adulto/animacoes/lemur_catta_sunbathe.png",
+    "sha256": "1bb0eb5bd8c1ae1670d0fb40502ce6f5b265387a8e0edcce8578b9f4ade7ac0d",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 779950,
+    "opaque_pixels": 276818,
+    "output": "lemur_catta_sunbathe.png"
+  },
+  {
+    "name": "climb",
+    "source": "adulto/animacoes/lemur_catta_climb.png",
+    "sha256": "604d8998497938b4b242a849b77254e026af234bf4c72c97891241408568c1ed",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 756708,
+    "opaque_pixels": 300060,
+    "output": "lemur_catta_climb.png"
+  },
+  {
+    "name": "sit_idle",
+    "source": "adulto/animacoes/lemur_catta_sit_idle.png",
+    "sha256": "9ae928bcc579a9d8977f2c566b1244d857c127cac565f71e993f96960b418fe6",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 780083,
+    "opaque_pixels": 276685,
+    "output": "lemur_catta_sit_idle.png"
+  },
+  {
+    "name": "lie_down",
+    "source": "adulto/animacoes/lemur_catta_lie_down.png",
+    "sha256": "042bbc7adfb59243e1c31eb46409d752c45a5e17970615799d27f4a741bf6ce7",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 772901,
+    "opaque_pixels": 283867,
+    "output": "lemur_catta_lie_down.png"
+  },
+  {
+    "name": "stand_up",
+    "source": "adulto/animacoes/lemur_catta_stand_up.png",
+    "sha256": "db33f7889231366324c5df1b9ae69dab13baa139afe3ffc907b9e943dde38af4",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 690496,
+    "opaque_pixels": 366272,
+    "output": "lemur_catta_stand_up.png"
+  },
+  {
+    "name": "sit",
+    "source": "adulto/animacoes/lemur_catta_sit.png",
+    "sha256": "4d480927abc500e31e219d6bd093fac24e5eb552f03cf301cb5279d35056e152",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 785859,
+    "opaque_pixels": 270909,
+    "output": "lemur_catta_sit.png"
+  },
+  {
+    "name": "vocalize",
+    "source": "adulto/animacoes/lemur_catta_vocalize.png",
+    "sha256": "47539d621d97753684d611b87bc0b24d2b3ff45f53ef3ceead1071f3cb91daf0",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 781913,
+    "opaque_pixels": 274855,
+    "output": "lemur_catta_vocalize.png"
+  },
+  {
+    "name": "sniff",
+    "source": "adulto/animacoes/lemur_catta_sniff.png",
+    "sha256": "ac82521215e944b06793b496994620bc7206570be90d051e88414d728327b589",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 767048,
+    "opaque_pixels": 289720,
+    "output": "lemur_catta_sniff.png"
+  },
+  {
+    "name": "climb_down",
+    "source": "adulto/animacoes/lemur_catta_climb_down.png",
+    "sha256": "c9b8387d76334939b8bb20152fa8814d61940a390da8bc7679973757fec62931",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 831322,
+    "opaque_pixels": 225446,
+    "output": "lemur_catta_climb_down.png"
+  },
+  {
+    "name": "alert",
+    "source": "adulto/animacoes/lemur_catta_alert.png",
+    "sha256": "42b646fd9f8f9779668c46a3bb15f451c2d0e43cdf8fb3205168c3b49588a773",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 796159,
+    "opaque_pixels": 260609,
+    "output": "lemur_catta_alert.png"
+  },
+  {
+    "name": "defend",
+    "source": "adulto/animacoes/lemur_catta_defend.png",
+    "sha256": "e80bb36cbe2cbc430834d457c1e0fe39a7a713411eed0a9da0cbec59fa545a62",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 713243,
+    "opaque_pixels": 343525,
+    "output": "lemur_catta_defend.png"
+  },
+  {
+    "name": "groom_self",
+    "source": "adulto/animacoes/lemur_catta_groom_self.png",
+    "sha256": "88c74bb5b4a53e3950babc9b5851616e1804848a620c12485b621e772ca7e677",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 691013,
+    "opaque_pixels": 365755,
+    "output": "lemur_catta_groom_self.png"
+  },
+  {
+    "name": "scent_mark",
+    "source": "adulto/animacoes/lemur_catta_scent_mark.png",
+    "sha256": "eb535a7dcfd72928390d13838856d7c6ef4cc165ce1af083f2e14f6806f67e76",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 749311,
+    "opaque_pixels": 307457,
+    "output": "lemur_catta_scent_mark.png"
+  },
+  {
+    "name": "groom_social",
+    "source": "adulto/animacoes/lemur_catta_groom_social.png",
+    "sha256": "504fbb598d687c6efeb34adf61bb397c40540e98a8f8ec0d3f29304defd9255d",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "candidato_transparente",
+    "transparent_pixels": 706869,
+    "opaque_pixels": 349899,
+    "output": "lemur_catta_groom_social.png"
+  },
+  {
+    "name": "nurse_infant",
+    "source": "adulto/animacoes/lemur_catta_nurse_infant.png",
+    "sha256": "9d904f21a7f49fa87fcd8ca5c79821f443129edb885db85570e95ea330b53592",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "injured",
+    "source": "adulto/animacoes/lemur_catta_injured.png",
+    "sha256": "511f26fdb69b9b1cc7a1f076befdff75cb5888bcae6960430201a4cc8ec80bed",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "death",
+    "source": "adulto/animacoes/lemur_catta_death.png",
+    "sha256": "473485136da550c7c55795862980a8ca33102726704602096ec07aebfdf0ba5b",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "carry_infant",
+    "source": "adulto/animacoes/lemur_catta_carry_infant.png",
+    "sha256": "cd8fb7152782e334adfb306267ad0077f5b633b14aab633246cec37de5dab931",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "lifecycle_combined",
+    "source": "ciclo_de_vida/variante_combinada/lemur_catta_lifecycle_combined.png",
+    "sha256": "13f7840816b413f67eaf38e519d7f4194e3d4efb82136b26e56e156a3e84b45a",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "adult_male",
+    "source": "ciclo_de_vida/estagios/lemur_catta_adult_male.png",
+    "sha256": "eb7ffee1b2cd8cfade02a136fca42d258b0fcfacd7967836357717acfaf1de76",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "newborn",
+    "source": "ciclo_de_vida/estagios/lemur_catta_newborn.png",
+    "sha256": "5b4a599805085d6b8b1d5845d451f06ec8b891cfb2799e5c237b76915d28efbe",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "infant",
+    "source": "ciclo_de_vida/estagios/lemur_catta_infant.png",
+    "sha256": "37f4b8711b2664f01f5c49c390d1bd6b086241ac41ad8a00e0aa0d36c47936cd",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "elder",
+    "source": "ciclo_de_vida/estagios/lemur_catta_elder.png",
+    "sha256": "caf459473707097ded09ca6b7744d7515239ffa17240e36cba51560b54377fda",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "juvenile",
+    "source": "ciclo_de_vida/estagios/lemur_catta_juvenile.png",
+    "sha256": "eb785863cc3407b3f12d2a2e7db94da403e5ee18a2eb2e5405b25f65a71a4c2f",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  },
+  {
+    "name": "adult_female",
+    "source": "ciclo_de_vida/estagios/lemur_catta_adult_female.png",
+    "sha256": "1a44a6f4dbdd7041f971fb497f57ad52da491dcb66f9f4da1ef1034233c60f6c",
+    "size": [
+      1376,
+      768
+    ],
+    "original_mode": "RGB",
+    "status": "revisao_quadriculado",
+    "reason": "Fundo quadriculado incorporado, sobreposto a tons da pelagem. Não aplicar chave global."
+  }
+]

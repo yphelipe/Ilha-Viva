@@ -1,0 +1,131 @@
+{
+  "passed": 10,
+  "tests": [
+    "96 agentes e habitats corretos",
+    "continuidade após carregar",
+    "sem insetos não há polinização sexual",
+    "sem mariposa não há fruto de orquídea",
+    "visitas cruzadas geram polinização",
+    "recursos externos contabilizados",
+    "decompositores consomem recursos distintos",
+    "ausência de fezes impede refeições de besouro",
+    "tempestade impede visitas florais",
+    "um ano em três climas: balanços, limites e estados finitos"
+  ],
+  "summaries": {
+    "auto": {
+      "count": [
+        33,
+        7,
+        0,
+        60
+      ],
+      "juveniles": 0,
+      "total": 100,
+      "events": {
+        "visits": 8864,
+        "pollinations": 312,
+        "births": 300,
+        "deaths": 296,
+        "meals": [
+          15907,
+          15626,
+          1829,
+          37535
+        ],
+        "processedDung": 1.7767342228623586,
+        "processedWood": 37.53500000000322
+      },
+      "flora": {
+        "counts": [
+          106,
+          167,
+          104,
+          26,
+          181,
+          98
+        ],
+        "richness": 6,
+        "flowers": 73,
+        "fruits": 33,
+        "bank": 53.226202093287846
+      }
+    },
+    "drought": {
+      "count": [
+        0,
+        0,
+        0,
+        60
+      ],
+      "juveniles": 0,
+      "total": 60,
+      "events": {
+        "visits": 260,
+        "pollinations": 31,
+        "births": 140,
+        "deaths": 176,
+        "meals": [
+          957,
+          1198,
+          1816,
+          37584
+        ],
+        "processedDung": 1.7625466886895877,
+        "processedWood": 37.58400000000311
+      },
+      "flora": {
+        "counts": [
+          106,
+          0,
+          104,
+          0,
+          0,
+          98
+        ],
+        "richness": 3,
+        "flowers": 0,
+        "fruits": 0,
+        "bank": 11.605977079335052
+      }
+    },
+    "storm": {
+      "count": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "juveniles": 0,
+      "total": 0,
+      "events": {
+        "visits": 0,
+        "pollinations": 0,
+        "births": 30,
+        "deaths": 126,
+        "meals": [
+          0,
+          0,
+          88,
+          2037
+        ],
+        "processedDung": 0.08800000000000006,
+        "processedWood": 2.019496905442079
+      },
+      "flora": {
+        "counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "richness": 0,
+        "flowers": 0,
+        "fruits": 0,
+        "bank": 11.146832430707542
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "solo_floresta_original.png",
+  "atlas": "solo_atlas_64.png",
+  "rows": [
+    "vegetacao",
+    "serapilheira",
+    "terra",
+    "transicao"
+  ],
+  "size": 64,
+  "logical_grid": 32,
+  "status": "experimental; arte gerada para o projeto, recortada e composta; sem aprovação final",
+  "maps": [
+    "mata.png",
+    "folhas.png",
+    "terra.png",
+    "transicao.png"
+  ],
+  "sha256": {
+    "mata.png": "1eb6566dc86403016952d283ef8277ba0fc0eec7bedfe441ca599b309473d621",
+    "folhas.png": "5f817bceb0de3332500e97512f02bf3da5c6e0c68810b6b35c0ff72a667f2c34",
+    "transicao.png": "ae0051abf8c1f9576099b63c513a1ac1a4e6addbc4e76da518492072abb7f6a0",
+    "solo_atlas_64.png": "bac43a59927cdb14cda2aacbc1d677581361d22ecb79332c08bcc656dd1d62dd",
+    "terra.png": "9f6bdd29100a1d8c9676a6ab3dc01770816f3649c60376b2c57b82bda3b38d07",
+    "solo_floresta_original.png": "9ecc22803833e77f0de56484a6e62de8e9fc86fd726b66d0ae0ace5963600335"
+  }
+}

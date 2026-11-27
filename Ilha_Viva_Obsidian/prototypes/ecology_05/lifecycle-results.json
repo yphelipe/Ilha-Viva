@@ -1,0 +1,103 @@
+{
+  "passed": 9,
+  "tests": [
+    "reptil nasce somente apos incubacao",
+    "ovo inviavel retorna materia ao solo",
+    "postura real de reptil separada do nascimento",
+    "filhote de lemure recebe materia da mae e a acompanha",
+    "orfandade detectada sem gerar alimento",
+    "serializacao com ninho",
+    "tres anos seed 42",
+    "tres anos seed 77",
+    "tres anos seed 123"
+  ],
+  "scenarios": [
+    {
+      "seed": 42,
+      "animals": {
+        "count": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "total": 0,
+        "nests": 0,
+        "juveniles": 0
+      },
+      "life": {
+        "laid": 15,
+        "hatched": 0,
+        "eggLoss": 15,
+        "nursed": 599,
+        "orphaned": 0
+      },
+      "insects": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flora": 8,
+      "maxError": 5.529727786779404e-10
+    },
+    {
+      "seed": 77,
+      "animals": {
+        "count": [
+          0,
+          5,
+          0,
+          0
+        ],
+        "total": 5,
+        "nests": 0,
+        "juveniles": 0
+      },
+      "life": {
+        "laid": 16,
+        "hatched": 3,
+        "eggLoss": 13,
+        "nursed": 1351,
+        "orphaned": 0
+      },
+      "insects": [
+        14,
+        0,
+        0,
+        0
+      ],
+      "flora": 8,
+      "maxError": 5.966285243630409e-10
+    },
+    {
+      "seed": 123,
+      "animals": {
+        "count": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "total": 1,
+        "nests": 0,
+        "juveniles": 0
+      },
+      "life": {
+        "laid": 14,
+        "hatched": 2,
+        "eggLoss": 12,
+        "nursed": 1892,
+        "orphaned": 2
+      },
+      "insects": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flora": 8,
+      "maxError": 5.020410753786564e-10
+    }
+  ]
+}

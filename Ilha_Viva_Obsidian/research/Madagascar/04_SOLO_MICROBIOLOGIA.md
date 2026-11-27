@@ -1,0 +1,11 @@
+# Solo, microbiologia e decomposição
+Base científica: FAO F23–F24; revisão Nature Reviews Microbiology F25. Não simular células individuais nem criar IA generativa para bactérias.
+
+## Estados por célula ecológica (unidades internas a definir)
+Água no solo (0..capacidade), temperatura, matéria orgânica lábil e recalcitrante, N mineral, P disponível, biomassa microbiana funcional, oxigenação proxy, pH classe, textura, compactação, erosão, cobertura, risco de patógenos. Pools e fluxos, não apenas um número de fertilidade. Carbono/energia não são sinônimos de nitrogênio. Distinguir mineralização (orgânico -> mineral), imobilização (mineral -> biomassa), nitrificação dependente de oxigênio, perdas por lixiviação e desnitrificação em condições apropriadas. Fixação biológica de N somente para grupos/simbioses compatíveis; não adicionar N a todo solo fértil. Fungos micorrízicos podem facilitar aquisição de nutrientes em plantas compatíveis; custo de carbono e condições ambientais.
+
+## Modelo experimental conservativo
+Entrada: folhas, madeira morta, fezes, restos vegetais e animais. Decomposição limitada por estoque, qualidade do substrato, umidade, temperatura e oxigenação. Distribuir matéria removida entre respiração/perdas, biomassa microbiana e matéria estabilizada; transferir nutrientes com contabilidade explícita. Frio/seca desaceleram; saturação hídrica altera disponibilidade de oxigênio e vias metabólicas. Não aumentar decomposição indefinidamente com chuva. A atividade de decompositores invertebrados fragmenta resíduos; fungos e bactérias transformam matéria. Usar funções calibráveis, nunca criar estoque negativo. Patógenos como pressão de risco por hospedeiro e ambiente, não confundir todos os micróbios com agentes de doença. Nenhuma afirmação de modelagem microbiológica local específica sem estudos de solo regionais.
+
+## Percepção do jogador
+Folhas viram serapilheira, troncos se degradam, cogumelos aparecem onde adequados, solo compactado infiltra menos, cobertura protege contra erosão; composto melhora certas propriedades com atraso. UI mostra umidade/qualidade em linguagem simples; detalhes opcionais em diário naturalista. Sem microgerenciamento obrigatório de N, P, pH ou bactérias.

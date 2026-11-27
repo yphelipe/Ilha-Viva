@@ -1,0 +1,262 @@
+[
+  {
+    "action": "fruit",
+    "direction": "right",
+    "source": "idle",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      3,
+      2,
+      6
+    ],
+    "scale": 0.8,
+    "mirror": false
+  },
+  {
+    "action": "drink",
+    "direction": "right",
+    "source": "eat_leaves",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      4,
+      3,
+      6
+    ],
+    "scale": 0.82,
+    "mirror": false
+  },
+  {
+    "action": "run",
+    "direction": "right",
+    "source": "eat_insects",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "scale": 1.0,
+    "mirror": false
+  },
+  {
+    "action": "sit",
+    "direction": "right",
+    "source": "lie_down",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      2
+    ],
+    "scale": 0.7,
+    "mirror": true
+  },
+  {
+    "action": "sleep",
+    "direction": "right",
+    "source": "drink",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      3,
+      2
+    ],
+    "scale": 0.67,
+    "mirror": true
+  },
+  {
+    "action": "fruit",
+    "direction": "left",
+    "source": "idle",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      3,
+      2,
+      6
+    ],
+    "scale": 0.8,
+    "mirror": true
+  },
+  {
+    "action": "drink",
+    "direction": "left",
+    "source": "eat_leaves",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      4,
+      3,
+      6
+    ],
+    "scale": 0.82,
+    "mirror": true
+  },
+  {
+    "action": "run",
+    "direction": "left",
+    "source": "eat_insects",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "scale": 1.0,
+    "mirror": true
+  },
+  {
+    "action": "sit",
+    "direction": "left",
+    "source": "lie_down",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      2
+    ],
+    "scale": 0.7,
+    "mirror": false
+  },
+  {
+    "action": "sleep",
+    "direction": "left",
+    "source": "drink",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      3,
+      2
+    ],
+    "scale": 0.67,
+    "mirror": false
+  },
+  {
+    "action": "sit",
+    "direction": "down",
+    "source": "lie_down",
+    "row": 1,
+    "columns": [
+      1,
+      2,
+      3,
+      2
+    ],
+    "scale": 0.7,
+    "mirror": false
+  },
+  {
+    "action": "sleep",
+    "direction": "down",
+    "source": "drink",
+    "row": 1,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      3,
+      2
+    ],
+    "scale": 0.67,
+    "mirror": false
+  },
+  {
+    "action": "sit",
+    "direction": "up",
+    "source": "lie_down",
+    "row": 4,
+    "columns": [
+      1,
+      2,
+      3,
+      2
+    ],
+    "scale": 0.7,
+    "mirror": false
+  },
+  {
+    "action": "sleep",
+    "direction": "up",
+    "source": "drink",
+    "row": 4,
+    "columns": [
+      1,
+      2,
+      3,
+      4,
+      3,
+      2
+    ],
+    "scale": 0.67,
+    "mirror": false
+  },
+  {
+    "action": "leaf",
+    "direction": "right",
+    "source": "eat_flowers",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      2,
+      3,
+      2
+    ],
+    "scale": 0.82,
+    "mirror": false
+  },
+  {
+    "action": "leaf",
+    "direction": "left",
+    "source": "eat_flowers",
+    "row": 2,
+    "columns": [
+      1,
+      2,
+      3,
+      2,
+      3,
+      2
+    ],
+    "scale": 0.82,
+    "mirror": true
+  }
+]

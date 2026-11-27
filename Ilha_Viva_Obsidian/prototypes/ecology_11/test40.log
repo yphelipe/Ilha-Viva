@@ -1,0 +1,20 @@
+[
+  'C/N/P/água e estoques não negativos, 120 passos',
+  'restingHatch',
+  'shrimpSpawn',
+  'shrimpHatch',
+  'recolonization',
+  'frogSpawn',
+  'frogHatch',
+  'frogMature',
+  'birdMeals',
+  'birdSpawn',
+  'birdHatch',
+  'birdCare',
+  'birdFledge',
+  'reidratação',
+  'eclosão após chuva',
+  'recolonização após chuva',
+  'nenhum reaparecimento sem organismos ou ovos',
+  'fotossíntese aquática desligada no escuro'
+]

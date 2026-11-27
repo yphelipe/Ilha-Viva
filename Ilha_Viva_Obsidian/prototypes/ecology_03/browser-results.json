@@ -1,0 +1,18 @@
+{
+  "passed": 12,
+  "tests": [
+    "sem overflow",
+    "96 agentes",
+    "avanço diário",
+    "fezes contabilizadas",
+    "madeira contabilizada",
+    "ocultar agentes",
+    "fenologia",
+    "restauração",
+    "remoção experimental",
+    "reinício",
+    "30 dias",
+    "sem erros JS"
+  ],
+  "errors": []
+}

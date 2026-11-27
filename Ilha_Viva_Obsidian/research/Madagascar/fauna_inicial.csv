@@ -1,0 +1,9 @@
+id,taxon,habitat_preliminar,dieta_preliminar,fonte,status,parametros_simulacao
+lemur_catta,Lemur catta,sul/sudoeste seco,frutos;folhas;flores;seiva;invertebrados ocasionais,F07,ficha preliminar,pendente
+varecia_variegata,Varecia variegata,leste úmido,frutos; outros a validar,F08,ficha preliminar,pendente
+varecia_rubra,Varecia rubra,nordeste úmido,frutos; outros a validar,F09,ficha preliminar,pendente
+propithecus_coquereli,Propithecus coquereli,noroeste seco,folhas; outros a validar,F10,ficha preliminar,pendente
+microcebus_murinus,Microcebus murinus,distribuição local a verificar,vegetais; invertebrados a detalhar,F11,ficha preliminar,pendente
+cryptoprocta_ferox,Cryptoprocta ferox,florestas; ocorrência local a verificar,lêmures;tenrecos;pequenos vertebrados,F12,ficha preliminar,pendente
+furcifer_pardalis,Furcifer pardalis,floresta aberta; costa,invertebrados,F13,ficha preliminar,pendente
+astrochelys_radiata,Astrochelys radiata,sul/sudoeste seco,gramíneas;frutos;suculentas,F13b,ficha preliminar,pendente

@@ -1,0 +1,4 @@
+__pycache__/
+.venv/
+tests/output/
+.DS_Store

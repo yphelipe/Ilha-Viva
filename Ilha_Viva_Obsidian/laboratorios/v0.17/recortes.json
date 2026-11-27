@@ -1,0 +1,338 @@
+[
+  {
+    "action": "hoe",
+    "frame": 1,
+    "source_rect": [
+      46,
+      13,
+      211,
+      249
+    ],
+    "anchor": [
+      17.99,
+      73.9
+    ]
+  },
+  {
+    "action": "hoe",
+    "frame": 2,
+    "source_rect": [
+      295,
+      18,
+      465,
+      244
+    ],
+    "anchor": [
+      21.49,
+      72.23
+    ]
+  },
+  {
+    "action": "hoe",
+    "frame": 3,
+    "source_rect": [
+      518,
+      18,
+      682,
+      244
+    ],
+    "anchor": [
+      34.83,
+      73.59
+    ]
+  },
+  {
+    "action": "hoe",
+    "frame": 4,
+    "source_rect": [
+      786,
+      34,
+      986,
+      252
+    ],
+    "anchor": [
+      28.9,
+      67.21
+    ]
+  },
+  {
+    "action": "hoe",
+    "frame": 5,
+    "source_rect": [
+      1042,
+      49,
+      1250,
+      253
+    ],
+    "anchor": [
+      31.75,
+      62.24
+    ]
+  },
+  {
+    "action": "hoe",
+    "frame": 6,
+    "source_rect": [
+      1320,
+      22,
+      1482,
+      251
+    ],
+    "anchor": [
+      22.41,
+      72.55
+    ]
+  },
+  {
+    "action": "axe",
+    "frame": 1,
+    "source_rect": [
+      51,
+      276,
+      208,
+      505
+    ],
+    "anchor": [
+      17.22,
+      75.28
+    ]
+  },
+  {
+    "action": "axe",
+    "frame": 2,
+    "source_rect": [
+      277,
+      278,
+      449,
+      502
+    ],
+    "anchor": [
+      30.69,
+      74.3
+    ]
+  },
+  {
+    "action": "axe",
+    "frame": 3,
+    "source_rect": [
+      538,
+      262,
+      693,
+      503
+    ],
+    "anchor": [
+      28.38,
+      79.96
+    ]
+  },
+  {
+    "action": "axe",
+    "frame": 4,
+    "source_rect": [
+      792,
+      300,
+      1000,
+      503
+    ],
+    "anchor": [
+      27.99,
+      66.28
+    ]
+  },
+  {
+    "action": "axe",
+    "frame": 5,
+    "source_rect": [
+      1042,
+      303,
+      1262,
+      502
+    ],
+    "anchor": [
+      32.05,
+      66.29
+    ]
+  },
+  {
+    "action": "axe",
+    "frame": 6,
+    "source_rect": [
+      1319,
+      280,
+      1487,
+      503
+    ],
+    "anchor": [
+      24.77,
+      73.96
+    ]
+  },
+  {
+    "action": "sickle",
+    "frame": 1,
+    "source_rect": [
+      46,
+      528,
+      208,
+      747
+    ],
+    "anchor": [
+      19.35,
+      71.97
+    ]
+  },
+  {
+    "action": "sickle",
+    "frame": 2,
+    "source_rect": [
+      289,
+      533,
+      465,
+      748
+    ],
+    "anchor": [
+      26.93,
+      70.96
+    ]
+  },
+  {
+    "action": "sickle",
+    "frame": 3,
+    "source_rect": [
+      542,
+      528,
+      738,
+      748
+    ],
+    "anchor": [
+      27.35,
+      72.95
+    ]
+  },
+  {
+    "action": "sickle",
+    "frame": 4,
+    "source_rect": [
+      788,
+      533,
+      994,
+      750
+    ],
+    "anchor": [
+      29.9,
+      70.93
+    ]
+  },
+  {
+    "action": "sickle",
+    "frame": 5,
+    "source_rect": [
+      1043,
+      542,
+      1248,
+      747
+    ],
+    "anchor": [
+      31.07,
+      67.61
+    ]
+  },
+  {
+    "action": "sickle",
+    "frame": 6,
+    "source_rect": [
+      1320,
+      528,
+      1461,
+      745
+    ],
+    "anchor": [
+      24.17,
+      72.64
+    ]
+  },
+  {
+    "action": "waterEntryPants",
+    "frame": 1,
+    "source_rect": [
+      69,
+      762,
+      187,
+      1010
+    ],
+    "anchor": [
+      18.31,
+      54.87
+    ]
+  },
+  {
+    "action": "waterEntryPants",
+    "frame": 2,
+    "source_rect": [
+      320,
+      765,
+      442,
+      1009
+    ],
+    "anchor": [
+      19.49,
+      54.09
+    ]
+  },
+  {
+    "action": "waterEntryPants",
+    "frame": 3,
+    "source_rect": [
+      565,
+      768,
+      701,
+      1010
+    ],
+    "anchor": [
+      23.68,
+      52.86
+    ]
+  },
+  {
+    "action": "waterEntryPants",
+    "frame": 4,
+    "source_rect": [
+      816,
+      769,
+      972,
+      1010
+    ],
+    "anchor": [
+      25.48,
+      52.74
+    ]
+  },
+  {
+    "action": "waterEntryPants",
+    "frame": 5,
+    "source_rect": [
+      1055,
+      769,
+      1239,
+      994
+    ],
+    "anchor": [
+      31.16,
+      52.36
+    ]
+  },
+  {
+    "action": "waterEntryPants",
+    "frame": 6,
+    "source_rect": [
+      1299,
+      769,
+      1508,
+      972
+    ],
+    "anchor": [
+      35.67,
+      52.68
+    ]
+  }
+]

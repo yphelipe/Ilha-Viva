@@ -1,0 +1,1 @@
+212 verificações de seleção e direção, travessia, gelo e bloqueio de deslocamento; sem erros JS. Não equivale a QA biomecânico.

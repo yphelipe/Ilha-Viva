@@ -1,0 +1,85 @@
+{
+  "cell": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    101
+  ],
+  "reference": "foice v11",
+  "rows": [
+    {
+      "action": "sickle",
+      "direction": "down",
+      "row": 0,
+      "frames": 3
+    },
+    {
+      "action": "sickle",
+      "direction": "left",
+      "row": 1,
+      "frames": 6
+    },
+    {
+      "action": "sickle",
+      "direction": "right",
+      "row": 2,
+      "frames": 6
+    },
+    {
+      "action": "sickle",
+      "direction": "up",
+      "row": 3,
+      "frames": 3
+    },
+    {
+      "action": "hoe",
+      "direction": "down",
+      "row": 4,
+      "frames": 6
+    },
+    {
+      "action": "hoe",
+      "direction": "left",
+      "row": 5,
+      "frames": 6
+    },
+    {
+      "action": "hoe",
+      "direction": "right",
+      "row": 6,
+      "frames": 6
+    },
+    {
+      "action": "hoe",
+      "direction": "up",
+      "row": 7,
+      "frames": 6
+    },
+    {
+      "action": "axe",
+      "direction": "down",
+      "row": 8,
+      "frames": 7
+    },
+    {
+      "action": "axe",
+      "direction": "left",
+      "row": 9,
+      "frames": 6
+    },
+    {
+      "action": "axe",
+      "direction": "right",
+      "row": 10,
+      "frames": 6
+    },
+    {
+      "action": "axe",
+      "direction": "up",
+      "row": 11,
+      "frames": 6
+    }
+  ]
+}

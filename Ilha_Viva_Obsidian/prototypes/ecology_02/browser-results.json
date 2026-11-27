@@ -1,0 +1,18 @@
+{
+  "passed": 12,
+  "tests": [
+    "sem overflow horizontal",
+    "seis espécies",
+    "avanço diário",
+    "controle de polinizadores",
+    "camada fenológica",
+    "corte",
+    "introdução de esporos",
+    "composto",
+    "persistência simulada",
+    "reiniciar",
+    "30 dias",
+    "sem erros JS"
+  ],
+  "errors": []
+}
