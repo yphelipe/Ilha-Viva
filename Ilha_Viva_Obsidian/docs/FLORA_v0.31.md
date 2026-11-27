@@ -1,0 +1,19 @@
+# Ilha Viva v0.31 | Flora experimental
+## Estado e integração
+Continuação do ecossistema 01 (v0.30), com o motor hidrológico e de balanços de C/N/água preservado e perfis fisiológicos opcionais. O protagonista, sprites, cenário e builds anteriores ficam intactos. O laboratório 02 é um instrumento de diagnóstico, não gameplay artístico final. Madagascar permanece a única referência geográfica principal. A roupa de frio permanece pendente.
+
+## Referências científicas e limites
+- Baobá de Grandidier: Adansonia grandidieri, bioma seco. https://powo.science.kew.org/taxon/558630-1
+- Ravenala madagascariensis: https://www.kew.org/plants/travellers-palm ; interação de polinização documentada com Eulemur macaco: https://pubmed.ncbi.nlm.nih.gov/9751827/ . Há outras espécies de Ravenala reconhecidas; não generalizar a distribuição.
+- Alluaudia procera: https://www.kew.org/plants/madagascar-ocotillo ; https://records.data.kew.org/occurrences/0c708820-f1f7-451e-bb9f-1e12a589c497
+- Angraecum sesquipedale: orquídea epífita de floresta tropical, interação com mariposa de probóscide longa. https://www.kew.org/read-and-watch/orchids-of-madagascar-science ; https://www.botanic.cam.ac.uk/the-garden/plant-list/angraecum-sesquipedale/
+- Nephrolepis biserrata: presença em Madagascar, samambaia de distribuição ampla, reprodução por esporos. https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A17160710-1
+- Pachypodium lamerei: ambiente tropical sazonalmente seco. https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A80705-1 ; dispersão pelo vento no gênero: https://pza.sanbi.org/pachypodium
+
+Todos os tempos de maturidade, janelas fenológicas, taxas de perda, tolerância, reservas, dispersão e probabilidades no código são hipóteses de gameplay, não parâmetros medidos. Dispersão por gravidade para algumas espécies é uma simplificação transitória; introduzir agentes de dispersão específicos posteriormente. O suporte epifítico é aproximado pela proximidade de Ravenala madura, não uma afirmação de exclusividade do hospedeiro. Esporos são agrupados como propágulos com germinação simplificada, sem modelar alternância de gerações. Floração é um estado sem massa própria, frutificação e banco de propágulos têm estoques explícitos. Polinização é probabilística, não uma população de insetos simulada; no modo sem mariposa a orquídea não frutifica. Uma coorte dominante por célula, não contagem de indivíduos.
+
+## Sistemas
+Seis espécies; 1120 células (1050 terrestres). Banco local de propágulos por espécie, recrutamento condicionado a habitat, água, oxigênio e luz; crescimento condicionado por perfis; senescência e morte transferem matéria a resíduos; colheita exporta C/N; propagação retira reservas e nutrientes; dispersão transfere matéria entre células. Controles de polinizadores, camadas de espécie/fenologia, semeadura, corte, irrigação e composto. Salvamento em chave nova ivEco031. Estado antigo permanece independente. O passo base é de 6 horas, reprodução atualizada diariamente.
+
+## QA e pendências
+10 testes base, 10 testes flora, 12 verificações Chromium com viewport móvel emulado. Ver arquivos JSON. Cenário natural anual mantém as seis espécies mas tem 445 mortes de coortes e 76 germinações; exige calibração demográfica e hídrica antes de integração definitiva. Estiagem contínua mantém as três espécies de habitat seco; tempestade contínua extrema elimina todas as coortes, resultado experimental não previsão real. Fases e contagens não equivalem a indivíduos ou frutos reais. Salvamento testado com armazenamento simulado; Android físico/FPS, fauna e arte final pendentes. Próximo: calibrar clima e sobrevivência, modelar insetos polinizadores e consumidores com dieta específica e ligar os agentes a flores/frutos/esporos/decomposição, depois sprites autorais.

@@ -1,0 +1,10 @@
+from playwright.sync_api import sync_playwright
+from pathlib import Path
+import json
+p=Path(__file__).parent; checks=[]; errors=[]
+with sync_playwright() as q:
+ b=q.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']);page=b.new_page(viewport={'width':412,'height':915},is_mobile=True,has_touch=True);page.on('pageerror',lambda e:errors.append(str(e)));page.set_content((p/'Ilha_Viva_Ecossistema_03.html').read_text());page.evaluate("Object.defineProperty(window,'localStorage',{value:{data:{},setItem(k,v){this.data[k]=v},getItem(k){return this.data[k]??null}}})")
+ def ck(n,v):
+  assert v,n;checks.append(n)
+ ck('sem overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth'));ck('96 agentes',page.evaluate('lab.state.insects.length')==96);page.click('#day');page.wait_for_function('lab.state.day===1');ck('avanço diário',True);page.click('#dung');ck('fezes contabilizadas',page.evaluate('lab.state.ledger.externalC')==.1);page.click('#wood');ck('madeira contabilizada',page.evaluate('lab.state.ledger.externalC')==.2);page.click('#showInsects');ck('ocultar agentes',not page.locator('#showInsects').is_checked());page.click('#showInsects');page.select_option('#layer','phenology');ck('fenologia',page.locator('#layer').input_value()=='phenology');page.click('#save');page.click('#week');page.wait_for_function('lab.state.day===8');page.click('#load');ck('restauração',page.evaluate('lab.state.day')==1);page.select_option('#pollinators','none');page.click('#day');page.wait_for_function('lab.state.day===2');ck('remoção experimental',page.evaluate('lab.state.insects.length')==0);page.click('#reset');ck('reinício',page.evaluate('lab.state.insects.length')==96);page.click('#month');page.wait_for_function('lab.state.day===30');ck('30 dias',True);ck('sem erros JS',not errors);page.screenshot(path=str(p/'Ilha_Viva_Ecossistema_03_preview.png'),full_page=True);b.close()
+(p/'browser-results.json').write_text(json.dumps({'passed':len(checks),'tests':checks,'errors':errors},ensure_ascii=False,indent=2));print(checks)

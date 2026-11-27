@@ -1,0 +1,10 @@
+from playwright.sync_api import sync_playwright
+import json
+from pathlib import Path
+p=Path('/mnt/data');checks=[]
+with sync_playwright() as q:
+ b=q.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']);page=b.new_page(viewport={'width':412,'height':915},is_mobile=True,has_touch=True);err=[];page.on('pageerror',lambda e:err.append(str(e)));page.set_content((p/'Ilha_Viva_Ecossistema_02.html').read_text());page.evaluate("Object.defineProperty(window,'localStorage',{value:{data:{},setItem(k,v){this.data[k]=v},getItem(k){return this.data[k]??null}}})")
+ def ck(n,v):
+  assert v,n;checks.append(n)
+ ck('sem overflow horizontal',page.evaluate('document.documentElement.scrollWidth<=innerWidth'));ck('seis espécies',page.evaluate('Flora.metrics(lab.state).richness')==6);page.click('#day');page.wait_for_function('lab.state.day===1');ck('avanço diário',True);page.select_option('#pollinators','noMoth');ck('controle de polinizadores',page.evaluate('lab.state.pollinators')=='noMoth');page.select_option('#layer','phenology');ck('camada fenológica',page.locator('#layer').input_value()=='phenology');page.click('#cut');ck('corte',page.evaluate('lab.state.cells[368].sp')==-1);page.select_option('#seedSelect','4');page.click('#seed');ck('introdução de esporos',page.evaluate('lab.state.cells[368].bank[4]')>=.024);page.click('#compost');ck('composto',page.evaluate('lab.state.ledger.externalN')>.02);page.click('#save');page.click('#week');page.wait_for_function('lab.state.day===8');page.click('#load');ck('persistência simulada',page.evaluate('lab.state.day')==1);page.click('#reset');ck('reiniciar',page.evaluate('lab.state.day')==0);page.click('#month');page.wait_for_function('lab.state.day===30');ck('30 dias',True);ck('sem erros JS',not err);page.screenshot(path=str(p/'Ilha_Viva_Ecossistema_02_preview.png'),full_page=True);b.close()
+(p/'iv031/browser-results.json').write_text(json.dumps({'passed':len(checks),'tests':checks,'errors':err},ensure_ascii=False,indent=2));print(checks)

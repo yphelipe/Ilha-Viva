@@ -1,0 +1,89 @@
+{
+  "passed": 10,
+  "tests": [
+    "seis espécies e habitats compatíveis",
+    "determinismo e restauração JSON",
+    "um ano: conservação e estados não negativos em três climas",
+    "sem polinizadores: sem frutos sexuais, esporos continuam",
+    "sem mariposa: orquídea não frutifica",
+    "corte conserva C e N e permite regeneração",
+    "sem banco de sementes e sem vizinhos: não nasce espontaneamente",
+    "introdução de propágulos contabilizada e restrita ao habitat",
+    "escuridão: zero fotossíntese e sem germinação",
+    "colheita exporta fruto e nutrientes"
+  ],
+  "summaries": {
+    "auto": {
+      "counts": [
+        106,
+        169,
+        104,
+        27,
+        177,
+        98
+      ],
+      "richness": 6,
+      "flowers": 83,
+      "fruits": 35,
+      "bank": 56.69882771432472,
+      "events": {
+        "germinations": 76,
+        "deaths": 445,
+        "flowers": 927,
+        "pollinated": 735,
+        "propagules": 7194,
+        "dispersals": 7194,
+        "harvests": 0
+      },
+      "water": 0.28635052885412604
+    },
+    "drought": {
+      "counts": [
+        106,
+        0,
+        104,
+        0,
+        0,
+        98
+      ],
+      "richness": 3,
+      "flowers": 0,
+      "fruits": 0,
+      "bank": 12.680901735901113,
+      "events": {
+        "germinations": 0,
+        "deaths": 742,
+        "flowers": 265,
+        "pollinated": 212,
+        "propagules": 468,
+        "dispersals": 468,
+        "harvests": 0
+      },
+      "water": 0
+    },
+    "storm": {
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "richness": 0,
+      "flowers": 0,
+      "fruits": 0,
+      "bank": 11.717462727362355,
+      "events": {
+        "germinations": 0,
+        "deaths": 1050,
+        "flowers": 251,
+        "pollinated": 65,
+        "propagules": 309,
+        "dispersals": 309,
+        "harvests": 0
+      },
+      "water": 0.9629025918805436
+    }
+  }
+}

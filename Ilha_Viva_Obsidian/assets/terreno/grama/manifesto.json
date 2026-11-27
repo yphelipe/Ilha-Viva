@@ -1,0 +1,25 @@
+{
+  "tile_size": 32,
+  "base": {
+    "file": "grama_tiles_32.png",
+    "rows": [
+      "solo_exposto",
+      "cortada",
+      "baixa",
+      "alta",
+      "seca",
+      "umida"
+    ],
+    "columns": 8
+  },
+  "overlay": {
+    "file": "grama_tufos_32.png",
+    "rows": [
+      "baixo",
+      "alto",
+      "seco"
+    ],
+    "columns": 8
+  },
+  "approval": "pendente"
+}

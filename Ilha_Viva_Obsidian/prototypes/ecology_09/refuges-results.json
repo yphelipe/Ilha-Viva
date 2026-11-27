@@ -1,0 +1,37 @@
+{
+  "passed": 7,
+  "tests": [
+    "sete refúgios finitos",
+    "seca prolongada esgota as reservas sem reposição artificial",
+    "ovos têm período mínimo de incubação",
+    "insetos reais transferem matéria para água",
+    "migração depende de trechos conectados",
+    "ovos inviáveis retornam aos detritos",
+    "sem passagem em trecho seco"
+  ],
+  "results": {
+    "drought90": {
+      "o": 0.0038598023891061465,
+      "wet": 0,
+      "n": 0.9273839733931304,
+      "p": 0.26395101989249364,
+      "refuges": 0,
+      "ground": 40.97195428078469,
+      "pond": 0,
+      "deepGround": 101.94944465495111,
+      "springs": 0,
+      "soilP": 34.94002722074297,
+      "microP": 1.0291544115632547,
+      "rootAssoc": 0.000015243162204521481,
+      "algae": 0.013771803598227437,
+      "plankton": 0.0006580630174210896,
+      "larvae": 0.00012060245258034517,
+      "shrimp": 0.00012241305082830414,
+      "fish": 0.000026958652120685314,
+      "juvenile": 0.000025454525628361848,
+      "eggs": 9.315329540723893e-17,
+      "terrestrialPrey": 2.43456331657298e-30,
+      "detritus": 14.900448297105964
+    }
+  }
+}

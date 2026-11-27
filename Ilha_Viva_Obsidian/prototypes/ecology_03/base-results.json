@@ -1,0 +1,15 @@
+{
+  "passed": 10,
+  "tests": [
+    "determinismo 90 dias",
+    "365 dias: balanços e estados finitos em cinco regimes",
+    "escuro: fotossíntese zero e reserva consumida",
+    "seca reduz água e crescimento relativo",
+    "tempestade aumenta vazão e alagamentos",
+    "corte transfere carbono e N para resíduo",
+    "composto tem entradas explícitas",
+    "solo saturado reduz oxigenação",
+    "snapshot JSON continua idêntico",
+    "sem regeneração espontânea em célula sem biomassa"
+  ]
+}

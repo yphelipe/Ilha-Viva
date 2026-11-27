@@ -1,0 +1,34 @@
+{
+  "passed": 17,
+  "checks": [
+    "10 groups, 181 sequence slots",
+    "memory capped, deduplicated and serialized",
+    "memory expires",
+    "memory target approaches remembered site",
+    "dorsal infant follows mother, no second rendered individual",
+    "all dorsal directions have distinct images",
+    "milk transfer conserves ecological budget, infant follows final position",
+    "older infant dismounts, neonatal ventral state not mislabeled dorsal",
+    "no mother, no composite",
+    "social rest pairs two real agents reciprocally",
+    "climb at actual trunk, reaches height, descends before travel",
+    "no climbing when tree absent",
+    "natural simulation, conservation and memory",
+    "no JS errors",
+    "visualizer climb",
+    "visualizer carry",
+    "visualizer sun"
+  ],
+  "natural": {
+    "counts": {
+      "sleep": 316,
+      "climb": 2,
+      "leaf": 279,
+      "fruit": 35,
+      "walk": 1,
+      "idle": 7
+    },
+    "mem": 2660
+  },
+  "errors": []
+}

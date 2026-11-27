@@ -1,0 +1,35 @@
+{
+  "checks": [
+    "índice acompanha movimento",
+    "consulta por ID",
+    "competição territorial mesmo sexo",
+    "não bloqueia parceiro reprodutivo",
+    "abrigo seco adequado",
+    "abrigo alagado rejeitado",
+    "torpor sazonal reduz atividade",
+    "balanço C/N/P/água",
+    "tenreque consome fruto alternativo",
+    "balanço C/N/P/água",
+    "busca espacial em simulação",
+    "repouso em abrigos durante ciclo"
+  ],
+  "events": {
+    "shelterRest": 2934,
+    "territoryAvoid": 0,
+    "torpor": 0,
+    "fruitFallback": 0,
+    "localQueries": 1268
+  },
+  "pop": {
+    "count": [
+      20,
+      7,
+      10,
+      2,
+      12
+    ],
+    "total": 51,
+    "nests": 0,
+    "juveniles": 0
+  }
+}

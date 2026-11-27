@@ -1,0 +1,10 @@
+from playwright.sync_api import sync_playwright
+import json
+from pathlib import Path
+p=Path('/mnt/data'); checks=[]
+with sync_playwright() as q:
+ b=q.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']); page=b.new_page(viewport={'width':412,'height':915},is_mobile=True,has_touch=True); errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.set_content((p/'Ilha_Viva_Ecossistema_01.html').read_text());page.evaluate("Object.defineProperty(window,'localStorage',{value:{data:{},setItem(k,v){this.data[k]=v},getItem(k){return this.data[k]??null}}})");
+ def ck(n,ok):
+  assert ok,n; checks.append(n)
+ ck('mapa 1120 células',page.evaluate('lab.state.cells.length')==1120);ck('sem overflow horizontal',page.evaluate('document.documentElement.scrollWidth <= innerWidth'));page.click('#day');page.wait_for_function('lab.state.day===1');ck('avanço diário',True);page.select_option('#weather','storm');page.click('#week');page.wait_for_function('lab.state.day===8');ck('tempestade 7 dias',page.evaluate('lab.state.rain>0'));page.select_option('#layer','micro');ck('camada microbiana',page.locator('#layer').input_value()=='micro');page.click('#compost');ck('composto',page.evaluate('lab.state.ledger.externalN')==.02);page.click('#save');page.click('#day');page.wait_for_function('lab.state.day===9');page.click('#load');ck('save/load com armazenamento simulado',page.evaluate('lab.state.day')==8);page.click('#reset');ck('reiniciar',page.evaluate('lab.state.day')==0);page.select_option('#light','dark');page.click('#day');page.wait_for_function('lab.state.day===1');ck('sem luz',page.evaluate('lab.state.cells.every(c=>c.photo===0)'));page.click('#reset');page.select_option('#weather','auto');page.click('#month');page.wait_for_function('lab.state.day===30');ck('30 dias',True);ck('sem erros JS',not errors);page.screenshot(path=str(p/'Ilha_Viva_Ecossistema_01_preview.png'),full_page=True);b.close()
+(p/'iv030/browser-results.json').write_text(json.dumps({'passed':len(checks),'tests':checks,'errors':errors},ensure_ascii=False,indent=2));print(checks)

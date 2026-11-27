@@ -1,0 +1,9 @@
+const W=14,H=9,T=32, clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const hash=(x,y)=>{let n=Math.imul(x+17,374761393)^Math.imul(y+31,668265263);n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967296};
+function makeWorld(){return {day:1,weather:'natural',grazing:false,grazed:0,harvest:0,last:null,tiles:Array.from({length:W*H},(_,i)=>{let x=i%W,y=Math.floor(i/W),h=hash(x,y),band=(Math.sin(x*.48+y*.31)+1)/2;return {m:clamp(.48+.15*band+.10*(h-.5)),b:clamp(.37+.47*band+.12*(h-.5)),r:.86,f:.74,v:Math.floor(h*8),stress:0}})}}
+function climate(day,mode){if(mode==='rain')return {rain:.24,temp:19,label:'Chuva'};if(mode==='dry')return {rain:0,temp:31,label:'Estiagem'};if(mode==='cold')return {rain:.025,temp:4,label:'Frio'};let n=hash(day,99);return {rain:n<.32?.20:0,temp:19+Math.sin(day*.11)*5,label:n<.32?'Chuva':'Tempo aberto'}}
+function cut(t,amount){let taken=Math.max(0,Math.min(amount,t.b-.055));t.b-=taken;if(t.b<.20)t.r=clamp(t.r-taken*.30);return taken}
+function grow(t,c){let evap=.052+Math.max(0,c.temp-18)*.004; t.m=clamp(t.m+c.rain*(1-.25*t.m)-evap*(1-.28*t.b));let water=clamp((t.m-.12)/.43),temp=clamp((c.temp-3)/13)*clamp((38-c.temp)/12);let growth=.13*water*temp*t.f*t.r*(.22+.78*t.b)*(1-t.b);let loss=t.m<.16?.018*(1-t.m/.16):0;t.b=clamp(t.b+growth-loss);t.r=clamp(t.r+(water*temp*t.b*.025)-(t.m<.16?.016:0));t.stress=t.m<.2?t.stress+1:Math.max(0,t.stress-1);return t}
+function step(w){let c=climate(w.day,w.weather);for(let t of w.tiles)grow(t,c);if(w.grazing){let best=-1,score=-1;w.tiles.forEach((t,i)=>{let s=t.b*t.r*(.5+.5*t.m);if(t.b>.25&&s>score){best=i;score=s}});if(best>=0){w.grazed+=cut(w.tiles[best],.22);w.last=best}else w.last=null}else w.last=null;w.day++;return c}
+function visual(t){return t.b<.10?0:t.m<.22||t.stress>5?4:t.b<.29?1:t.b>.67?3:t.m>.76?5:2}
+function avg(w,k){return w.tiles.reduce((s,t)=>s+t[k],0)/w.tiles.length}

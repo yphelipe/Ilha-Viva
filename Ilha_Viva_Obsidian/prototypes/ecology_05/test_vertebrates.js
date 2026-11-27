@@ -1,0 +1,10 @@
+const V=require('./vertebrates'),I=require('./insects'),F=require('./flora'),A=require('node:assert/strict');let tests=[],summaries={};function test(n,f){f();tests.push(n)}function run(s,n){let err=0;for(let i=0;i<n;i++){V.tick(s);for(let e of Object.values(s.last)){A.ok(Number.isFinite(e)&&Math.abs(e)<1e-6);err=Math.max(err,Math.abs(e));}for(let a of s.animals){A.ok(a.c>=0&&a.n>=0&&a.seed>=0&&a.water>=0&&a.water<=1);A.ok(V.P[a.sp].hab.includes(s.cells[a.pos].kind));}for(let c of s.cells)for(let k of ['b','pn','fruit','fruitN','dung','dungN'])A.ok(Number.isFinite(c[k])&&c[k]>=-1e-10);}return err}
+test('40 vertebrados iniciais e oito perfis vegetais',()=>{let s=V.create();A.equal(s.animals.length,40);A.equal(F.species.length,8)});
+test('determinismo após serialização',()=>{let s=V.create();run(s,80);let t=JSON.parse(JSON.stringify(s));run(s,80);run(t,80);A.deepEqual(s,t)});
+for(let mode of ['normal','none','noFossa'])test('365 dias: '+mode,()=>{let s=V.create();s.faunaMode=mode;let maxError=run(s,1460);summaries[mode]={animals:V.metrics(s),insects:I.metrics(s),flora:F.metrics(s),events:s.animalEvents,maxError};});
+test('fezes sustentam besouros no cenário natural',()=>{A.ok(summaries.normal.events.dung>0);A.ok(summaries.normal.insects.count[2]>summaries.none.insects.count[2]);A.equal(summaries.none.events.dung,0)});
+test('predação e fuga observadas, sem predador não há caça de lêmures',()=>{A.ok(summaries.normal.events.predation[0]>0&&summaries.normal.events.predation[1]>0&&summaries.normal.events.fled>0);A.equal(summaries.noFossa.events.predation[1],0)});
+test('dispersão por consumo de tamarindo',()=>{A.ok(summaries.normal.events.food.fruit>0&&summaries.normal.events.seedMass>0)});
+test('reprodução e presença de quatro grupos no cenário natural',()=>{A.ok(summaries.normal.animals.count.every(x=>x>0));A.ok(summaries.normal.events.births.some(x=>x>0));});
+test('seca e tempestade: conservação e estados válidos',()=>{for(let w of ['drought','storm']){let s=V.create();s.weather=w;run(s,120);}});
+console.log(JSON.stringify({passed:tests.length,tests,summaries},null,2));

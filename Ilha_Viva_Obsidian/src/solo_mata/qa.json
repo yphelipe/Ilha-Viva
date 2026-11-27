@@ -1,0 +1,28 @@
+{
+  "checks": [
+    "carregamento das 4 texturas",
+    "foice com colheita",
+    "posição fixa durante ação",
+    "deslocamento",
+    "regador executado",
+    "30 dias de estiagem",
+    "pastoreio autônomo",
+    "tráfego autônomo aumenta compactação",
+    "tráfego reduz vegetação",
+    "3650 dias adicionais com estados limitados",
+    "zero erros de JavaScript"
+  ],
+  "result": {
+    "c": [
+      0.5710020110884532,
+      0.9960000000000003
+    ],
+    "veg": [
+      0.8377048187293151,
+      0.5924585780509138
+    ],
+    "longDay": 3681,
+    "bounded": true
+  },
+  "errors": []
+}

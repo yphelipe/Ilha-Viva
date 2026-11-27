@@ -1,0 +1,19 @@
+/* v0.46: crop stocks are independent of wild flora; normalized ecological units. */
+const Farm=(()=>{
+const crops={beans:{name:'Feijão',days:24,water:.42,temp:25},rice:{name:'Arroz de sequeiro',days:36,water:.65,temp:27},sweet:{name:'Batata-doce',days:32,water:.35,temp:26}}; // experimental accelerated game days
+const items={fruit:{name:'Frutos silvestres',category:'Alimentos',stack:20},beans:{name:'Feijão',category:'Alimentos',stack:20},rice:{name:'Arroz',category:'Alimentos',stack:20},sweet:{name:'Batata-doce',category:'Alimentos',stack:20},water:{name:'Água potável',category:'Suprimentos',stack:10},irrigation:{name:'Carga de regador',category:'Suprimentos',stack:10}};
+for(const k in crops)items['seed_'+k]={name:'Semente: '+crops[k].name,category:'Sementes',stack:20};
+const cap=12, clamp=(x)=>Math.max(0,Math.min(1,x));
+function slots(b){return Object.entries(b).reduce((n,[k,q])=>n+(items[k]?Math.ceil(q/items[k].stack):0),0)}
+function canAdd(b,k,q){return !!items[k]&&Number.isInteger(q)&&q>0&&slots({...b,[k]:(b[k]||0)+q})<=cap}
+function add(b,k,q){if(!canAdd(b,k,q))return false;b[k]=(b[k]||0)+q;return true}
+function take(b,k,q){if(!Number.isInteger(q)||q<=0||(b[k]||0)<q)return false;b[k]-=q;return true}
+function create(){return {plots:{},ledger:{photo:0,resp:0,water:0,harvestC:0,harvestN:0,harvestP:0,seedC:0,seedN:0,seedP:0},events:{planted:0,harvested:0,failed:0},last:{c:0,n:0,p:0,w:0}}}
+function bag(){return {seed_beans:8,seed_rice:5,seed_sweet:5,water:5,irrigation:10,fruit:0}}
+function till(f,s,i){const c=s.cells[i];if(!c||c.channel||c.surface>8||c.b>.16||f.plots[i]?.crop)return false;f.plots[i]??={crop:null};return true}
+function plant(f,s,b,i,k){const c=s.cells[i],p=f.plots[i];if(!p||p.crop||!c||c.channel||c.surface>8||!crops[k]||!take(b,'seed_'+k,1))return false;p.crop=k;p.age=0;p.progress=0;p.c=.004;p.n=.00032;p.p=.000048;p.stress=0;f.ledger.seedC+=p.c;f.ledger.seedN+=p.n;f.ledger.seedP+=p.p;f.events.planted++;return true}
+function harvest(f,b,i){const p=f.plots[i];if(!p?.crop||p.progress<1||p.c<.012||!add(b,p.crop,Math.max(1,Math.floor(p.c/.012))))return false;f.ledger.harvestC+=p.c;f.ledger.harvestN+=p.n;f.ledger.harvestP+=p.p;f.plots[i]={crop:null};f.events.harvested++;return true}
+function totals(f,s){let t={c:0,n:0,p:0,w:0};for(const [i,p] of Object.entries(f.plots)){if(!p.crop)continue;const c=s.cells[i];t.c+=p.c;t.n+=p.n+c.n;t.p+=p.p+c.soilP;t.w+=c.water}return t}
+function tick(f,s){const before=totals(f,s),L={...f.ledger};let dead=[];for(const [i,p] of Object.entries(f.plots)){if(!p.crop)continue;const c=s.cells[i],k=crops[p.crop];p.age+=.25;let m=c.water/c.cap,light=[0,.72,1,.22][(s.step-1)%4]*(1-s.cloud*.65);if(s.light==='dark')light=0;let fit=clamp(m/k.water)*clamp((1.12-m)/.32)*clamp(1-Math.abs(s.temp-k.temp)/18)*clamp(c.n/.12)*clamp(c.soilP/.012)*clamp(c.oxygen/.6)/(1+c.b*3);if(c.surface>8)fit*=.1;let growth=Math.min(.003*light*fit,c.n/.08,c.soilP/.012,c.water/12,Math.max(0,.16-p.c));p.c+=growth;p.n+=growth*.08;p.p+=growth*.012;c.n-=growth*.08;c.soilP-=growth*.012;c.water-=growth*12;f.ledger.photo+=growth;f.ledger.water+=growth*12;let resp=Math.min(p.c,.000045);p.c-=resp;f.ledger.resp+=resp;p.progress=Math.min(1,p.progress+fit*(light>0?1/3:0)/k.days);p.stress=Math.max(0,p.stress+(fit<.15?.25:-.12));if(p.stress>12||p.c<.0001)dead.push(i)}let after=totals(f,s);f.last={c:after.c-before.c-(f.ledger.photo-L.photo)+(f.ledger.resp-L.resp),n:after.n-before.n,p:after.p-before.p,w:after.w-before.w+(f.ledger.water-L.water)};for(const i of dead){const p=f.plots[i],c=s.cells[i];c.litter+=p.c;c.ln+=p.n;c.soilP+=Math.max(0,p.p-p.n*.15);f.plots[i]={crop:null};f.events.failed++}}
+return {crops,items,cap,slots,canAdd,add,take,create,bag,till,plant,harvest,tick};})();
+if(typeof module!=='undefined')module.exports=Farm;

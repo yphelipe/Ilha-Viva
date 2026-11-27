@@ -1,0 +1,138 @@
+[
+  {
+    "action": "andar",
+    "source": "folha_de_sprites_do_fazendeiro_pixelado.png",
+    "directions": {
+      "baixo": 4,
+      "esquerda": 4,
+      "direita": 4,
+      "cima": 4
+    },
+    "alpha_zero": 0.697,
+    "edge_warnings": []
+  },
+  {
+    "action": "correr",
+    "source": "690668.png",
+    "directions": {
+      "baixo": 4,
+      "esquerda": 4,
+      "direita": 4,
+      "cima": 4
+    },
+    "alpha_zero": 0.655,
+    "edge_warnings": []
+  },
+  {
+    "action": "andar_novo",
+    "source": "ciclo_de_caminhada_do_fazendeiro_pixel_art.png",
+    "directions": {
+      "baixo": 8
+    },
+    "alpha_zero": 0.753,
+    "edge_warnings": []
+  },
+  {
+    "action": "correr_novo",
+    "source": "folha_de_sprites_herói_em_corrida.png",
+    "directions": {
+      "baixo": 12
+    },
+    "alpha_zero": 0.726,
+    "edge_warnings": [
+      "baixo:1 pixels opacos na borda da célula",
+      "baixo:2 pixels opacos na borda da célula",
+      "baixo:4 pixels opacos na borda da célula",
+      "baixo:12 pixels opacos na borda da célula"
+    ]
+  },
+  {
+    "action": "descalco",
+    "source": "herói_descalço_em_caminhada_pixel_art.png",
+    "directions": {
+      "baixo": 8
+    },
+    "alpha_zero": 0.715,
+    "edge_warnings": []
+  },
+  {
+    "action": "nado_roupa",
+    "source": "ciclo_de_natação_em_pixel_art.png",
+    "directions": {
+      "baixo": 12
+    },
+    "alpha_zero": 0.853,
+    "edge_warnings": []
+  },
+  {
+    "action": "nado_calca",
+    "source": "sprite_sheet_de_natação_em_pixel_art.png",
+    "directions": {
+      "baixo": 12
+    },
+    "alpha_zero": 0.851,
+    "edge_warnings": [
+      "baixo:1 pixels opacos na borda da célula",
+      "baixo:2 pixels opacos na borda da célula",
+      "baixo:3 pixels opacos na borda da célula",
+      "baixo:4 pixels opacos na borda da célula",
+      "baixo:9 pixels opacos na borda da célula",
+      "baixo:10 pixels opacos na borda da célula",
+      "baixo:11 pixels opacos na borda da célula",
+      "baixo:12 pixels opacos na borda da célula"
+    ]
+  },
+  {
+    "action": "machado",
+    "source": "folha_de_sprites_do_fazendeiro_lenhador.png",
+    "directions": {
+      "baixo": 3,
+      "cima": 3
+    },
+    "alpha_zero": 0.733,
+    "edge_warnings": [
+      "baixo:3 pixels opacos na borda da célula",
+      "cima:2 pixels opacos na borda da célula",
+      "cima:3 pixels opacos na borda da célula"
+    ]
+  },
+  {
+    "action": "enxada",
+    "source": "sprite_de_fazendeiro_arando_a_terra.png",
+    "directions": {
+      "baixo": 3,
+      "cima": 3
+    },
+    "alpha_zero": 0.707,
+    "edge_warnings": [
+      "baixo:2 pixels opacos na borda da célula",
+      "cima:1 pixels opacos na borda da célula",
+      "cima:3 pixels opacos na borda da célula"
+    ]
+  },
+  {
+    "action": "foice",
+    "source": "folhas_ao_vento_animação_de_ceifa.png",
+    "directions": {
+      "baixo": 3,
+      "cima": 3
+    },
+    "alpha_zero": 0.694,
+    "edge_warnings": [
+      "cima:1 pixels opacos na borda da célula",
+      "cima:3 pixels opacos na borda da célula"
+    ]
+  },
+  {
+    "action": "regador",
+    "source": "sprite_de_agricultor_regando_em_12_quadros.png",
+    "directions": {
+      "baixo": 3,
+      "cima": 3
+    },
+    "alpha_zero": 0.748,
+    "edge_warnings": [
+      "cima:2 pixels opacos na borda da célula"
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+Escala: sprite carregado, sem overflow, 3 modos, sem erros JS

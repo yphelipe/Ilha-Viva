@@ -1,0 +1,242 @@
+{
+  "passed": 10,
+  "tests": [
+    "40 vertebrados iniciais e oito perfis vegetais",
+    "determinismo após serialização",
+    "365 dias: normal",
+    "365 dias: none",
+    "365 dias: noFossa",
+    "fezes sustentam besouros no cenário natural",
+    "predação e fuga observadas, sem predador não há caça de lêmures",
+    "dispersão por consumo de tamarindo",
+    "reprodução e presença de quatro grupos no cenário natural",
+    "seca e tempestade: conservação e estados válidos"
+  ],
+  "summaries": {
+    "normal": {
+      "animals": {
+        "count": [
+          27,
+          9,
+          10,
+          2
+        ],
+        "total": 48,
+        "nests": 3,
+        "juveniles": 10
+      },
+      "insects": {
+        "count": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "juveniles": 3,
+        "total": 240
+      },
+      "flora": {
+        "counts": [
+          61,
+          114,
+          68,
+          16,
+          112,
+          59,
+          134,
+          118
+        ],
+        "richness": 8,
+        "flowers": 193,
+        "fruits": 60,
+        "bank": 39.10376075333954
+      },
+      "events": {
+        "births": [
+          9,
+          1,
+          0,
+          0
+        ],
+        "deaths": [
+          2,
+          0,
+          0,
+          0
+        ],
+        "meals": [
+          2262,
+          136,
+          2716,
+          4
+        ],
+        "food": {
+          "leaf": 13.356000000000284,
+          "fruit": 0.20400000000000013,
+          "grass": 9.724148194987967,
+          "insect": 1.0103650186940583,
+          "lemur": 0.3044384624000015
+        },
+        "predation": [
+          136,
+          2
+        ],
+        "dung": 9.829788670432533,
+        "seedDeposits": 22,
+        "seedMass": 0.024480000000000002,
+        "fled": 238
+      },
+      "maxError": 4.3655745685100555e-10
+    },
+    "none": {
+      "animals": {
+        "count": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "total": 0,
+        "nests": 0,
+        "juveniles": 0
+      },
+      "insects": {
+        "count": [
+          60,
+          60,
+          0,
+          60
+        ],
+        "juveniles": 0,
+        "total": 180
+      },
+      "flora": {
+        "counts": [
+          61,
+          114,
+          68,
+          16,
+          112,
+          59,
+          134,
+          118
+        ],
+        "richness": 8,
+        "flowers": 186,
+        "fruits": 58,
+        "bank": 39.266497754531194
+      },
+      "events": {
+        "births": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "deaths": [
+          20,
+          8,
+          10,
+          2
+        ],
+        "meals": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "food": {
+          "leaf": 0,
+          "fruit": 0,
+          "grass": 0,
+          "insect": 0,
+          "lemur": 0
+        },
+        "predation": [
+          0,
+          0
+        ],
+        "dung": 0,
+        "seedDeposits": 0,
+        "seedMass": 0,
+        "fled": 0
+      },
+      "maxError": 3.055902197957039e-10
+    },
+    "noFossa": {
+      "animals": {
+        "count": [
+          26,
+          11,
+          10,
+          0
+        ],
+        "total": 47,
+        "nests": 1,
+        "juveniles": 9
+      },
+      "insects": {
+        "count": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "juveniles": 6,
+        "total": 240
+      },
+      "flora": {
+        "counts": [
+          61,
+          114,
+          68,
+          16,
+          112,
+          59,
+          134,
+          118
+        ],
+        "richness": 8,
+        "flowers": 194,
+        "fruits": 60,
+        "bank": 39.118078358438865
+      },
+      "events": {
+        "births": [
+          6,
+          3,
+          0,
+          0
+        ],
+        "deaths": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "meals": [
+          2485,
+          143,
+          2716,
+          0
+        ],
+        "food": {
+          "leaf": 14.694000000000335,
+          "fruit": 0.20400000000000013,
+          "grass": 9.724146641415995,
+          "insect": 1.1190758758132706,
+          "lemur": 0
+        },
+        "predation": [
+          143,
+          0
+        ],
+        "dung": 10.286697006891394,
+        "seedDeposits": 22,
+        "seedMass": 0.024480000000000002,
+        "fled": 0
+      },
+      "maxError": 4.656612873077393e-10
+    }
+  }
+}

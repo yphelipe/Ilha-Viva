@@ -1,0 +1,11 @@
+const V=require('./vertebrates'),E=require('./ecology'),A=require('node:assert/strict');let tests=[],scenarios=[];function test(name,f){f();tests.push(name)}
+function run(s,n){let max=0;for(let i=0;i<n;i++){V.tick(s);for(let x of Object.values(s.last)){A.ok(Number.isFinite(x)&&Math.abs(x)<1e-6);max=Math.max(max,Math.abs(x))}for(let a of s.animals)A.ok(a.c>=0&&a.n>=0);for(let e of s.nests)A.ok(e.c>=0&&e.n>=0)}return max}
+function nest(s,sp,over={}){let pos=s.cells.findIndex(c=>!c.channel&&c.kind==='dry');s.cells[pos].water=s.cells[pos].cap*.5;let c=V.P[sp].base*.35;let e={sp,pos,c,n:c*.08,left:.25,stress:0,...over};s.nests.push(e);return e}
+test('reptil nasce somente apos incubacao',()=>{let s=V.create();nest(s,1,{left:.5});run(s,1);A.equal(s.lifeEvents.hatched,0);run(s,1);A.equal(s.lifeEvents.hatched,1);A.ok(s.animals.some(a=>a.sp===1&&a.age===0))});
+test('ovo inviavel retorna materia ao solo',()=>{let s=V.create();let e=nest(s,2,{stress:31});s.cells[e.pos].water=0;s.weather='drought';run(s,1);A.equal(s.lifeEvents.eggLoss,1);A.equal(s.nests.length,0)});
+test('postura real de reptil separada do nascimento',()=>{let s=V.create();let a=s.animals.find(a=>a.sp===2&&a.sex==='F');a.preg=.25;a.c=.15;a.n=.02;run(s,1);A.equal(s.lifeEvents.laid,1);A.equal(s.animalEvents.births[2],0);A.ok(s.nests[0].left>=179)});
+test('filhote de lemure recebe materia da mae e a acompanha',()=>{let s=V.create();let m=s.animals.find(a=>a.sp===0&&a.sex==='F');m.preg=.25;m.c=.17;m.n=.02;run(s,1);let a=s.animals.find(a=>a.mother===m.id);A.ok(a);run(s,1);A.ok(s.lifeEvents.nursed>0);A.equal(a.state,'cuidado materno')});
+test('orfandade detectada sem gerar alimento',()=>{let s=V.create();let m=s.animals.find(a=>a.sp===0&&a.sex==='F');m.preg=.25;m.c=.17;m.n=.02;run(s,1);m.c=0;run(s,1);A.ok(s.lifeEvents.orphaned>0)});
+test('serializacao com ninho',()=>{let s=V.create();nest(s,2,{left:180});let t=JSON.parse(JSON.stringify(s));run(s,12);run(t,12);A.deepEqual(s,t)});
+for(let seed of [42,77,123])test('tres anos seed '+seed,()=>{let s=V.create(seed);let max=run(s,4380);scenarios.push({seed,animals:V.metrics(s),life:s.lifeEvents,insects:require('./insects').metrics(s).count,flora:require('./flora').metrics(s).richness,maxError:max})});
+console.log(JSON.stringify({passed:tests.length,tests,scenarios},null,2));

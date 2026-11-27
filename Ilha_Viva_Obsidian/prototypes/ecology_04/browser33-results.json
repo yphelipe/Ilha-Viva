@@ -1,0 +1,17 @@
+{
+  "passed": 11,
+  "tests": [
+    "sem overflow",
+    "40 vertebrados",
+    "avanço diário",
+    "ocultar fauna",
+    "restauração",
+    "remoção experimental",
+    "reinício",
+    "camada microbiana",
+    "30 dias",
+    "fezes produzidas",
+    "sem erros JS"
+  ],
+  "errors": []
+}
