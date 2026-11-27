@@ -1,9 +1,11 @@
 # Roadmap e gates de produção
 
-> **Decisão vigente 27/11/2026:** ambientação continental rural fictícia dos EUA, piloto nos Apalaches, com outras ecorregiões em expansão. Madagascar e Amazônia são históricos e não ativos. Protagonista aprovado preservado; terreno, fauna, flora e dados científicos serão reconstruídos. Ver [[AMBIENTACAO_EUA]] para requisitos e gates. Checkpoint documental; build v0.47 ainda histórico, motor novo não implementado.
+> **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
 
 
-> **Vigência v0.29 (26/11/2026):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevalece sobre trechos históricos conflitantes. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
+
+
+> **Histórico v0.29 (26/11/2026, superado):** Madagascar substitui a ambientação amazônica e qualquer perfil climático anterior. A ilha oceânica fictícia terá biomas regionais, mapa gigantesco expansível e simulação científica offline. A especificação [[docs/MADAGASCAR_v0.29]] prevaleceu naquela versão. Protagonista aprovado preservado; traje de frio pendente (versões rejeitadas não usar). Nenhum código ou arte alterado nesta revisão.
 
 
 | Missão | Entrega integrada | Gate obrigatório |
@@ -154,3 +156,6 @@ QA: 55 regressões anteriores +17 testes adicionais (14 campo/IA e 3 visualizado
 
 Referências biológicas: Wisconsin National Primate Research Center, https://primate.wisc.edu/primate-info-net/pin-factsheets/pin-factsheet-ring-tailed-lemur/ ; San Diego Zoo Wildlife Alliance https://ielc.libguides.com/sdzg/factsheets/ringtailedlemur/reproduction ; Holding-on: co-evolution between infant carrying and grasping behaviour in strepsirrhines https://pmc.ncbi.nlm.nih.gov/articles/PMC5121892/ ; Duke Lemur Center https://lemur.duke.edu/discover/meet-the-lemurs/ring-tailed-lemur/ .
 
+
+## Roteiro ativo continental (substitui gates de conteúdo malgaxe)
+M48-A parcial: auditar base, calibrar recorte piloto, terreno espacial, clima/água/solo e HTML novo com protagonista. M48-B: microbiologia e flora. M48-C: fauna e pecuária. M48-D: sociedade, IA e economia. Cada gate exige evidência, regressão, HTML funcional quando aplicável e checkpoint conforme [[CHECKPOINT_CONTINUIDADE]].
