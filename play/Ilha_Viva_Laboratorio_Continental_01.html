@@ -1,0 +1,101 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ilha Viva | Laboratório continental 01</title><style>body{margin:0;background:#18251f;color:#eee9d9;font:16px system-ui}main{max-width:800px;margin:auto;padding:14px}h1{font-size:21px;margin:4px 0}p{font-size:14px;line-height:1.4;color:#c5d0bf}canvas{width:100%;height:auto;background:#273c2f;image-rendering:pixelated;touch-action:none;border:1px solid #526b51}button,select{background:#354c3d;color:#fff;border:1px solid #819783;border-radius:7px;padding:12px;margin:3px;font-size:14px}#stats,#cell{padding:9px;background:#24372b;margin:8px 0;font:14px system-ui;white-space:pre-line}.tag{color:#c0d49c}button:focus-visible{outline:2px solid white}</style></head><body><main><h1>Ilha Viva • Laboratório continental 01</h1><p class="tag">M48-A | Ambiente experimental, não jogo final. Terreno, água, neve e solo vivos. Sem protagonista nesta prova.</p><canvas id="map" width="640" height="360" aria-label="Mapa do terreno e estado ecológico"></canvas><div><button id="step">+1 dia</button><button id="week">+7 dias</button><button id="year">+365 dias</button><button id="auto">▶ Simular</button><button id="storm">Tempestade</button><button id="cold">Nevasca</button><button id="reset">Reiniciar</button></div><label>Camada <select id="layer"><option value="land">Paisagem</option><option value="water">Umidade</option><option value="height">Relevo</option><option value="nitrogen">Nitrogênio</option><option value="microbe">Microbiologia</option></select></label><div id="stats"></div><div id="cell"></div><p>Toque em uma área para inspecionar sua evolução. O mundo avança sem jogador. Parâmetros ilustrativos inspirados no clima de Asheville; não calibrados. Nenhum servidor ou download externo.</p></main><script>// Experimental continental soil cell; no calibrated species or spatial transport yet.
+function initialState(){
+  return {water:70,snow:0,plantC:0.18,plantN:0.0072,litterC:0.4,litterN:0.018,microbeC:0.04,microbeN:0.005,mineralN:0.006};
+}
+
+function stepSoil(state,climate){
+  // Prototype coefficients, not field-calibrated. Water mm; C and N kg/m²; one simulated day.
+  const s={...state};
+  const keys=Object.keys(initialState());
+  for(const k of keys) if(!Number.isFinite(s[k])||s[k]<0)throw new Error("invalid state "+k);
+  const {rainMm,tempC,light}=climate;
+  if(!Number.isFinite(rainMm)||rainMm<0||!Number.isFinite(tempC)||!Number.isFinite(light)||light<0||light>1)throw new Error("invalid weather");
+  const clamp=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+  let rain=tempC<=0?0:rainMm;
+  s.snow+=rainMm-rain;
+  const melt=Math.min(s.snow,Math.max(0,tempC)*1.5);
+  s.snow-=melt;
+  const liquid=rain+melt;
+  const infiltration=Math.min(liquid,Math.max(0,110-s.water),tempC<=0?0:35);
+  const runoff=liquid-infiltration;
+  s.water+=infiltration;
+  const drainage=Math.min(s.water,Math.max(0,s.water-75)*0.14);
+  s.water-=drainage;
+  const evap=Math.min(s.water,Math.max(0,tempC)*0.12*light);
+  s.water-=evap;
+  const wet=clamp(s.water/75,0,1);
+  const oxygen=clamp((115-s.water)/40,0,1);
+  const thermal=clamp((tempC+2)/22,0,1)*clamp((42-tempC)/17,0,1);
+  const activity=wet*oxygen*thermal;
+  const leachedN=Math.min(s.mineralN,s.mineralN*drainage/110);
+  s.mineralN-=leachedN;
+  // Microbial death transfers C and N to litter without inventing material.
+  const turnover=0.009*activity;
+  const deadMC=s.microbeC*turnover,deadMN=s.microbeN*turnover;
+  s.microbeC-=deadMC;s.microbeN-=deadMN;s.litterC+=deadMC;s.litterN+=deadMN;
+  const frac=clamp(0.035*activity*s.microbeC/(0.025+s.microbeC),0,1);
+  const decC=s.litterC*frac,decN=s.litterN*frac;
+  s.litterC-=decC;s.litterN-=decN;
+  // Simplified microbial C:N of 8; available N constrains biomass accumulation.
+  const microbialGrowth=Math.min(decC*0.35,(decN+s.mineralN)*8);
+  const microbialNeed=microbialGrowth/8;
+  s.microbeC+=microbialGrowth;s.microbeN+=microbialNeed;
+  s.mineralN+=decN-microbialNeed;
+  const microbialResp=decC-microbialGrowth;
+  const plantTurnover=clamp(0.002+0.015*(1-wet)+0.005*(tempC<=0?1:0),0,1);
+  const fallenC=s.plantC*plantTurnover,fallenN=s.plantN*plantTurnover;
+  s.plantC-=fallenC;s.plantN-=fallenN;s.litterC+=fallenC;s.litterN+=fallenN;
+  const plantResp=Math.min(s.plantC,s.plantC*0.006*thermal);
+  s.plantC-=plantResp;
+  const potential=0.012*light*activity*clamp(s.plantC/0.08,0,1);
+  const growth=Math.min(potential,s.mineralN*25);
+  s.plantC+=growth;s.plantN+=growth/25;s.mineralN-=growth/25;
+  for(const k of keys){if(s[k]<-1e-12||!Number.isFinite(s[k]))throw new Error("invalid result "+k);if(s[k]<0)s[k]=0;}
+  return {state:s,flux:{precipitation:rainMm,melt,infiltration,runoff,drainage,evap,carbonUptake:growth,respiredC:microbialResp+plantResp,leachedN,detritusC:fallenC,decC,microbialGrowth}};
+}
+
+const profile={"id":"blue-ridge-pilot-v1","latitude":35.43,"reference":"Asheville regional airport USW00003812; rounded illustrative values informed by Climate-Charts NOAA-derived table; not validated station normal","tempC":[3.6,5.5,9.6,14.2,18.5,22.6,24,23.6,20.6,14.6,8.7,5.9],"precipMm":[102,89,84,119,122,102,119,135,112,112,97,130],"days":[31,28,31,30,31,30,31,31,30,31,30,31],"wetProbability":0.34,"cellM":10};
+function hash01(seed,x,y){let n=(seed^Math.imul(x+1,374761393)^Math.imul(y+1,668265263))|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967296}
+function newWorld(w=32,h=24,seed=4801){
+  if(!Number.isInteger(w)||!Number.isInteger(h)||w<3||h<3||w*h>16384)throw Error("invalid dimensions");
+  const cells=Array.from({length:w*h},(_,i)=>{const x=i%w,y=Math.floor(i/w),u=x/(w-1),v=y/(h-1);const valley=.49+.14*Math.sin(v*6.3);const z=650+110*Math.abs(u-valley)+45*Math.sin(u*5.7+v*2.9)**2+30*(1-v)+8*(hash01(seed,x,y)-.5);const s=initialState();s.water=45+32*(1-Math.abs(u-valley));s.plantC=.13+.13*hash01(seed+9,x,y);s.plantN=s.plantC/25;return {z,soil:s,surface:0};});
+  return {w,h,seed,day:0,cells,last:null};
+}
+function weather(day,seed){
+  let d=day%365,m=0;while(d>=profile.days[m]){d-=profile.days[m];m++}
+  const f=d/profile.days[m],mean=profile.tempC[m]*(1-f)+profile.tempC[(m+1)%12]*f;
+  const rain=hash01(seed,day,1)<profile.wetProbability?(profile.precipMm[m]/profile.days[m]/profile.wetProbability)*(.3+1.4*hash01(seed,day,2)):0;
+  return {tempC:mean+(hash01(seed,day,3)-.5)*14,light:.58+.26*Math.sin((day%365-80)*2*Math.PI/365),rainMm:rain,month:m};
+}
+function advance(world,override=null,reverse=false){
+  const {w,h,cells}=world,cl=override||weather(world.day,world.seed);
+  const next=cells.map(c=>({z:c.z,soil:null,surface:0}));
+  const ledger={precipitation:0,evap:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0};
+  const order=Array.from({length:cells.length},(_,i)=>reverse?cells.length-1-i:i);
+  const transfers=[];
+  for(const i of order){
+    const c=cells[i],x=i%w,y=Math.floor(i/w),tempC=cl.tempC-(c.z-650)*.0065;
+    const s={...c.soil};
+    const intake=tempC>0?Math.min(c.surface,Math.max(0,110-s.water),15):0;
+    s.water+=intake;
+    const {state,flux}=stepSoil(s,{rainMm:cl.rainMm,tempC,light:cl.light});
+    next[i].soil=state;
+    for(const k of ["precipitation","evap","drainage","carbonUptake","respiredC","leachedN"])ledger[k]+=flux[k];
+    const available=c.surface-intake+flux.runoff;
+    let target=-1,best=c.z;
+    for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=w||ny>=h)continue;const j=ny*w+nx;if(cells[j].z<best){best=cells[j].z;target=j}}
+    const edge=x===0||y===0||x===w-1||y===h-1;
+    const flow=target>=0?available*.65:edge?available*.65:0;
+    next[i].surface=available-flow;
+    transfers.push({i,target,flow});
+  }
+  // Canonical order of accumulation makes reverse traversal produce identical states.
+  transfers.sort((a,b)=>a.i-b.i);
+  for(const {target,flow} of transfers){if(target>=0){next[target].surface+=flow;ledger.routed+=flow}else ledger.outflow+=flow}
+  return {...world,day:world.day+1,cells:next,last:{climate:cl,ledger}};
+}
+function totals(world){
+  return world.cells.reduce((a,c)=>{a.water+=c.soil.water+c.soil.snow+c.surface;for(const [k,v] of Object.entries(c.soil)){if(k.endsWith("C"))a.C+=v;if(k.endsWith("N"))a.N+=v}return a},{water:0,C:0,N:0})
+}
+let world=newWorld(),selected=0,timer=null;const canvas=document.getElementById("map"),ctx=canvas.getContext("2d"),el=id=>document.getElementById(id);const cw=canvas.width/world.w,ch=canvas.height/world.h;
+function draw(){const layer=el("layer").value;ctx.clearRect(0,0,640,360);for(let i=0;i<world.cells.length;i++){const c=world.cells[i],s=c.soil,x=(i%world.w)*cw,y=Math.floor(i/world.w)*ch;let h=100+Math.min(25,s.plantC*70),sat=35,l=27+Math.min(25,s.plantC*70)+(c.z-700)*.06;if(layer==="water"){h=195;sat=65;l=20+s.water/110*45}else if(layer==="height"){h=40;sat=20;l=20+(c.z-650)*.3}else if(layer==="nitrogen"){h=54;sat=70;l=12+Math.min(55,s.mineralN*5500)}else if(layer==="microbe"){h=285;sat=48;l=15+Math.min(55,s.microbeC*450)}else if(s.snow>2){h=200;sat=18;l=75+Math.min(16,s.snow)}else if(c.surface>3){h=199;sat=52;l=35+Math.min(15,c.surface)}ctx.fillStyle="hsl("+h+","+sat+"%,"+Math.max(8,Math.min(93,l))+"%)";ctx.fillRect(x,y,cw+1,ch+1);if(layer==="land"&&s.snow<2&&c.surface<3){for(let j=0;j<8;j++){const px=x+Math.floor(hash01(world.seed+j,i,4)*cw),py=y+Math.floor(hash01(world.seed+j,i,5)*ch);ctx.fillStyle=j%2?"#dde7a71a":"#102d2a33";ctx.fillRect(px,py,2,2)}}}ctx.strokeStyle="#ffdf78";ctx.lineWidth=2;ctx.strokeRect((selected%world.w)*cw,Math.floor(selected/world.w)*ch,cw,ch);const c=world.cells[selected],s=c.soil,l=world.last?.ledger,cl=world.last?.climate||weather(world.day,world.seed);el("stats").textContent="Ano "+(Math.floor(world.day/365)+1)+" • Dia "+(world.day%365+1)+" | "+cl.tempC.toFixed(1)+" °C | precipitação "+cl.rainMm.toFixed(1)+" mm\n"+(l?"Água encaminhada: "+(l.routed*profile.cellM**2/1000).toFixed(1)+" m³ • Saída superficial: "+(l.outflow*profile.cellM**2/1000).toFixed(1)+" m³":"Estado inicial");el("cell").textContent="Célula "+selected+" | altitude "+c.z.toFixed(1)+" m\nÁgua no solo "+s.water.toFixed(2)+" mm | neve (equivalente em água) "+s.snow.toFixed(2)+" mm | superfície "+c.surface.toFixed(2)+" mm\nC vegetal "+s.plantC.toFixed(4)+" | C microbiano "+s.microbeC.toFixed(4)+" | N mineral "+s.mineralN.toFixed(6)+" kg/m²";}function tick(n=1,cl=null){for(let i=0;i<n;i++)world=advance(world,cl);draw()}el("step").onclick=()=>tick();el("week").onclick=()=>tick(7);el("year").onclick=()=>tick(365);el("storm").onclick=()=>tick(1,{rainMm:100,tempC:20,light:.35});el("cold").onclick=()=>tick(1,{rainMm:20,tempC:-8,light:.3});el("auto").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("auto").textContent="▶ Simular"}else{timer=setInterval(()=>tick(),300);el("auto").textContent="Ⅱ Pausar"}};el("reset").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("auto").textContent="▶ Simular"}world=newWorld();selected=0;draw()};el("layer").onchange=draw;canvas.onpointerdown=e=>{const r=canvas.getBoundingClientRect(),x=Math.min(world.w-1,Math.max(0,Math.floor((e.clientX-r.left)/r.width*world.w))),y=Math.min(world.h-1,Math.max(0,Math.floor((e.clientY-r.top)/r.height*world.h)));selected=y*world.w+x;draw()};draw();</script></body></html>
