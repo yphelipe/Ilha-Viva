@@ -16,3 +16,6 @@ Saída: módulo integrado, testes, dados versionados e feedback visível no HTML
 
 ## Aprendizado verificado CP-2026-11-27-03
 Para roteamento espacial, calcular disponibilidades a partir do estado anterior, registrar transferências separadamente e acumular em ordem canônica. Testar a mesma malha com travessia reversa, além de balanços globais com fronteiras explícitas. Evidência: scientific/us/world.test.mjs, commit 3142c0b8; 4.423 verificações em runtime JS. Estados das células coincidiram; ledger de somas pode diferir por arredondamento. Não confundir teste sintético com calibração física.
+
+## Aprendizado verificado CP-07
+Para consumo concorrente, agrupar demandas por célula, limitar ao estoque acessível, distribuir proporcionalmente e retirar massa uma única vez. Converter densidades por área antes de combinar com estoques absolutos dos agentes. Respiração, detritos, exportação por colheita e carcaças devem fechar C/N. Testar competição por estoque insuficiente, morte sem alimento, conservação diária e persistência. Evidência: food_world.test.mjs (732b085c), 11.021 verificações no runtime JS. Parâmetros não calibrados; balanço fechado não implica equilíbrio ecológico.
