@@ -33,3 +33,5 @@ CP-11 confirmado: Campo 03 compilado e entregue como HTML/artefato CI; run 46151
 
 ## CP-2026-11-28-12
 Campo 04: coleta de água conservativa, cobertura orgânica, colheita condicionada a 14 dias/biomassa, analógico tátil, zoom, destaque e progresso do canteiro. 64 verificações de modelo; QA real/artefato pendentes de confirmação CI. Preserva artes e Campo 03. Ver checkpoint mestre.
+
+CP-12 confirmado: Campo 04 compilado e entregue; CI 46154034962, 26 testes Chromium, 64 verificações agrícolas e 17.683 de flora. Ver checkpoint mestre; Android físico pendente.

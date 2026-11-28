@@ -1,0 +1,17 @@
+{
+  "run": 46154034962,
+  "job": 141006628833,
+  "commit": "6417de4ab245efd5d0c92d7d3c15722c5b6c14b1",
+  "conclusion": "success",
+  "artifactId": 15267351043,
+  "htmlBytes": 1664130,
+  "htmlSha256": "26999746421c1355ddf99edbcbad8d9a81a07f2eac6ec64a16d9463340cb5e95",
+  "farmChecks": 64,
+  "floraChecks": 17683,
+  "stewardCases": 6,
+  "climateCases": 4,
+  "atlasTests": 2,
+  "browserChecks": 26,
+  "browser": "159.0.8154.6",
+  "androidPhysical": false
+}
