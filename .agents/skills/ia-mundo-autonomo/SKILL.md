@@ -19,3 +19,6 @@ Usar MCPs e ferramentas gratuitas disponíveis quando houver ganho demonstrável
 
 ## Aprendizado verificado CP-06
 Separar decisão de experiência observada; memória por local com decaimento, capacidade e expiração; não transmitir evento fora do alcance. Comparar política com/sem memória no mesmo cenário e após save/reload. Controle: escolha 3 antes da perturbação, escolha 5 depois (risco aprendido 0,585), controle permanece 3. Evidência scientific/us/adaptive_agents.test.mjs, commit 3c7a5166. 5.508 verificações no runtime JS. Agente diagnóstico sem necessidades biológicas; não afirmar fauna final.
+
+## Aprendizado CP-07
+Ligar utilidade de busca de alimento à reserva individual; planejar sobre snapshot, resolver competição por recursos e aplicar consequências reais. Não permitir agentes mortos executarem ações. Testar privação de recursos, retorno de matéria, limites de reserva e save. Evidência: food_world.test.mjs (732b085c). Agentes ainda abstratos, sem espécie ou reprodução.
