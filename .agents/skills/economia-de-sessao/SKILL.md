@@ -16,3 +16,6 @@ Status: procedimento inicial, medir resultados e aprimorar por missão.
 8. Quando métricas reais estiverem disponíveis, comparar tempo, chamadas, tokens, retrabalho e entregas; não inventar métricas de consumo ou prometer redução percentual.
 
 Aprendizado inicial do CP-03: atlas grande não retornou pelo conector textual; preferir leitura local via checkout no Codex e validação de hash, sem copiar o JSON inteiro para o contexto. Preservar original e extrair somente metadados necessários. Resultado de checkout no Codex ainda pendente.
+
+## Continuidade de execução | CP-2026-11-27-06
+Publicar commits incrementais coerentes após testes direcionados, sem esperar o fim de uma missão longa. Registrar checkpoint curto antes de trocar de frente e snapshot no marco integrado; evitar duplicar relatórios. Se o push não estiver disponível, informar e preservar estado local. Antes de continuar, conferir HEAD e comparar alterações ainda não publicadas do Codex com main; não sobrescrever. Laboratório 02 e IA adaptativa diagnóstica disponíveis; consultar checkpoint mestre.
