@@ -1,0 +1,34 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcha humana · Ilha Viva</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui;background:#17241f;color:#eef2e9}body{max-width:760px;margin:auto;padding:20px}h1{font:2.3rem Georgia,serif;margin:.2em 0}canvas{width:100%;image-rendering:pixelated;background:#233630;border:1px solid #496056}.labels,.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.labels span{flex:1;text-align:center}.controls{margin:18px 0}select,button,a{font:inherit;padding:8px;color:inherit}button,select{background:#31473d;border:1px solid #6c8275;border-radius:5px}input{max-width:100%}p{line-height:1.5}a{color:#e5bf88}
+</style><main><h1>Marcha humana</h1><p>Compare a animação aprovada com a guia experimental lateral. A linha marca o solo. O pé em apoio acompanha o terreno durante a passada.</p>
+<div class="labels"><span>Protagonista</span><span>Guia FK / IK</span></div><canvas id="view" width="240" height="100" aria-label="Protagonista e esqueleto lateral"></canvas>
+<div class="controls"><label>Ação <select id="action"><option value="walk">Caminhar</option><option value="idle">Repouso</option></select></label><button id="toggle">Reproduzir</button><label>Quadro <input id="phase" type="range" min="0" max="23" value="0"></label><output id="count"></output></div>
+<a id="sheet" download>Baixar guia PNG com alfa</a></main>
+<script>
+const data=@@RIG@@;
+const byId=id=>document.getElementById(id);
+const canvas=byId('view'), ctx=canvas.getContext('2d'), action=byId('action'), phase=byId('phase');
+const images={}, guides={};
+for(const [key,value] of Object.entries(data.images)) images[key]=load(value);
+for(const [key,value] of Object.entries(data.guides)) guides[key]=load(value);
+function load(src){const image=new Image();image.onload=draw;image.src=src;return image}
+function draw(){
+ const frame=Number(phase.value), clip=data.clips[action.value], ref=clip[Math.floor(frame*clip.length/data.frames)];
+ const img=images[ref.id], guide=guides[action.value], moving=action.value==='walk';
+ ctx.clearRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingEnabled=false;
+ ctx.fillStyle='#718079';ctx.fillRect(0,84,240,1);
+ for(let x=-(moving?Math.round(32*frame/data.frames):0);x<240;x+=16)ctx.fillRect(x,85,1,2);
+ if(img?.naturalWidth){ctx.save();ctx.translate(60,84);if(ref.mirror)ctx.scale(-1,1);
+ ctx.drawImage(img,-Math.round(ref.mirror?ref.w-ref.ax:ref.ax),-Math.round(ref.ay));ctx.restore()}
+ if(guide?.naturalWidth){const [w,h]=data.size;ctx.drawImage(guide,frame*w,0,w,h,180-data.pivot[0],84-data.pivot[1],w,h)}
+ byId('count').value=(frame+1)+' / '+data.frames;
+ byId('sheet').href=data.guides[action.value];byId('sheet').download='guia-'+action.value+'.png';
+}
+let timer;
+function pause(){clearInterval(timer);timer=null;byId('toggle').textContent='Reproduzir'}
+byId('toggle').onclick=()=>{if(timer){pause();return}byId('toggle').textContent='Pausar';
+ timer=setInterval(()=>{phase.value=(Number(phase.value)+1)%data.frames;draw()},1000*data.clips[action.value].length/(6*data.frames))};
+phase.oninput=()=>{pause();draw()};action.onchange=()=>{pause();phase.value=0;draw()};draw();
+</script></html>

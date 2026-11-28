@@ -1,0 +1,50 @@
+{
+  "profile": "blue-ridge-asheville-1991-2020",
+  "days": 1825,
+  "seed": 4801,
+  "cells": 192,
+  "cellDays": 350400,
+  "start": {
+    "waterM3": 1309.4916461644225,
+    "carbonKg": 12210.335984372858,
+    "nitrogenKg": 707.2934393749065
+  },
+  "end": {
+    "waterM3": 1831.753027668202,
+    "carbonKg": 5472.084630775613,
+    "nitrogenKg": 634.7816510161863
+  },
+  "findings": [
+    {
+      "code": "net-carbon-loss",
+      "kg": 6738.251353597247,
+      "cause": "A respiração acumulada excedeu a fixação de carbono."
+    },
+    {
+      "code": "net-nitrogen-export",
+      "kg": 72.51178835872025,
+      "cause": "A drenagem profunda exporta N e o piloto ainda carece de reposição externa."
+    }
+  ],
+  "maxDailyResidual": {
+    "waterM3": 4.172306944383309e-12,
+    "carbonKg": 7.440992266793955e-11,
+    "nitrogenKg": 3.844022539514769e-12
+  },
+  "cumulative": {
+    "rainM3": 127035.44731752321,
+    "transpiredM3": 27507.272123353032,
+    "evaporatedSoilM3": 18473.69378577469,
+    "boundaryRunoffM3": 377.4701801145187,
+    "deepDrainageM3": 80154.74984677705,
+    "atmosphericCarbonInKg": 38727.91486109752,
+    "respiredCarbonKg": 45466.166214694684,
+    "deepNitrogenOutKg": 72.51178835872443
+  },
+  "peakSnowWaterEquivalentMm": 25.235328201621336,
+  "peakPlantCarbonKgPerM2": 0.2616619668995718,
+  "stewardActions": {
+    "inspect": 1776,
+    "irrigate": 49
+  }
+}

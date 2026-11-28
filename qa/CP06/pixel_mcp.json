@@ -1,0 +1,40 @@
+{
+  "server": {
+    "name": "pixel-art-mcp",
+    "version": "0.1.0"
+  },
+  "sha256": "158d1b4de1e3b6361b5746042171182665142510ed8fa83e628fe93ed4fcc1ba",
+  "width": 41,
+  "height": 80,
+  "partial_alpha_pixels_pillow": 2442,
+  "inspect_file": {
+    "format": "png",
+    "path": "frame.png",
+    "width": 41,
+    "height": 80,
+    "colorMode": "truecolor + alpha (RGBA)",
+    "bitDepth": 8,
+    "interlaced": false,
+    "opaqueColors": 1892,
+    "transparentPixels": 1257,
+    "partialAlphaPixels": 2442,
+    "detectedScale": 1,
+    "textChunks": [],
+    "mcpMetadata": null,
+    "autoSlicing": {
+      "confident": false,
+      "proposal": {
+        "frameWidth": 41,
+        "frameHeight": 80
+      },
+      "alternatives": [
+        {
+          "frameWidth": 39,
+          "frameHeight": 78,
+          "margin": 1
+        }
+      ],
+      "reason": "No transparent gutters separate frames; pass explicit frameWidth/frameHeight (or use \"none\")."
+    }
+  }
+}

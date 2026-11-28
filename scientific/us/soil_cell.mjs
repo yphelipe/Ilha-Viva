@@ -21,8 +21,15 @@ export function stepSoil(state,climate){
   s.water+=infiltration;
   const drainage=Math.min(s.water,Math.max(0,s.water-75)*0.14);
   s.water-=drainage;
-  const evap=Math.min(s.water,Math.max(0,tempC)*0.12*light);
-  s.water-=evap;
+  // A canopy shades the soil and transpires from the same finite root-zone stock.
+  // Empirical atmospheric demand, not Penman–Monteith reference ET.
+  const cover = s.plantC / (s.plantC + 0.12);
+  const demand = Math.max(0, tempC) * 0.18 * light;
+  const soilEvap = Math.min(s.water, demand * (1 - cover));
+  s.water -= soilEvap;
+  const transpiration = Math.min(s.water, demand * cover * clamp(s.water / 45, 0, 1));
+  s.water -= transpiration;
+  const evap = soilEvap + transpiration;
   const wet=clamp(s.water/75,0,1);
   const oxygen=clamp((115-s.water)/40,0,1);
   const thermal=clamp((tempC+2)/22,0,1)*clamp((42-tempC)/17,0,1);
@@ -51,5 +58,5 @@ export function stepSoil(state,climate){
   const growth=Math.min(potential,s.mineralN*25);
   s.plantC+=growth;s.plantN+=growth/25;s.mineralN-=growth/25;
   for(const k of keys){if(s[k]<-1e-12||!Number.isFinite(s[k]))throw new Error("invalid result "+k);if(s[k]<0)s[k]=0;}
-  return {state:s,flux:{precipitation:rainMm,melt,infiltration,runoff,drainage,evap,carbonUptake:growth,respiredC:microbialResp+plantResp,leachedN,detritusC:fallenC,decC,microbialGrowth}};
+  return {state:s,flux:{precipitation:rainMm,melt,infiltration,runoff,drainage,evap,soilEvap,transpiration,carbonUptake:growth,respiredC:microbialResp+plantResp,leachedN,detritusC:fallenC,decC,microbialGrowth}};
 }

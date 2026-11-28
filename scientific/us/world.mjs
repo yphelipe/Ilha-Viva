@@ -1,5 +1,21 @@
 import {initialState,stepSoil} from './soil_cell.mjs';
-export const profile={"id":"blue-ridge-pilot-v1","latitude":35.43,"reference":"Asheville regional airport USW00003812; rounded illustrative values informed by Climate-Charts NOAA-derived table; not validated station normal","tempC":[3.6,5.5,9.6,14.2,18.5,22.6,24,23.6,20.6,14.6,8.7,5.9],"precipMm":[102,89,84,119,122,102,119,135,112,112,97,130],"days":[31,28,31,30,31,30,31,31,30,31,30,31],"wetProbability":0.34,"cellM":10};
+// NOAA US Climate Normals 1991–2020. Original station units are retained here.
+const stationTempF = [38.7,42.1,48.4,57.0,64.8,71.8,75.1,74.0,68.3,57.9,47.8,41.4];
+const stationPrecipIn = [4.13,3.46,3.80,4.17,4.13,4.79,4.67,5.04,4.13,3.37,3.72,4.18];
+export const profile = {
+  id: "blue-ridge-asheville-1991-2020", reference: "NOAA NCEI USW00003812",
+  latitude: 35.4319, stationElevationM: 645.3, cellM: 10,
+  tempC: stationTempF.map(f => (f - 32) * 5 / 9),
+  precipMm: stationPrecipIn.map(inches => inches * 25.4),
+  wetDays: [10.5,9.8,11.9,10.6,11.5,13.4,13.9,13.1,9.2,7.8,8.8,10.0],
+  days: [31,28,31,30,31,30,31,31,30,31,30,31]
+};
+
+export function daylightHours(day, latitude = profile.latitude) {
+  const declination = 0.409 * Math.sin(2 * Math.PI * (day % 365 + 1) / 365 - 1.39);
+  const cosine = -Math.tan(latitude * Math.PI / 180) * Math.tan(declination);
+  return 24 / Math.PI * Math.acos(Math.max(-1, Math.min(1, cosine)));
+}
 function hash01(seed,x,y){let n=(seed^Math.imul(x+1,374761393)^Math.imul(y+1,668265263))|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967296}
 
 export function newWorld(w=32,h=24,seed=4801){
@@ -10,25 +26,29 @@ export function newWorld(w=32,h=24,seed=4801){
 
 export function weather(day,seed){
   let d=day%365,m=0;while(d>=profile.days[m]){d-=profile.days[m];m++}
-  const f=d/profile.days[m],mean=profile.tempC[m]*(1-f)+profile.tempC[(m+1)%12]*f;
-  const rain=hash01(seed,day,1)<profile.wetProbability?(profile.precipMm[m]/profile.days[m]/profile.wetProbability)*(.3+1.4*hash01(seed,day,2)):0;
-  return {tempC:mean+(hash01(seed,day,3)-.5)*14,light:.58+.26*Math.sin((day%365-80)*2*Math.PI/365),rainMm:rain,month:m};
+  const probability = profile.wetDays[m] / profile.days[m];
+  const rain = hash01(seed,day,1) < probability
+    ? profile.precipMm[m] / profile.wetDays[m] * (.3 + 1.4 * hash01(seed,day,2)) : 0;
+  const hours = daylightHours(day);
+  // Within-month anomalies have zero expectation and the observed mean remains the target.
+  return {tempC:profile.tempC[m]+(hash01(seed,day,3)-.5)*14,
+    light:hours/24,daylightHours:hours,rainMm:rain,month:m};
 }
 
 export function advance(world,override=null,reverse=false){
   const {w,h,cells}=world,cl=override||weather(world.day,world.seed);
   const next=cells.map(c=>({z:c.z,soil:null,surface:0}));
-  const ledger={precipitation:0,evap:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0};
+  const ledger={precipitation:0,evap:0,soilEvap:0,transpiration:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0};
   const order=Array.from({length:cells.length},(_,i)=>reverse?cells.length-1-i:i);
   const transfers=[];
   for(const i of order){
-    const c=cells[i],x=i%w,y=Math.floor(i/w),tempC=cl.tempC-(c.z-650)*.0065;
+    const c=cells[i],x=i%w,y=Math.floor(i/w),tempC=cl.tempC-(c.z-profile.stationElevationM)*.0065;
     const s={...c.soil};
     const intake=tempC>0?Math.min(c.surface,Math.max(0,110-s.water),15):0;
     s.water+=intake;
     const {state,flux}=stepSoil(s,{rainMm:cl.rainMm,tempC,light:cl.light});
     next[i].soil=state;
-    for(const k of ["precipitation","evap","drainage","carbonUptake","respiredC","leachedN"])ledger[k]+=flux[k];
+    for(const k of ["precipitation","evap","soilEvap","transpiration","drainage","carbonUptake","respiredC","leachedN"])ledger[k]+=flux[k];
     const available=c.surface-intake+flux.runoff;
     let target=-1,best=c.z;
     for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=w||ny>=h)continue;const j=ny*w+nx;if(cells[j].z<best){best=cells[j].z;target=j}}
@@ -44,5 +64,5 @@ export function advance(world,override=null,reverse=false){
 }
 
 export function totals(world){
-  return world.cells.reduce((a,c)=>{a.water+=c.soil.water+c.soil.snow+c.surface;for(const [k,v] of Object.entries(c.soil)){if(k.endsWith("C"))a.C+=v;if(k.endsWith("N"))a.N+=v}return a},{water:0,C:0,N:0})
+  return world.cells.reduce((a,c)=>{a.water+=c.soil.water+c.soil.snow+c.surface;for(const [k,v] of Object.entries(c.soil)){if(k.endsWith("C"))a.C+=v;if(k.endsWith("N"))a.N+=v}return a},{water:world.steward?.tankMm ?? 0,C:0,N:0})
 }
