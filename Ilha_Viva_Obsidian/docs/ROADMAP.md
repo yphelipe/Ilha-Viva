@@ -188,3 +188,5 @@ Laboratório Continental 06 e flora.mjs publicados. Gramíneas/leguminosas possu
 
 ## CP-2026-11-28-11
 Branch missao/campo-continental: Campo 02 preservado e código Campo 03 com rega conservativa, corrida tátil e proteção durante animações. 29 verificações de modelo aprovadas (runtime JS); build/Chromium pendentes por bloqueio de acesso ao atlas/HTML grande. Pipeline CI criado, sem execução confirmada. Consultar [[CHECKPOINT_CONTINUIDADE]]. Não afirmar que Campo 03 foi empacotado; continuar na branch ativa e validar antes de merge.
+
+CP-11 confirmado: Campo 03 compilado e entregue como HTML/artefato CI; run 46151967224, SHA-256 77fc75da07e8cb05c8a0a282b54184d9b1f60ccd85cfcd2cfce49ccd4dd9752a. 20 testes Chromium e testes Node/atlas aprovados. Sem teste Android físico. Ver checkpoint mestre para evidências e limites.

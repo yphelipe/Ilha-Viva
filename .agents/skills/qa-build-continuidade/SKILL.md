@@ -22,3 +22,5 @@ Decisão do usuário em 28/11/2026: desenvolver o mesmo jogo em ambos os ambient
 
 ## Aprendizado CP-11
 Executar testes do modelo antes de empacotar. Se atlas/HTML não estiverem acessíveis, não substituir o campo por diagnóstico; manter último build, criar pipeline reproduzível e reportar falta de execução. Separar commit de código, artefato e teste real do navegador. Não confundir workflow escrito com workflow executado.
+
+CP-11 confirmado: Campo 03 compilado e entregue como HTML/artefato CI; run 46151967224, SHA-256 77fc75da07e8cb05c8a0a282b54184d9b1f60ccd85cfcd2cfce49ccd4dd9752a. 20 testes Chromium e testes Node/atlas aprovados. Sem teste Android físico. Ver checkpoint mestre para evidências e limites.
