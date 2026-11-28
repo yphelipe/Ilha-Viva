@@ -13,3 +13,6 @@ Status: procedimento inicial v1; validar e refinar com evidência de cada missã
 4. Traduza para mecânicas legíveis: estados, fluxos, causalidade, feedback, limites; teste com casos normais e extremos. Não inferir precisão pelo número de casas decimais.
 5. Atualize enciclopédia/Obsidian e versão dos dados; preserve material de Madagascar como histórico.
 Saída: ficha, fontes verificadas, decisão de modelagem, teste e lacunas.
+
+## Aprendizado CP-08
+Usar fonte regional primária com unidade e contexto; não transportar deposição florestal como dado de fazenda. Walker et al. 2023 (doi:10.5194/bg-20-971-2023), Coweeta: total 6,7 e úmido inorgânico 3,69 kg N/ha/ano. O restante calculado inclui formas variadas; não rotular como seco puro. Separar dados observados, cálculos e hipóteses de modelagem. Registrar composição química simplificada e incerteza. Ver CP-08.
