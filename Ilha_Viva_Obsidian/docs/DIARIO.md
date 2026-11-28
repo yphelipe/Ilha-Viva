@@ -195,3 +195,6 @@ Campo 06 local usa prancha integral Gemini 1536×857, 29 objetos recortados e ci
 
 ## CP-2026-11-28-15
 Campo 07 local: água superficial evapora, chuva/neve visual, poças, vegetação dependente de biomassa, analógico proporcional. 18 verificações Chromium e dois cenários anuais de balanço hídrico. Fontes e limites no checkpoint. Código físico/UI principal sincronizado; atlas Gemini ainda local. HTML primeiro.
+
+## Preparação de fauna | Cervo, após CP-15
+Prancha integral Gemini 691735.jpg (WebP, 1536×857), 24 quadros laterais em quatro grupos de seis: pastar, beber, repousar, correr. Recortes RGBA 256×224, pivô 128×218, fundo branco removido, baseline comum por linha. 52 verificações de arquivos e 5 do visualizador em Chromium 144.0.7559.96 offline. Pacote local Ilha_Viva_Cervo_Assets.zip contém PNGs, atlas, manifesto, fonte, script, QA e visualizador HTML. Repouso pouco variável; corrida e continuidade biomecânica não aprovadas. Falta prancha integral de marcha frontal, traseira e lateral (opção B anterior); não usar captura. Ainda não integrado ao Campo 07, nenhuma fauna nova simulada nesta entrega. Binários permanecem nos anexos, não no GitHub. Próximo: curadoria da marcha e integração do cervo com necessidades reais e escala coerente; preservar arte e HTML existente.
