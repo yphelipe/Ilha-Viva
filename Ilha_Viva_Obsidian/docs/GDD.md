@@ -386,3 +386,6 @@ Laboratório Continental 02 e módulo adaptive_agents.mjs publicados. Seis agent
 
 ## CP-2026-11-27-07
 Laboratório Continental 03 e `scientific/us/food_world.mjs` publicados: fome, consumo de biomassa conservativo, competição proporcional, respiração, retorno de nutrientes, morte por déficit e colheita com exportação C/N. 11.021 verificações do motor e 8 da UI simulada; cinco anos virtuais. Perda líquida C/N continua; coeficientes sintéticos. Sem novo campo com protagonista ou arte definitiva. Ver [[CHECKPOINT_CONTINUIDADE]] e `qa/continental_03.json` para evidências, limitações e próximos passos.
+
+## CP-2026-11-27-08 | Fertilidade experimental
+Laboratório 04 e módulo fertility.mjs publicados. Deposição atmosférica inspirada em Coweeta (6,7 kg N/ha/ano) e estoque orgânico protegido com taxas sintéticas. Dois cenários de 5 anos, 14.674 verificações do motor e 7 da UI simulada. C/N finais maiores na combinação experimental, mas perdas persistem e C colhido menor. Não é calibração de campo nem prova isolada de eficácia. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_04.json. Protagonista e arte final ainda pendentes; preservar históricos. Próximo: teste fatorial, fontes e sumidouros específicos, microbiologia.
