@@ -164,3 +164,6 @@ Missão vigente: [[MISSAO_CODEX_M48A]], arquivo `Ilha_Viva_Obsidian/docs/MISSAO_
 
 ## CP-2026-11-27-06 | IA adaptativa diagnóstica
 Laboratório Continental 02 e módulo adaptive_agents.mjs publicados. Seis agentes com percepção local, memória, esquecimento, decisão por utilidade e save local. 1.825 dias, 10.950 decisões, 5.508 verificações de motor e 8 de interface em runtime JS/DOM simulado; diagnóstico de perdas C/N. Sem arte final, protagonista, fauna calibrada ou testes reais de navegador/Android. Consultar [[CHECKPOINT_CONTINUIDADE]] e qa/continental_02.json. Próximo: comparar trabalho Codex quando publicado, campo continental integrado e calibração científica. Commits incrementais obrigatórios.
+
+## CP-2026-11-27-07
+Laboratório Continental 03 e `scientific/us/food_world.mjs` publicados: fome, consumo de biomassa conservativo, competição proporcional, respiração, retorno de nutrientes, morte por déficit e colheita com exportação C/N. 11.021 verificações do motor e 8 da UI simulada; cinco anos virtuais. Perda líquida C/N continua; coeficientes sintéticos. Sem novo campo com protagonista ou arte definitiva. Ver [[CHECKPOINT_CONTINUIDADE]] e `qa/continental_03.json` para evidências, limitações e próximos passos.
