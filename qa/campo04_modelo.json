@@ -1,0 +1,7 @@
+{
+  "checks": 64,
+  "daysToFirstHarvest": 14,
+  "harvestCarbonKg": 0.48811150091724287,
+  "manualWaterLiters": 60,
+  "environment": "JS runtime, exact modules"
+}

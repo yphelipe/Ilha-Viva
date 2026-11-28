@@ -63,7 +63,7 @@ export function harvestFarm(farm,index) {
   if (!plot || plot.plantedDay===null) return {farm,ok:false,message:'Plante um canteiro para colher.'};
   const days = farm.world.day-(plot.cutDay ?? plot.plantedDay);
   const soil = farm.world.cells[index].soil;
-  if (days<3 || soil.legumeCarbon*area<=startC || soil.snow>0) {
+  if (cropStatus(farm,index).kind!=='ready') {
     return {farm,ok:false,message:'Aguarde o crescimento do canteiro para cortar a forragem.'};
   }
   // Retain viable foliage for regrowth. The foraging agents see the reduced stock next tick.
@@ -94,10 +94,46 @@ export function waterFarm(farm,index) {
     message:'Rega: '+(mm*area).toFixed(0)+' litros retirados da cisterna.'};
 }
 
+
+// Source water must already be present in the selected hydrological cell.
+export function collectFarmWater(farm,index) {
+  const w=farm.world, c=w.cells[index], s=w.steward;
+  if(!Number.isInteger(index)||!c||!s)return {farm,ok:false,message:'Fonte indisponível.'};
+  if(!w.last?.climate || w.last.climate.tempC-(c.z-profile.stationElevationM)*.0065<=0)
+    return {farm,ok:false,message:'A água superficial está congelada.'};
+  const mm=Math.min(c.surface,0.4,Math.max(0,4-s.tankMm));
+  if(mm<=1e-12)return {farm,ok:false,message:s.tankMm>=4?'Cisterna cheia.':'Não há água disponível neste trecho.'};
+  const cells=w.cells.slice();cells[index]={...c,surface:c.surface-mm};
+  return {farm:{...farm,world:{...w,cells,steward:{...s,tankMm:s.tankMm+mm}},
+    garden:{...farm.garden,collectedWaterL:(farm.garden.collectedWaterL??0)+mm*area}},ok:true,
+    message:'Água coletada: '+(mm*area).toFixed(0)+' L para a cisterna.'};
+}
+// Cut forage is an internal stock, not new fertilizer. Decomposers process the returned litter.
+export function mulchFarm(farm,index) {
+  const p=farm.garden.plots.find(p=>p.index===index),s=farm.garden.stock;
+  if(!p)return {farm,ok:false,message:'A cobertura deve ser aplicada a um canteiro.'};
+  if(farm.world.cells[index].soil.snow>0)return {farm,ok:false,message:'Aguarde o degelo.'};
+  if(s.cropC<=1e-12)return {farm,ok:false,message:'Não há forragem armazenada.'};
+  const C=Math.min(s.cropC,0.5),N=s.cropN*C/s.cropC;
+  const cells=farm.world.cells.slice(),c=cells[index];
+  cells[index]={...c,soil:{...c.soil,litterC:c.soil.litterC+C/area,litterN:c.soil.litterN+N/area}};
+  const stock={...s,cropC:s.cropC-C,cropN:Math.max(0,s.cropN-N)};
+  const garden={...farm.garden,stock,mulchedC:(farm.garden.mulchedC??0)+C,mulchedN:(farm.garden.mulchedN??0)+N};
+  return {farm:{...farm,garden,world:{...farm.world,cells}},ok:true,message:'Cobertura orgânica aplicada. A decomposição liberará nutrientes gradualmente.'};
+}
+export function cropStatus(farm,index) {
+  const p=farm.garden.plots.find(p=>p.index===index);
+  if(!p)return {kind:'outside',days:0,progress:0};
+  if(p.plantedDay===null)return {kind:'empty',days:0,progress:0};
+  const s=farm.world.cells[index].soil,days=farm.world.day-(p.cutDay??p.plantedDay);
+  const progress=Math.min(1,days/14,s.legumeCarbon*area/(startC*1.5));
+  return {kind:progress>=1&&s.snow===0?'ready':s.snow>0?'frozen':'growing',days,progress};
+}
+
 export function farmReport(farm) {
   const base = floraReport(farm), s = farm.garden.stock, planted = initialStarts-s.starts;
   return {...base,storedCarbonKg:s.cropC+s.starts*startC,storedNitrogenKg:s.cropN+s.starts*startN,
-    residualC:base.residualC+planted*startC,residualN:base.residualN+planted*startN};
+    residualC:base.residualC+planted*startC+(farm.garden.mulchedC??0),residualN:base.residualN+planted*startN+(farm.garden.mulchedN??0)};
 }
 
 export function validateFarm(farm) {
@@ -105,8 +141,9 @@ export function validateFarm(farm) {
   validateSteward(farm.world);
   const g=farm.garden, s=g?.stock, indices=bedIndices(farm.world);
   if (g?.schema!==1 || !s || !Number.isInteger(s.starts) || s.starts<0 || s.starts>initialStarts ||
-      !nonnegative(s.cropC) || !nonnegative(s.cropN) || !nonnegative(g.manualWaterL??0) ||
-      Math.abs(s.cropC-farm.foodLedger.harvestC)>1e-8 || Math.abs(s.cropN-farm.foodLedger.harvestN)>1e-8 ||
+      !nonnegative(s.cropC) || !nonnegative(s.cropN) || !nonnegative(g.manualWaterL??0) || !nonnegative(g.collectedWaterL??0) ||
+      !nonnegative(g.mulchedC??0) || !nonnegative(g.mulchedN??0) ||
+      Math.abs(s.cropC+(g.mulchedC??0)-farm.foodLedger.harvestC)>1e-8 || Math.abs(s.cropN+(g.mulchedN??0)-farm.foodLedger.harvestN)>1e-8 ||
       !Array.isArray(g.plots) || g.plots.length!==indices.length) throw Error('Estoque ou canteiros inválidos.');
   let planted=0;
   for (const [i,p] of g.plots.entries()) {

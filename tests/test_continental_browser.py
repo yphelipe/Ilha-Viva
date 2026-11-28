@@ -12,7 +12,7 @@ from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-FIELD = ROOT / 'play/Ilha_Viva_Campo_Continental_03.html'
+FIELD = ROOT / 'play/Ilha_Viva_Campo_Continental_04.html'
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -82,6 +82,10 @@ def test_field(evidence=None):
             check('duplicate planting blocked', snapshot()['farm']['garden']['stock']['starts'] == 5)
             page.locator('#harvest').tap()
             check('premature harvest blocked', snapshot()['farm']['garden']['stock']['cropC'] == 0)
+            check('growth bar visible', page.locator('#growth').is_visible())
+            page.locator('#zoom').tap()
+            check('zoom toggle', page.locator('#zoom').get_attribute('aria-pressed') == 'true')
+            page.locator('#zoom').tap()
             page.locator('#run').tap()
             check('mobile run toggle', page.locator('#run').get_attribute('aria-pressed') == 'true')
             page.locator('#run').tap()
@@ -125,6 +129,17 @@ def test_field(evidence=None):
                   snapshot()['player']['y'] == hit['y'])
             check('camera follows traversal', snapshot()['camera'] != evolved['camera'])
             page.locator('#load').tap()
+            stick = page.locator('#stick')
+            rect = stick.bounding_box()
+            touch = context.new_cdp_session(page)
+            touch.send('Input.dispatchTouchEvent', {'type':'touchStart','touchPoints':[{'x':rect['x']+rect['width']*.8,'y':rect['y']+rect['height']*.5}]})
+            try:
+                page.wait_for_function('x => Continental.snapshot().player.x > x', arg=stationary['x'])
+            finally:
+                touch.send('Input.dispatchTouchEvent', {'type':'touchEnd','touchPoints':[]})
+            check('analog touch moves player', snapshot()['player']['x'] > stationary['x'])
+            page.locator('#load').tap()
+            page.locator('#control-mode').tap()
             button = page.locator('[data-dir="right"]')
             box = button.bounding_box()
             touch = context.new_cdp_session(page)
@@ -142,6 +157,26 @@ def test_field(evidence=None):
                 'document.documentElement.scrollWidth <= window.innerWidth'))
             if evidence:
                 page.screenshot(path=str(evidence / 'campo_paisagem.png'), full_page=True)
+            page.locator('#load').tap()
+            # Controlled imported save tests real buttons with a known finite water stock.
+            fixture=json.loads(exported)
+            bed=fixture['farm']['garden']['plots'][0]['index']
+            fixture['farm']['world']['cells'][bed]['soil']['water']=30
+            fixture['farm']['world']['cells'][bed]['soil']['snow']=0
+            fixture['farm']['world']['last']['climate']['tempC']=20
+            fixture['farm']['world']['steward']['tankMm']=.6
+            page.locator('#import').set_input_files({'name':'rega.json','mimeType':'application/json','buffer':json.dumps(fixture).encode()})
+            page.wait_for_function("Continental.snapshot().world.steward.tankMm === .6")
+            page.locator('#water').tap()
+            page.wait_for_function("Continental.snapshot().action === 'idle'")
+            check('manual watering debits cistern and wets plot', abs(snapshot()['world']['steward']['tankMm']-.2)<1e-8 and abs(snapshot()['world']['cells'][bed]['soil']['water']-30.4)<1e-8)
+            page.evaluate('Continental.step(20)')
+            page.locator('#harvest').tap()
+            page.wait_for_function("Continental.snapshot().action === 'idle'")
+            check('mature harvest stored', snapshot()['farm']['garden']['stock']['cropC']>0)
+            page.locator('#mulch').tap()
+            page.wait_for_function("Continental.snapshot().action === 'idle'")
+            check('organic cover consumes harvested stock', snapshot()['farm']['garden'].get('mulchedC',0)>0)
             check('no external requests or JavaScript exceptions', not errors and not external)
             result = {'artifact': FIELD.name, 'sha256': hashlib.sha256(FIELD.read_bytes()).hexdigest(),
                       'browser': browser.version, 'offline_after_local_navigation': True,

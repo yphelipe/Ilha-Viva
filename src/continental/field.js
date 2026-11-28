@@ -9,7 +9,7 @@ let farm = createFarm(COLS, ROWS, 4801);
 let player = {x:805,y:415,dir:'down'};
 const camera = {x:0,y:0};
 let inspected = null, work = null, gait = 0, isMoving = false, isRunning = false;
-let touchRun = false;
+let touchRun = false, stickVector={x:0,y:0}, stickPointer=null, zoomMode=1;
 let season = 0, needsPaint = true, lastTime = 0, request = 0, autoTimer = null;
 const keysHeld = new Set(), directions = new Map();
 const groundObjects = [...SCENES].sort((a,b)=>a.y-b.y);
@@ -29,7 +29,7 @@ function follow() {
 }
 function resizeField() {
     const rect=fieldCanvas.getBoundingClientRect();
-    const zoom=rect.width<540?.90:1.35;
+    const zoom=(rect.width<540?.90:1.35)*zoomMode;
     fieldCanvas.width=Math.min(MAP_W,Math.max(1,Math.round(rect.width/zoom)));
     fieldCanvas.height=Math.min(MAP_H,Math.max(1,Math.round(rect.height/zoom)));
     follow();schedule();
@@ -42,7 +42,7 @@ function updateGround() {
 function updatePanel() {
     const w=farm.world, cl=environment(), index=selectedCell(), c=w.cells[index];
     const row=Math.floor(index/COLS)+1,col=index%COLS+1;
-    element('date').textContent=seasonNames[season]+' · '+seasonCalendar[cl.month]+' · Dia '+(w.day+1);
+    let d=w.day%365,m=0;while(d>=profile.days[m]){d-=profile.days[m];m++}element('date').textContent=seasonNames[season]+' · '+(d+1)+' '+seasonCalendar[m]+' · Ano '+(Math.floor(w.day/365)+1);
     element('climate').textContent=formatted(cl.tempC)+' °C · '+(cl.rainMm>0?formatted(cl.rainMm)+' mm de chuva':'sem chuva');
     element('place').textContent=(inspected===null?'Parcela aos seus pés':'Parcela observada')+' · '+row+' / '+col;
     element('cell').textContent='Água no solo '+formatted(c.soil.water)+' mm · Gramíneas '+formatted(100*c.soil.grassCarbon)+' kg C · Leguminosas '+formatted(100*c.soil.legumeCarbon)+' kg C';
@@ -93,6 +93,7 @@ function draw() {
     g.imageSmoothingEnabled=false;
     g.drawImage(groundLayer,camera.x,camera.y,w,h,0,0,w,h);
     drawBeds(g);
+    drawSelection(g);
     let heroDone=false;
     for(const o of groundObjects){
         if(!heroDone && o.y>player.y){drawHero();heroDone=true}
@@ -107,8 +108,8 @@ function frame(time){
     request=0;
     const dt=Math.min(.08,(time-(lastTime||time))/1000);lastTime=time;
     const held=new Set([...directions.values(),...Array.from(keysHeld,k=>keyVectors[k])]);
-    const dx=Number(held.has('right'))-Number(held.has('left'));
-    const dy=Number(held.has('down'))-Number(held.has('up'));
+    const dx=Number(held.has('right'))-Number(held.has('left'))+stickVector.x;
+    const dy=Number(held.has('down'))-Number(held.has('up'))+stickVector.y;
     isRunning=touchRun||keysHeld.has('ShiftLeft')||keysHeld.has('ShiftRight');
     if(work){work.elapsed+=dt;if(work.elapsed>=work.duration)work=null;needsPaint=true}
     isMoving=Boolean((dx||dy)&&move(dx,dy,dt,isRunning));
@@ -128,12 +129,13 @@ function setAuto(on) {
 function restore(text) {
     const decoded=decodeFarmSave(text), p=decoded.player;
     if(decoded.farm.world.w!==COLS||decoded.farm.world.h!==ROWS||blocked(p.x,p.y))throw Error('Posição incompatível com o vale.');
-    setAuto(false);keysHeld.clear();directions.clear();work=null;isMoving=false;gait=0;touchRun=false;element('run').setAttribute('aria-pressed','false');
+    setAuto(false);keysHeld.clear();directions.clear();resetStick();work=null;isMoving=false;gait=0;touchRun=false;element('run').setAttribute('aria-pressed','false');
     farm=decoded.farm;player=p;inspected=null;follow();updateGround();
 }
 element('next').onclick=()=>{if(!work)step()};
 element('run').onclick=()=>{touchRun=!touchRun;element('run').setAttribute('aria-pressed',String(touchRun));schedule()};
 element('auto').onclick=()=>setAuto(autoTimer===null);
+element('zoom').onclick=()=>{zoomMode=zoomMode===1?1.35:1;element('zoom').setAttribute('aria-pressed',String(zoomMode!==1));resizeField()};
 element('save').onclick=()=>{
     try{localStorage.setItem(slot,encodeFarmSave(farm,player));notice('Partida salva neste navegador.')}
     catch{notice('O navegador não conseguiu salvar. Use Exportar arquivo.')}
@@ -163,7 +165,21 @@ function handleKey(e,down) {
     e.preventDefault();if(down)keysHeld.add(e.code);else keysHeld.delete(e.code);schedule();
 }
 window.addEventListener('keydown',e=>handleKey(e,true));window.addEventListener('keyup',e=>handleKey(e,false));
-window.addEventListener('blur',()=>{keysHeld.clear();directions.clear();schedule()});
+window.addEventListener('blur',()=>{keysHeld.clear();directions.clear();resetStick();schedule()});
+const stick=element('stick'), knob=element('knob');
+function resetStick(){stickPointer=null;stickVector={x:0,y:0};knob.style.transform='translate(0,0)';schedule()}
+function updateStick(e){
+    const r=stick.getBoundingClientRect(),radius=r.width*.36;
+    let x=(e.clientX-r.left-r.width/2)/radius,y=(e.clientY-r.top-r.height/2)/radius;
+    const len=Math.hypot(x,y);if(len>1){x/=len;y/=len}
+    knob.style.transform='translate('+Math.round(x*radius)+'px,'+Math.round(y*radius)+'px)';
+    stickVector=len<.18?{x:0,y:0}:{x,y};schedule();
+}
+stick.onpointerdown=e=>{if(stickPointer!==null)return;e.preventDefault();stickPointer=e.pointerId;stick.setPointerCapture(e.pointerId);updateStick(e)};
+stick.onpointermove=e=>{if(e.pointerId===stickPointer)updateStick(e)};
+stick.onpointerup=stick.onpointercancel=stick.onlostpointercapture=e=>{if(e.pointerId===stickPointer)resetStick()};
+element('control-mode').onclick=()=>{resetStick();directions.clear();const show=stick.hidden;stick.hidden=!show;element('arrows').hidden=show;element('control-mode').textContent=show?'Setas':'Analógico';schedule()};
+
 fieldCanvas.onpointerdown=e=>{
     const rect=fieldCanvas.getBoundingClientRect();
     inspected=cellAt(camera.x+(e.clientX-rect.left)*fieldCanvas.width/rect.width,camera.y+(e.clientY-rect.top)*fieldCanvas.height/rect.height);
@@ -172,7 +188,9 @@ fieldCanvas.onpointerdown=e=>{
 function updateStock(){
     const {stock,plots}=farm.garden, index=selectedCell();
     const plot=plots.find(p=>p.index===index);
-    const description=plot?(plot.plantedDay===null?'Canteiro disponível':'Canteiro plantado há '+(farm.world.day-plot.plantedDay)+' dias'):'Fora da horta';
+    const status=cropStatus(farm,index);const description=({outside:'Fora da horta',empty:'Canteiro disponível',ready:'Pronto para cortar',frozen:'Canteiro congelado',growing:'Em crescimento · '+Math.floor(status.progress*100)+'%'})[status.kind];
+    element('growth').value=status.progress;element('growth').hidden=!plot||status.kind==='empty';
+    element('water-total').textContent=formatted(farm.garden.manualWaterL??0)+' L de rega · '+formatted(farm.garden.mulchedC??0)+' kg C devolvidos ao solo';
     element('stock').textContent=description+' · '+stock.starts+' mudas · Colheita armazenada '+formatted(stock.cropC)+' kg C · Cisterna '+formatted((farm.world.steward?.tankMm??0)*100)+' L';
 }
 function drawBeds(g){
@@ -195,10 +213,17 @@ function drawBeds(g){
         }
     }
 }
+function bedPoint(index){return {x:(index%COLS)*CELL_W+61,y:Math.floor(index/COLS)*CELL_H+91}}
+function drawSelection(g){
+    const index=selectedCell(),p=farm.garden.plots.find(p=>p.index===index);
+    if(p){const point=bedPoint(index),x=point.x-camera.x,y=point.y-camera.y;g.strokeStyle=cropStatus(farm,index).kind==='ready'?'#e4ce78':'#faf1c3';g.lineWidth=1;g.strokeRect(Math.round(x-28),Math.round(y-12),56,30);}
+}
 function tend(operation,kind) {
     if(work){notice('Aguarde a animação terminar.');return}
     const index=selectedCell();
     if(index!==cellAt(player.x,player.y)){notice('Caminhe até a parcela observada para trabalhar.');return}
+    const point=bedPoint(index);
+    if(farm.garden.plots.some(p=>p.index===index)&&Math.hypot(player.x-point.x,player.y-point.y)>58){notice('Aproxime-se do canteiro.');return}
     const result=operation(farm,index);notice(result.message);
     if(!result.ok)return;
     farm=result.farm;work={kind,elapsed:0,duration:.64};gait=0;
@@ -207,6 +232,12 @@ function tend(operation,kind) {
 element('plant').onclick=()=>tend(plantFarm,'hoe');
 element('harvest').onclick=()=>tend(harvestFarm,'sickle');
 element('water').onclick=()=>tend(waterFarm,'water');
+element('mulch').onclick=()=>tend(mulchFarm,'hoe');
+element('collect').onclick=()=>{
+ if(work)return;const x=riverX(player.y),distance=Math.abs(player.x-x);
+ if(distance>riverWidth(player.y)+25){notice('Aproxime-se da margem do riacho.');return}
+ const r=collectFarmWater(farm,cellAt(x,player.y));notice(r.message);if(r.ok){farm=r.farm;updateGround()}
+};
 window.Continental={
     snapshot:()=>structuredClone({world:farm.world,farm,player,camera,season:seasonNames[season],action:work?.kind??(isMoving?(isRunning?'run':'walk'):'idle')}),
     step,move

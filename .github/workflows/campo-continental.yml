@@ -32,14 +32,14 @@ jobs:
       - name: Atlas e navegador
         run: |
           python tests/test_continental_atlas.py
-          python tests/test_continental_browser.py --evidence qa/campo03
+          python tests/test_continental_browser.py --evidence qa/campo04
       - name: Artefato do campo e evidencias
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Ilha-Viva-Campo-Continental-03
+          name: Ilha-Viva-Campo-Continental-04
           path: |
-            play/Ilha_Viva_Campo_Continental_03.html
-            qa/campo03/
+            play/Ilha_Viva_Campo_Continental_04.html
+            qa/campo04/
           if-no-files-found: warn
           retention-days: 14

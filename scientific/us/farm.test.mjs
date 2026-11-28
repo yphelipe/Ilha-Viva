@@ -1,4 +1,4 @@
-import {createFarm,plantFarm,harvestFarm,waterFarm,stepFarm,validateFarm,farmReport} from './farm.mjs';
+import {createFarm,plantFarm,harvestFarm,waterFarm,stepFarm,validateFarm,farmReport,collectFarmWater,mulchFarm,cropStatus} from './farm.mjs';
 import {foodTotals} from './food_world.mjs';
 function verifyFarm(){
  let checks=0;const ck=(b,m)=>{if(!b)throw Error(m);checks++},near=(a,b,m)=>ck(Math.abs(a-b)<1e-7*Math.max(1,Math.abs(a),Math.abs(b)),m);
@@ -11,6 +11,13 @@ function verifyFarm(){
  let natural=createFarm();natural=plantFarm(natural,natural.garden.plots[0].index).farm;const bed=natural.garden.plots[0].index;let days=0;
  while(days<365&&!harvestFarm(natural,bed).ok){natural=stepFarm(natural);days++;validateFarm(natural);const r=farmReport(natural);near(r.residualC,0,"C balance");near(r.residualN,0,"N balance")}
  const harvested=harvestFarm(natural,bed);ck(harvested.ok,"harvest matured");ck(harvested.farm.garden.stock.cropC>0,"yield");ck(!harvestFarm(harvested.farm,bed).ok,"no repeated harvest");ck(validateFarm(harvested.farm),"validate");
+ ck(days>=14,"minimum growth period");
+ let mulched=mulchFarm(harvested.farm,bed);ck(mulched.ok,"mulch");ck(validateFarm(mulched.farm),"validate mulch");const mr=farmReport(mulched.farm);near(mr.residualC,0,"mulch C balance");near(mr.residualN,0,"mulch N balance");
+ near(foodTotals(mulched.farm).C-foodTotals(harvested.farm).C,harvested.farm.garden.stock.cropC-mulched.farm.garden.stock.cropC,"stored carbon returned");
+ const fixture=JSON.parse(JSON.stringify(wet));fixture.world.cells[i].surface=.7;const initialWater=foodTotals(fixture).waterL;
+ const collected=collectFarmWater(fixture,i);ck(collected.ok,"collect");near(collected.farm.world.cells[i].surface,.3,"surface debit");near(collected.farm.world.steward.tankMm,.4,"cistern credit");near(foodTotals(collected.farm).waterL,initialWater,"collection balance");ck(validateFarm(collected.farm),"validate collection");
+ ck(!collectFarmWater(collected.farm,-1).ok,"invalid source");
+ ck(cropStatus(natural,bed).kind==="ready","maturity state");
  return {checks,daysToFirstHarvest:days,harvestCarbonKg:harvested.farm.garden.stock.cropC,manualWaterLiters:wet.garden.manualWaterL};
 }
 console.log(JSON.stringify(verifyFarm(),null,2));
