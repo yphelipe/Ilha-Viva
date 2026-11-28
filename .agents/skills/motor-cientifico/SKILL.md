@@ -25,3 +25,6 @@ Separar estoques orgânicos ativos/protegidos por transferências, sem alterar m
 
 ## Aprendizado verificado CP-09
 Usar ensaio fatorial com mesmas condições iniciais totais, seed, duração e intervenções para distinguir fatores combinados; explicitar quando um fator engloba vários processos ou uma condição inicial. Fixação deve registrar entrada de N e custo de C, não gerar fertilidade gratuita. Testar ausência de hospedeiro, seca, frio, escuro e inibição por N. Se o pool vegetal agregado satura e suprime fixação, separar espécies e demanda antes de ajustar taxas. Evidência microbiology.test.mjs e qa/continental_05.json (29.708 verificações em JS); não confundir conservação com calibração.
+
+## Aprendizado CP-10
+Separar grupos funcionais com estoques reais C/N e agregados de compatibilidade que não contam em duplicidade. Resolver competição por N a partir de demanda simultânea; fixação condicionada a hospedeiro, custo de C e disponibilidade ambiental, e testar ausência de hospedeiro. Reconciliar os subestoques depois de consumo/colheita e verificar persistência. Referência flora.test.mjs, 17.683 verificações em runtime JS. Nodulação é índice e não população real. Refatorar orquestração duplicada após integração.

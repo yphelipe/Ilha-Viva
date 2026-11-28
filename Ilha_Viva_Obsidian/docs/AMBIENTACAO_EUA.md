@@ -67,3 +67,6 @@ Laboratório 04 e módulo fertility.mjs publicados. Deposição atmosférica ins
 
 ## CP-2026-11-27-09 | Simbiose e experimento fatorial
 Módulo microbiology.mjs e Laboratório Continental 05 publicados. Nove cenários de 3 anos, 29.708 verificações do motor e 7 de UI simulada. Separados fatores de deposição, dinâmica do estoque protegido e repartição inicial; teste adicional de fixação simbiótica limitada por hospedeiro agregado, C, N, luz, água e temperatura. Fixação total pequena (0,016396 kg N, custo 0,131166 kg C), apenas no primeiro ano. Não representa microbiologia completa nem calibração. Próximo: gramíneas/leguminosas em pools separados, nodulação e fungos/micorrizas/P; campo integrado quando atlas acessível. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_05.json.
+
+## CP-2026-11-27-10 | Flora funcional
+Laboratório Continental 06 e flora.mjs publicados. Gramíneas/leguminosas possuem C/N próprios, competição, nodulação funcional e crescimento com fixação de N/custo C. 17.683 verificações do motor e 7 da interface simulada; 4 cenários de 3 anos. Mistura fixou 6,184 kg N continuamente nos três anos; sem hospedeiro, zero. Parâmetros sintéticos e agentes abstratos. Atlas original inacessível pelo conector, preservado. Campo jogável e arte final ainda pendentes. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_06.json. HTML primeiro, Godot posterior.

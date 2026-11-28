@@ -19,3 +19,6 @@ Usar fonte regional primária com unidade e contexto; não transportar deposiç�
 
 ## Aprendizado CP-09
 Rizóbios precisam de hospedeiro compatível e recebem carboidratos; N mineral elevado inibe a fixação. Referências verificadas: Penn State Inoculation of Forage and Grain Legumes; USDA NRCS National Agronomy Manual; UGA White Clover Establishment and Management Guide; Missouri Extension wq277. Taxa UGA 100–150 lb N/acre/ano para estande vigoroso, não valor universal. Documentar coeficientes sintéticos separadamente; não afirmar espécie individual ou nodulação quando só existe fração agregada. Ver CP-09.
+
+## Aprendizado CP-10
+Misturas de gramíneas/leguminosas devem representar competição e necessidades próprias, não benefício uniforme. Fontes Penn State Extension: Inoculation of Forage and Grain Legumes, Making the Most of Mixtures, Soil Fertility Management for Forage Crops: Maintenance e White Clover (links no CP-10). Coeficientes permanecem sintéticos. Verificar efeitos de clima e N disponível, depois calibrar por espécie e solo.
