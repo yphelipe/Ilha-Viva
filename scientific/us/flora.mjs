@@ -8,7 +8,7 @@ function floraFertLedger(){return {depositionN:0,wetN:0,otherN:0,uptakeC:0,soilR
 function floraWorldAdvance(world,override=null,reverse=false,fixation=true){
   const {w,h,cells}=world,cl=override||weather(world.day,world.seed);
   const next=cells.map(c=>({z:c.z,soil:null,surface:0}));
-  const ledger={precipitation:0,evap:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0,fixedN:0,fixCostC:0};
+  const ledger={precipitation:0,evap:0,soilEvap:0,transpiration:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0,fixedN:0,fixCostC:0};
   const order=Array.from({length:cells.length},(_,i)=>reverse?cells.length-1-i:i);
   const transfers=[];
   for(const i of order){
@@ -18,7 +18,7 @@ function floraWorldAdvance(world,override=null,reverse=false,fixation=true){
     s.water+=intake;
     const {state,flux}=groupedSoil(s,{rainMm:cl.rainMm,tempC,light:cl.light},fixation);
     next[i].soil=state;
-    for(const k of ["precipitation","evap","drainage","carbonUptake","respiredC","leachedN","fixedN","fixCostC"])ledger[k]+=flux[k];
+    for(const k of ["precipitation","evap","soilEvap","transpiration","drainage","carbonUptake","respiredC","leachedN","fixedN","fixCostC"])ledger[k]+=flux[k];
     const available=c.surface-intake+flux.runoff;
     let target=-1,best=c.z;
     for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=w||ny>=h)continue;const j=ny*w+nx;if(cells[j].z<best){best=cells[j].z;target=j}}
@@ -80,7 +80,8 @@ export function initFlora(w=32,h=24,seed=4801,count=6,fixation=true,fraction=.25
 }
 export function groupedSoil(state,cl,fixation){
  const p=floraParams;
- const {state:s,flux}=stepSoil({...state,plantC:0,plantN:0},cl);
+ // The grouped pools handle plant metabolism below and still shade and transpire here.
+ const {state:s,flux}=stepSoil({...state,plantC:0,plantN:0},cl,state.grassCarbon+state.legumeCarbon);
  const wet=plantClamp(s.water/75),oxygen=plantClamp((115-s.water)/40),thermal=plantClamp((cl.tempC+2)/22)*plantClamp((42-cl.tempC)/17),activity=wet*oxygen*thermal;
  for(const g of ["grass","legume"]){
   const C=g+"Carbon",N=g+"Nitrogen",turn=plantClamp((g==="grass"?.002:.003)+.015*(1-wet)+(cl.tempC<=0?.005:0)),fallenC=s[C]*turn,fallenN=s[N]*turn;

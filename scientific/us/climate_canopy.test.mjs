@@ -44,3 +44,12 @@ test('canopy and available root-zone water control transpiration and shade', () 
   assert.equal(stepSoil(live,{...climate,light:0}).flux.transpiration,0);
   assert.equal(stepSoil(live,{...climate,tempC:-1}).flux.evap,0);
 });
+
+test('CP-10 plant groups transpire once and expose the daily water partition', async () => {
+  const {initFlora,floraAdvance} = await import('./flora.mjs');
+  const simulation = initFlora(4,4,23,2,true);
+  const next = floraAdvance(simulation,{tempC:20,light:.7,rainMm:0});
+  const ledger = next.world.last.ledger;
+  assert.ok(ledger.transpiration > 0 && ledger.soilEvap > 0);
+  assert.ok(Math.abs(ledger.evap-ledger.soilEvap-ledger.transpiration)<1e-10);
+});

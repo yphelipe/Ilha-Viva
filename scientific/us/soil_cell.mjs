@@ -3,7 +3,7 @@ export function initialState(){
   return {water:70,snow:0,plantC:0.18,plantN:0.0072,litterC:0.4,litterN:0.018,microbeC:0.04,microbeN:0.005,mineralN:0.006};
 }
 
-export function stepSoil(state,climate){
+export function stepSoil(state,climate,canopyC=state.plantC){
   // Prototype coefficients, not field-calibrated. Water mm; C and N kg/m²; one simulated day.
   const s={...state};
   const keys=Object.keys(initialState());
@@ -23,7 +23,8 @@ export function stepSoil(state,climate){
   s.water-=drainage;
   // A canopy shades the soil and transpires from the same finite root-zone stock.
   // Empirical atmospheric demand, not Penman–Monteith reference ET.
-  const cover = s.plantC / (s.plantC + 0.12);
+  if (!Number.isFinite(canopyC) || canopyC < 0) throw Error("invalid canopy carbon");
+  const cover = canopyC / (canopyC + 0.12);
   const demand = Math.max(0, tempC) * 0.18 * light;
   const soilEvap = Math.min(s.water, demand * (1 - cover));
   s.water -= soilEvap;
