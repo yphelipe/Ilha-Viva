@@ -1,6 +1,6 @@
 ---
 tags: [ilha-viva, indice]
-versao: "CP-2026-11-27-06"
+versao: "CP-2026-11-27-07"
 ---
 
 > **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
@@ -13,7 +13,7 @@ versao: "CP-2026-11-27-06"
 # Ilha Viva | Central do projeto
 YNOVIQ Studios • 26/11/2026
 
-**Fase atual:** M48-A parcial. Laboratório Continental 02: simulação diagnóstica com agentes adaptativos e save local; campo com protagonista ainda pendente. Começar por [[docs/CHECKPOINT_CONTINUIDADE]].
+**Fase atual:** M48-A parcial. Laboratório Continental 03: agentes adaptativos com consumo conservativo de biomassa, competição e retorno de nutrientes; campo com protagonista pendente. Começar por [[docs/CHECKPOINT_CONTINUIDADE]].
 
 ## Navegação
 - [[docs/SKILLS_PROJETO]] • biblioteca de procedimentos reutilizáveis
@@ -166,3 +166,6 @@ Missão vigente: [[MISSAO_CODEX_M48A]], arquivo `Ilha_Viva_Obsidian/docs/MISSAO_
 
 ## Laboratório 02
 [HTML no GitHub](https://github.com/yphelipe/Ilha-Viva/blob/main/play/Ilha_Viva_Laboratorio_Continental_02.html) | [[CHECKPOINT_CONTINUIDADE]] (CP-06). Não é o novo campo completo.
+
+## CP-2026-11-27-07
+Laboratório Continental 03 e `scientific/us/food_world.mjs` publicados: fome, consumo de biomassa conservativo, competição proporcional, respiração, retorno de nutrientes, morte por déficit e colheita com exportação C/N. 11.021 verificações do motor e 8 da UI simulada; cinco anos virtuais. Perda líquida C/N continua; coeficientes sintéticos. Sem novo campo com protagonista ou arte definitiva. Ver [[CHECKPOINT_CONTINUIDADE]] e `qa/continental_03.json` para evidências, limitações e próximos passos.
