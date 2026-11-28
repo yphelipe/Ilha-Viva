@@ -1,6 +1,6 @@
 ---
 tags: [ilha-viva, indice]
-versao: "CP-2026-11-27-04"
+versao: "CP-2026-11-27-06"
 ---
 
 > **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
@@ -13,7 +13,7 @@ versao: "CP-2026-11-27-04"
 # Ilha Viva | Central do projeto
 YNOVIQ Studios • 26/11/2026
 
-**Fase atual:** M48-A parcial. Laboratório Continental 01 disponível (diagnóstico ecológico, sem protagonista). Base jogável histórica v0.47. **Começar por [[docs/CHECKPOINT_CONTINUIDADE]].**
+**Fase atual:** M48-A parcial. Laboratório Continental 02: simulação diagnóstica com agentes adaptativos e save local; campo com protagonista ainda pendente. Começar por [[docs/CHECKPOINT_CONTINUIDADE]].
 
 ## Navegação
 - [[docs/SKILLS_PROJETO]] • biblioteca de procedimentos reutilizáveis
@@ -163,3 +163,6 @@ QA: 1.095 dias × 192 células = 210.240 células-dia; 4.423 verificações apro
 
 ## CP-2026-11-27-04 | Entrega ao Codex e economia de sessão
 Missão vigente: [[MISSAO_CODEX_M48A]], arquivo `Ilha_Viva_Obsidian/docs/MISSAO_CODEX_M48A.md`. Nova skill `.agents/skills/economia-de-sessao/SKILL.md`: leitura seletiva, trabalho agrupado, testes direcionados e regressão no marco integrado, automação, recuperação de bloqueios e atualização por evidências. Sete skills no total. Base técnica permanece CP-03; nesta revisão apenas procedimentos e documentação, sem novo build, código de jogo, arte ou testes. Próxima ação: executar a missão no checkout do Codex, recuperar atlas original e integrar campo continental em HTML. Não afirmar que Codex executou ou que economia foi medida.
+
+## Laboratório 02
+[HTML no GitHub](https://github.com/yphelipe/Ilha-Viva/blob/main/play/Ilha_Viva_Laboratorio_Continental_02.html) | [[CHECKPOINT_CONTINUIDADE]] (CP-06). Não é o novo campo completo.
