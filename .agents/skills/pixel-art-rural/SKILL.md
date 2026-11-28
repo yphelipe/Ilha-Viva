@@ -25,3 +25,6 @@ Procedimento, revisão fixada, instalação temporária e evidências em [Ferram
 
 ## Aprendizado CP-13: curadoria de prancha gerada externamente
 Preferir PNG original transparente; screenshots JPEG introduzem contaminação de chroma key, reamostragem e sobreposição de UI. Quando só houver captura, selecionar objetos completos e tratar recorte como candidato, não arte final. Não eliminar verdes legítimos; ajustar alfa e spill com inspeção visual. Conservar atlas anterior e oferecer comparação no render real, preservar pivôs e proporções; estação não deve trocar identidade da árvore. Registrar a origem e os bloqueios de sincronização. Não declarar sprites decorativos como indivíduos simulados.
+
+## Aprendizado CP-14
+Usar imagem integral enviada em vez de screenshot. Recortar na resolução fonte, conservar proporções, determinar escala pela altura do protagonista e elementos arquitetônicos, alinhar base e colisão à geometria projetada. Redimensionar uma vez na escala lógica e testar zoom inteiro. Preservar identidade sazonal e distinguir decoração de simulação. Registrar limitações de perspectiva, compressão e QA visual. Não promover arte candidata sem revisão.

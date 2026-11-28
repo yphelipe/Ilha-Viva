@@ -189,3 +189,6 @@ CP-12 confirmado: Campo 04 compilado e entregue; CI 46154034962, 26 testes Chrom
 
 ## CP-2026-11-28-13
 Prévia gráfica local Campo 05: 21 recortes de captura Gemini; alternância entre arte original e candidata; 9 testes locais Chromium. Assets/HTML/ZIP entregues no chat, binários ainda não sincronizados ao GitHub por limitação de transferência. Campo 04 permanece build oficial. PNG original necessário para acabamento final. Ver checkpoint mestre.
+
+## CP-2026-11-28-14
+Campo 06 local usa prancha integral Gemini 1536×857, 29 objetos recortados e cinco referências de água. Escala revista com protagonista como referência, colisões poligonais, zoom inteiro e câmera ajustada; 12 verificações Chromium. HTML e pacote entregues no chat, ainda não sincronizados ao GitHub. Campo 04 permanece oficial; ver checkpoint mestre. Arte candidata, não aprovação final.

@@ -1,0 +1,17 @@
+{
+  "source": "691718.jpg (WebP)",
+  "sourceDimensions": [
+    1536,
+    857
+  ],
+  "base": "Campo 04",
+  "html": "Ilha_Viva_Campo_Continental_06.html",
+  "bytes": 2054228,
+  "sha256": "6f65da962f846952911a6dd163a995ee6efb9f75513633aea2cc38e8b732ffe1",
+  "assets": 29,
+  "riverReferences": 5,
+  "browserChecks": 12,
+  "physicalAndroid": false,
+  "fullRegression": false,
+  "binariesInRepo": false
+}
