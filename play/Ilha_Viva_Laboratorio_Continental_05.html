@@ -1,0 +1,318 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ilha Viva | Laboratório continental 05 • Simbiose</title><style>body{margin:0;background:#18251f;color:#eee9d9;font:16px system-ui}main{max-width:800px;margin:auto;padding:14px}h1{font-size:21px;margin:4px 0}p{font-size:14px;line-height:1.4;color:#c5d0bf}canvas{width:100%;height:auto;background:#273c2f;image-rendering:pixelated;touch-action:none;border:1px solid #526b51}button,select{background:#354c3d;color:#fff;border:1px solid #819783;border-radius:7px;padding:12px;margin:3px;font-size:14px}#stats,#cell{padding:9px;background:#24372b;margin:8px 0;font:14px system-ui;white-space:pre-line}.tag{color:#c0d49c}button:focus-visible{outline:2px solid white}</style></head><body><main><h1>Ilha Viva • Laboratório continental 05 • Simbiose</h1><p class="tag">M48-A | Ambiente experimental, não jogo final. Experimento de fixação simbiótica de nitrogênio com custo de carbono, hospedeiros agregados e controles fatoriais. Marcadores são agentes abstratos, não arte de fauna ou protagonista.</p><canvas id="map" width="640" height="360" aria-label="Mapa do terreno e estado ecológico"></canvas><div><button id="step">+1 dia</button><button id="week">+7 dias</button><button id="year">+365 dias</button><button id="auto">▶ Simular</button><button id="storm">Tempestade</button><button id="cold">Nevasca</button><button id="reset">Reiniciar</button><button id="compare">Controle sem reposição</button><button id="nofix">Mesmo modelo sem fixação</button><button id="harvest">Colher 50% da célula</button><button id="noise">Perturbar célula (3 dias)</button><button id="save">Salvar</button><button id="load">Carregar</button></div><label>Camada <select id="layer"><option value="land">Paisagem</option><option value="water">Umidade</option><option value="height">Relevo</option><option value="nitrogen">Nitrogênio</option><option value="microbe">Microbiologia</option></select></label><div id="stats"></div><div id="cell"></div><div id="agents" style="white-space:pre-line;background:#24372b;padding:9px;margin:8px 0"></div><div id="status" role="status"></div><p>Toque em uma área para inspecionar sua evolução. O mundo avança sem jogador. Parâmetros ilustrativos inspirados no clima de Asheville; não calibrados. Nenhum servidor ou download externo.</p></main><script>// Experimental continental soil cell; no calibrated species or spatial transport yet.
+function initialState(){
+  return {water:70,snow:0,plantC:0.18,plantN:0.0072,litterC:0.4,litterN:0.018,microbeC:0.04,microbeN:0.005,mineralN:0.006};
+}
+
+function stepSoil(state,climate){
+  // Prototype coefficients, not field-calibrated. Water mm; C and N kg/m²; one simulated day.
+  const s={...state};
+  const keys=Object.keys(initialState());
+  for(const k of keys) if(!Number.isFinite(s[k])||s[k]<0)throw new Error("invalid state "+k);
+  const {rainMm,tempC,light}=climate;
+  if(!Number.isFinite(rainMm)||rainMm<0||!Number.isFinite(tempC)||!Number.isFinite(light)||light<0||light>1)throw new Error("invalid weather");
+  const clamp=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+  let rain=tempC<=0?0:rainMm;
+  s.snow+=rainMm-rain;
+  const melt=Math.min(s.snow,Math.max(0,tempC)*1.5);
+  s.snow-=melt;
+  const liquid=rain+melt;
+  const infiltration=Math.min(liquid,Math.max(0,110-s.water),tempC<=0?0:35);
+  const runoff=liquid-infiltration;
+  s.water+=infiltration;
+  const drainage=Math.min(s.water,Math.max(0,s.water-75)*0.14);
+  s.water-=drainage;
+  const evap=Math.min(s.water,Math.max(0,tempC)*0.12*light);
+  s.water-=evap;
+  const wet=clamp(s.water/75,0,1);
+  const oxygen=clamp((115-s.water)/40,0,1);
+  const thermal=clamp((tempC+2)/22,0,1)*clamp((42-tempC)/17,0,1);
+  const activity=wet*oxygen*thermal;
+  const leachedN=Math.min(s.mineralN,s.mineralN*drainage/110);
+  s.mineralN-=leachedN;
+  // Microbial death transfers C and N to litter without inventing material.
+  const turnover=0.009*activity;
+  const deadMC=s.microbeC*turnover,deadMN=s.microbeN*turnover;
+  s.microbeC-=deadMC;s.microbeN-=deadMN;s.litterC+=deadMC;s.litterN+=deadMN;
+  const frac=clamp(0.035*activity*s.microbeC/(0.025+s.microbeC),0,1);
+  const decC=s.litterC*frac,decN=s.litterN*frac;
+  s.litterC-=decC;s.litterN-=decN;
+  // Simplified microbial C:N of 8; available N constrains biomass accumulation.
+  const microbialGrowth=Math.min(decC*0.35,(decN+s.mineralN)*8);
+  const microbialNeed=microbialGrowth/8;
+  s.microbeC+=microbialGrowth;s.microbeN+=microbialNeed;
+  s.mineralN+=decN-microbialNeed;
+  const microbialResp=decC-microbialGrowth;
+  const plantTurnover=clamp(0.002+0.015*(1-wet)+0.005*(tempC<=0?1:0),0,1);
+  const fallenC=s.plantC*plantTurnover,fallenN=s.plantN*plantTurnover;
+  s.plantC-=fallenC;s.plantN-=fallenN;s.litterC+=fallenC;s.litterN+=fallenN;
+  const plantResp=Math.min(s.plantC,s.plantC*0.006*thermal);
+  s.plantC-=plantResp;
+  const potential=0.012*light*activity*clamp(s.plantC/0.08,0,1);
+  const growth=Math.min(potential,s.mineralN*25);
+  s.plantC+=growth;s.plantN+=growth/25;s.mineralN-=growth/25;
+  for(const k of keys){if(s[k]<-1e-12||!Number.isFinite(s[k]))throw new Error("invalid result "+k);if(s[k]<0)s[k]=0;}
+  return {state:s,flux:{precipitation:rainMm,melt,infiltration,runoff,drainage,evap,carbonUptake:growth,respiredC:microbialResp+plantResp,leachedN,detritusC:fallenC,decC,microbialGrowth}};
+}
+
+const profile={"id":"blue-ridge-pilot-v1","latitude":35.43,"reference":"Asheville regional airport USW00003812; rounded illustrative values informed by Climate-Charts NOAA-derived table; not validated station normal","tempC":[3.6,5.5,9.6,14.2,18.5,22.6,24,23.6,20.6,14.6,8.7,5.9],"precipMm":[102,89,84,119,122,102,119,135,112,112,97,130],"days":[31,28,31,30,31,30,31,31,30,31,30,31],"wetProbability":0.34,"cellM":10};
+function hash01(seed,x,y){let n=(seed^Math.imul(x+1,374761393)^Math.imul(y+1,668265263))|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967296}
+function newWorld(w=32,h=24,seed=4801){
+  if(!Number.isInteger(w)||!Number.isInteger(h)||w<3||h<3||w*h>16384)throw Error("invalid dimensions");
+  const cells=Array.from({length:w*h},(_,i)=>{const x=i%w,y=Math.floor(i/w),u=x/(w-1),v=y/(h-1);const valley=.49+.14*Math.sin(v*6.3);const z=650+110*Math.abs(u-valley)+45*Math.sin(u*5.7+v*2.9)**2+30*(1-v)+8*(hash01(seed,x,y)-.5);const s=initialState();s.water=45+32*(1-Math.abs(u-valley));s.plantC=.13+.13*hash01(seed+9,x,y);s.plantN=s.plantC/25;return {z,soil:s,surface:0};});
+  return {w,h,seed,day:0,cells,last:null};
+}
+function weather(day,seed){
+  let d=day%365,m=0;while(d>=profile.days[m]){d-=profile.days[m];m++}
+  const f=d/profile.days[m],mean=profile.tempC[m]*(1-f)+profile.tempC[(m+1)%12]*f;
+  const rain=hash01(seed,day,1)<profile.wetProbability?(profile.precipMm[m]/profile.days[m]/profile.wetProbability)*(.3+1.4*hash01(seed,day,2)):0;
+  return {tempC:mean+(hash01(seed,day,3)-.5)*14,light:.58+.26*Math.sin((day%365-80)*2*Math.PI/365),rainMm:rain,month:m};
+}
+function advance(world,override=null,reverse=false){
+  const {w,h,cells}=world,cl=override||weather(world.day,world.seed);
+  const next=cells.map(c=>({z:c.z,soil:null,surface:0}));
+  const ledger={precipitation:0,evap:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0};
+  const order=Array.from({length:cells.length},(_,i)=>reverse?cells.length-1-i:i);
+  const transfers=[];
+  for(const i of order){
+    const c=cells[i],x=i%w,y=Math.floor(i/w),tempC=cl.tempC-(c.z-650)*.0065;
+    const s={...c.soil};
+    const intake=tempC>0?Math.min(c.surface,Math.max(0,110-s.water),15):0;
+    s.water+=intake;
+    const {state,flux}=stepSoil(s,{rainMm:cl.rainMm,tempC,light:cl.light});
+    next[i].soil=state;
+    for(const k of ["precipitation","evap","drainage","carbonUptake","respiredC","leachedN"])ledger[k]+=flux[k];
+    const available=c.surface-intake+flux.runoff;
+    let target=-1,best=c.z;
+    for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=w||ny>=h)continue;const j=ny*w+nx;if(cells[j].z<best){best=cells[j].z;target=j}}
+    const edge=x===0||y===0||x===w-1||y===h-1;
+    const flow=target>=0?available*.65:edge?available*.65:0;
+    next[i].surface=available-flow;
+    transfers.push({i,target,flow});
+  }
+  // Canonical order of accumulation makes reverse traversal produce identical states.
+  transfers.sort((a,b)=>a.i-b.i);
+  for(const {target,flow} of transfers){if(target>=0){next[target].surface+=flow;ledger.routed+=flow}else ledger.outflow+=flow}
+  return {...world,day:world.day+1,cells:next,last:{climate:cl,ledger}};
+}
+function totals(world){
+  return world.cells.reduce((a,c)=>{a.water+=c.soil.water+c.soil.snow+c.surface;for(const [k,v] of Object.entries(c.soil)){if(k.endsWith("C"))a.C+=v;if(k.endsWith("N"))a.N+=v}return a},{water:0,C:0,N:0})
+}
+function clamp01(x){return Math.max(0,Math.min(1,x))}
+function adjacent(world,i){const x=i%world.w,y=Math.floor(i/world.w),n=[i];if(x>0)n.push(i-1);if(x<world.w-1)n.push(i+1);if(y>0)n.push(i-world.w);if(y<world.h-1)n.push(i+world.w);return n.sort((a,b)=>a-b)}
+function perceivedRisk(cell){return clamp01(cell.surface/25+cell.soil.snow/80)}
+function rememberedRisk(agent,i,day){const m=agent.memory.find(m=>m.cell===i);return m?m.risk*Math.pow(.5,Math.max(0,day-m.day)/30):0}
+function createAgent(world,id,pos){if(!Number.isInteger(pos)||pos<0||pos>=world.cells.length)throw Error("invalid position");return {id,pos,memory:[],visits:0,encounters:0,last:null}}
+function decide(agent,world){
+ const options=adjacent(world,agent.pos).map(i=>{const c=world.cells[i],visible=perceivedRisk(c),memory=rememberedRisk(agent,i,world.day);const cover=clamp01(c.soil.plantC/.3);const cost=i===agent.pos?0:.04;const novelty=agent.memory.some(m=>m.cell===i)?0:.06;return {cell:i,visible,memory,cover,score:cover*.5-visible*.7-memory*1.25-cost+novelty}});
+ options.sort((a,b)=>b.score-a.score||a.cell-b.cell);return options[0];
+}
+function experience(agent,world,choice,disturbances){
+ if(!adjacent(world,agent.pos).includes(choice.cell))throw Error("nonlocal action");
+ const noise=disturbances.some(e=>e.cell===choice.cell&&e.until>world.day);
+ const risk=clamp01(perceivedRisk(world.cells[choice.cell])+(noise?.9:0));
+ const old=rememberedRisk(agent,choice.cell,world.day);
+ const learned=clamp01(old*.35+risk*.65);
+ const memory=agent.memory.filter(m=>m.cell!==choice.cell&&world.day-m.day<=180);
+ memory.push({cell:choice.cell,risk:learned,day:world.day});
+ memory.sort((a,b)=>b.day-a.day||a.cell-b.cell);
+ return {...agent,pos:choice.cell,memory:memory.slice(0,24),visits:agent.visits+1,encounters:agent.encounters+(noise?1:0),last:{day:world.day,from:agent.pos,to:choice.cell,visible:choice.visible,expected:choice.memory,observed:risk,noise,learned}};
+}
+function createSimulation(w=32,h=24,seed=4801,count=6){
+ const world=newWorld(w,h,seed);if(!Number.isInteger(count)||count<1||count>64||count>world.cells.length)throw Error("invalid count");
+ const agents=Array.from({length:count},(_,i)=>createAgent(world,i,Math.floor((i+.5)*world.cells.length/count)));
+ return {schema:1,world,agents,disturbances:[]};
+}
+function addDisturbance(sim,cell,duration=3){
+ if(!Number.isInteger(cell)||cell<0||cell>=sim.world.cells.length||!Number.isInteger(duration)||duration<1||duration>30)throw Error("invalid disturbance");
+ return {...sim,disturbances:[...sim.disturbances.filter(e=>e.cell!==cell&&e.until>sim.world.day),{cell,until:sim.world.day+duration+1}].sort((a,b)=>a.cell-b.cell)};
+}
+function advanceSimulation(sim,override=null){
+ const world=advance(sim.world,override);const disturbances=sim.disturbances.filter(e=>e.until>world.day);
+ const agents=sim.agents.map(a=>experience(a,world,decide(a,world),disturbances));
+ return {...sim,world,agents,disturbances};
+}
+function encodeSimulation(sim){return JSON.stringify(sim)}
+function decodeSimulation(raw){
+ if(typeof raw!=="string"||raw.length>10000000)throw Error("invalid save size");
+ const s=JSON.parse(raw),w=s?.world;
+ const int=(v,min,max)=>Number.isInteger(v)&&v>=min&&v<=max;
+ const num=(v,min,max)=>Number.isFinite(v)&&v>=min&&v<=max;
+ if(s?.schema!==1||!w||!int(w.w,3,128)||!int(w.h,3,128)||!int(w.day,0,10000000)||!int(w.seed,-2147483648,2147483647)||!Array.isArray(w.cells)||w.cells.length!==w.w*w.h)throw Error("invalid world save");
+ const keys=Object.keys(initialState());
+ for(const c of w.cells){if(!c||!num(c.z,-10000,10000)||!num(c.surface,0,1e9)||!keys.every(k=>num(c.soil?.[k],0,1e9)))throw Error("invalid cell save")}
+ if(!Array.isArray(s.agents)||!s.agents.length||s.agents.length>64||!Array.isArray(s.disturbances)||s.disturbances.length>w.cells.length)throw Error("invalid agents");
+ const ids=new Set();
+ for(const a of s.agents){if(!a||!int(a.id,0,63)||ids.has(a.id)||!int(a.pos,0,w.cells.length-1)||!int(a.visits,0,w.day)||!int(a.encounters,0,a.visits)||!Array.isArray(a.memory)||a.memory.length>24)throw Error("invalid agent");ids.add(a.id);const seen=new Set();for(const m of a.memory){if(!m||!int(m.cell,0,w.cells.length-1)||seen.has(m.cell)||!num(m.risk,0,1)||!int(m.day,0,w.day))throw Error("invalid memory");seen.add(m.cell)}}
+ for(const e of s.disturbances)if(!e||!int(e.cell,0,w.cells.length-1)||!int(e.until,w.day+1,w.day+31))throw Error("invalid event");
+ return s;
+}
+function diagnose(sim,baseline){
+ const current=totals(sim.world),delta={water:current.water-baseline.water,C:current.C-baseline.C,N:current.N-baseline.N};
+ return {day:sim.world.day,agents:sim.agents.length,observations:sim.agents.reduce((n,a)=>n+a.visits,0),noiseEncounters:sim.agents.reduce((n,a)=>n+a.encounters,0),memories:sim.agents.reduce((n,a)=>n+a.memory.length,0),delta,flags:[...(delta.C<-.01?["net_carbon_loss"]:[]),...(delta.N<-.001?["net_nitrogen_loss"]:[])]};
+}
+const metabolism={"bodyC":0.16,"bodyN":0.02,"reserveMax":0.15,"initialReserve":0.09,"maintenance":0.018,"moveCost":0.004,"maxIntake":0.055,"assimilation":0.65,"starveDays":5};
+function bounded(x){return Math.max(0,Math.min(1,x))}
+function createFoodWorld(w=32,h=24,seed=4801,count=6){
+ const s=createSimulation(w,h,seed,count);
+ return {...s,foodSchema:1,agents:s.agents.map(a=>({...a,alive:true,reserveC:metabolism.initialReserve,bodyC:metabolism.bodyC,bodyN:metabolism.bodyN,deficitDays:0,consumedC:0,consumedN:0,deathDay:null,feeding:null})),foodLedger:{eatenC:0,eatenN:0,respiredC:0,litterC:0,litterN:0,deaths:0,harvestC:0,harvestN:0},dailyFood:null};
+}
+function foodTotals(s){
+ const t=totals(s.world),area=profile.cellM**2;
+ return {waterL:t.water*area,C:t.C*area+s.agents.reduce((n,a)=>n+a.bodyC+a.reserveC,0),N:t.N*area+s.agents.reduce((n,a)=>n+a.bodyN,0)};
+}
+function foodChoice(a,w){
+ const hunger=bounded(1-a.reserveC/metabolism.reserveMax),area=profile.cellM**2;
+ return adjacent(w,a.pos).map(i=>{const c=w.cells[i],visible=bounded(c.surface/25+c.soil.snow/80),memory=rememberedRisk(a,i,w.day),food=bounded(c.soil.plantC*area/metabolism.maxIntake/4)*(1-bounded(c.soil.snow/50)),cover=bounded(c.soil.plantC/.3),cost=i===a.pos?0:.08,novelty=a.memory.some(m=>m.cell===i)?0:.025;return {cell:i,visible,memory,score:food*(.2+1.3*hunger)+cover*.15-visible*.7-memory*1.25-cost+novelty}}).sort((a,b)=>b.score-a.score||a.cell-b.cell)[0];
+}
+function allocateFood(world,requests){
+ const area=profile.cellM**2,byCell=new Map(),allocation=new Map();
+ for(const r of requests){if(!byCell.has(r.cell))byCell.set(r.cell,[]);byCell.get(r.cell).push(r)}
+ for(const [i,group] of [...byCell].sort((a,b)=>a[0]-b[0])){
+  group.sort((a,b)=>a.id-b.id);const c=world.cells[i],s=c.soil;
+  const total=group.reduce((n,r)=>n+r.demand,0),available=s.plantC*area*(1-bounded(s.snow/50)),taken=Math.min(total,available),ratio=s.plantC>0?s.plantN/s.plantC:0;
+  for(const r of group){const C=total>0?taken*r.demand/total:0;allocation.set(r.id,{C,N:C*ratio})}
+  s.plantC-=taken/area;s.plantN-=taken*ratio/area;
+  if(s.plantC<0&&s.plantC>-1e-12)s.plantC=0;if(s.plantN<0&&s.plantN>-1e-12)s.plantN=0;
+ }
+ return allocation;
+}
+function advanceFoodWorld(sim,override=null){
+ const w=advance(sim.world,override),area=profile.cellM**2,disturbances=sim.disturbances.filter(e=>e.until>w.day);
+ const plans=sim.agents.filter(a=>a.alive).map(a=>{const choice=foodChoice(a,w),cost=metabolism.maintenance+(choice.cell===a.pos?0:metabolism.moveCost),demand=Math.min(metabolism.maxIntake,Math.max(0,(metabolism.reserveMax-a.reserveC+cost)/metabolism.assimilation));return {id:a.id,cell:choice.cell,choice,cost,demand}});
+ const map=new Map(plans.map(p=>[p.id,p])),allocation=allocateFood(w,plans);
+ const daily={eatenC:0,eatenN:0,respiredC:0,litterC:0,litterN:0,deaths:0,harvestC:0,harvestN:0};
+ const agents=sim.agents.map(a=>{if(!a.alive)return a;const p=map.get(a.id),f=allocation.get(a.id),b=experience(a,w,p.choice,disturbances),s=w.cells[p.cell].soil;
+  const assimilated=Math.min(f.C*metabolism.assimilation,metabolism.reserveMax-a.reserveC+p.cost);
+  const available=a.reserveC+assimilated,resp=Math.min(p.cost,available),reserve=available-resp;
+  let litterC=f.C-assimilated,litterN=f.N;
+  const deficit=resp+1e-12<p.cost?a.deficitDays+1:0,alive=deficit<metabolism.starveDays;
+  if(!alive){litterC+=a.bodyC+reserve;litterN+=a.bodyN;daily.deaths++}
+  s.litterC+=litterC/area;s.litterN+=litterN/area;
+  daily.eatenC+=f.C;daily.eatenN+=f.N;daily.respiredC+=resp;daily.litterC+=litterC;daily.litterN+=litterN;
+  return {...b,alive,reserveC:alive?reserve:0,bodyC:alive?a.bodyC:0,bodyN:alive?a.bodyN:0,deficitDays:deficit,consumedC:a.consumedC+f.C,consumedN:a.consumedN+f.N,deathDay:alive?null:w.day,feeding:{day:w.day,foodC:f.C,foodN:f.N,respiredC:resp,demand:p.demand}};
+ });
+ const foodLedger=Object.fromEntries(Object.keys(daily).map(k=>[k,sim.foodLedger[k]+daily[k]]));
+ return {...sim,world:w,agents,disturbances,foodLedger,dailyFood:daily};
+}
+function harvestFoodWorld(sim,i,fraction=.5){
+ if(!Number.isInteger(i)||i<0||i>=sim.world.cells.length||!Number.isFinite(fraction)||fraction<0||fraction>1)throw Error("invalid harvest");
+ const cells=sim.world.cells.slice(),c=cells[i],soil={...c.soil},area=profile.cellM**2,C=soil.plantC*fraction,N=soil.plantN*fraction;
+ soil.plantC-=C;soil.plantN-=N;cells[i]={...c,soil};
+ return {...sim,world:{...sim.world,cells},foodLedger:{...sim.foodLedger,harvestC:sim.foodLedger.harvestC+C*area,harvestN:sim.foodLedger.harvestN+N*area}};
+}
+function decodeFoodWorld(raw){
+ const s=decodeSimulation(raw);
+ if(s.foodSchema!==1||!s.foodLedger||!Object.keys(createFoodLedger()).every(k=>Number.isFinite(s.foodLedger[k])&&s.foodLedger[k]>=0))throw Error("invalid food schema");
+ for(const a of s.agents){if(typeof a.alive!=="boolean"||!["reserveC","bodyC","bodyN","consumedC","consumedN"].every(k=>Number.isFinite(a[k])&&a[k]>=0)||a.reserveC>metabolism.reserveMax+1e-10||!Number.isInteger(a.deficitDays)||a.deficitDays<0||a.deficitDays>metabolism.starveDays||(a.alive?(a.deathDay!==null||a.bodyC!==metabolism.bodyC||a.bodyN!==metabolism.bodyN):(a.reserveC!==0||a.bodyC!==0||a.bodyN!==0||!Number.isInteger(a.deathDay)||a.deathDay<1||a.deathDay>s.world.day)))throw Error("invalid metabolism")}
+ return s;
+}
+function createFoodLedger(){return {eatenC:0,eatenN:0,respiredC:0,litterC:0,litterN:0,deaths:0,harvestC:0,harvestN:0}}
+const fertilityProfile={"id":"coweeta-deposition-pilot-v1","source":"Walker et al. 2023 doi:10.5194/bg-20-971-2023; regional forest analog, not farm calibration","totalKgNHaYr":6.7,"wetInorganicKgNHaYr":3.69,"otherKgNHaYr":3.01,"stableTransferPerDay":0.0015,"stableReleasePerDay":0.00008,"initialStableFraction":0.55};
+function fertLedger(){return {depositionN:0,wetN:0,otherN:0,uptakeC:0,soilRespC:0,agentRespC:0,leachN:0,protectedC:0,protectedN:0,releasedC:0,releasedN:0}}
+function initFertility(w=32,h=24,seed=4801,count=6,enabled=true){
+ const sim=createFoodWorld(w,h,seed,count);
+ const cells=sim.world.cells.map(c=>{const s={...c.soil},f=fertilityProfile.initialStableFraction;s.stableC=enabled?s.litterC*f:0;s.stableN=enabled?s.litterN*f:0;s.litterC-=s.stableC;s.litterN-=s.stableN;return {...c,soil:s}});
+ const result={...sim,world:{...sim.world,cells},fertilitySchema:1,enabled,fertilityLedger:fertLedger(),dailyFertility:null};
+ return {...result,baseline:foodTotals(result)};
+}
+function fertAdvance(sim,override=null){
+ const cl=override||weather(sim.world.day,sim.world.seed),area=profile.cellM**2,annualRain=profile.precipMm.reduce((a,b)=>a+b,0),p=fertilityProfile;
+ const daily=fertLedger();
+ const cells=sim.world.cells.map(c=>{
+  const s={...c.soil},temp=cl.tempC-(c.z-650)*.0065,moisture=Math.min(1,s.water/75),thermal=Math.max(0,Math.min(1,(temp+2)/22)),activity=moisture*thermal;
+  const wet=sim.enabled?p.wetInorganicKgNHaYr/10000*cl.rainMm/annualRain:0,other=sim.enabled?p.otherKgNHaYr/10000/365:0;
+  // Snow deposition is stored in soil mineral pool immediately in this abstraction.
+  s.mineralN+=wet+other;daily.wetN+=wet*area;daily.otherN+=other*area;daily.depositionN+=(wet+other)*area;
+  const release=sim.enabled?p.stableReleasePerDay*activity:0;
+  const rc=s.stableC*release,rn=s.stableN*release;s.stableC-=rc;s.stableN-=rn;s.litterC+=rc;s.litterN+=rn;daily.releasedC+=rc*area;daily.releasedN+=rn*area;
+  return {...c,soil:s};
+ });
+ const next=advanceFoodWorld({...sim,world:{...sim.world,cells}},cl);
+ for(const c of next.world.cells){
+  const s=c.soil,temp=cl.tempC-(c.z-650)*.0065,activity=Math.min(1,s.water/75)*Math.max(0,Math.min(1,(temp+2)/22));
+  const f=sim.enabled?p.stableTransferPerDay*activity:0,C=s.litterC*f,N=s.litterN*f;s.litterC-=C;s.litterN-=N;s.stableC+=C;s.stableN+=N;daily.protectedC+=C*area;daily.protectedN+=N*area;
+ }
+ const l=next.world.last.ledger;daily.uptakeC=l.carbonUptake*area;daily.soilRespC=l.respiredC*area;daily.leachN=l.leachedN*area;daily.agentRespC=next.dailyFood.respiredC;
+ const ledger=Object.fromEntries(Object.keys(daily).map(k=>[k,sim.fertilityLedger[k]+daily[k]]));
+ return {...next,fertilityLedger:ledger,dailyFertility:daily};
+}
+function decodeFertility(raw){
+ const s=decodeFoodWorld(raw);
+ if(s.fertilitySchema!==1||typeof s.enabled!=="boolean"||!s.fertilityLedger||!s.baseline||!Object.keys(fertLedger()).every(k=>Number.isFinite(s.fertilityLedger[k])&&s.fertilityLedger[k]>=0)||!["waterL","C","N"].every(k=>Number.isFinite(s.baseline[k])&&s.baseline[k]>=0))throw Error("invalid fertility schema");
+ for(const c of s.world.cells)if(!["stableC","stableN"].every(k=>Number.isFinite(c.soil[k])&&c.soil[k]>=0))throw Error("invalid stable pool");
+ return s;
+}
+function fertilityReport(s){
+ const t=foodTotals(s),f=s.fertilityLedger,area=profile.cellM**2;
+ return {day:s.world.day,enabled:s.enabled,total:t,stableC:s.world.cells.reduce((n,c)=>n+c.soil.stableC*area,0),stableN:s.world.cells.reduce((n,c)=>n+c.soil.stableN*area,0),deltaC:t.C-s.baseline.C,deltaN:t.N-s.baseline.N,ledger:f,residualC:s.baseline.C+f.uptakeC-f.soilRespC-f.agentRespC-s.foodLedger.harvestC-t.C,residualN:s.baseline.N+f.depositionN-f.leachN-s.foodLedger.harvestN-t.N};
+}
+
+
+const factorProfile={"id":"coweeta-deposition-pilot-v1","source":"Walker et al. 2023 doi:10.5194/bg-20-971-2023; regional forest analog, not farm calibration","totalKgNHaYr":6.7,"wetInorganicKgNHaYr":3.69,"otherKgNHaYr":3.01,"stableTransferPerDay":0.0015,"stableReleasePerDay":0.00008,"initialStableFraction":0.55};
+function factorLedger(){return {depositionN:0,wetN:0,otherN:0,uptakeC:0,soilRespC:0,agentRespC:0,leachN:0,protectedC:0,protectedN:0,releasedC:0,releasedN:0}}
+
+function initFactors(w=32,h=24,seed=4801,count=6,factors={deposition:true,protection:true,initialPool:true,fixation:false}){
+ const sim=createFoodWorld(w,h,seed,count);
+ const cells=sim.world.cells.map(c=>{const s={...c.soil},f=factorProfile.initialStableFraction;s.stableC=factors.initialPool?s.litterC*f:0;s.stableN=factors.initialPool?s.litterN*f:0;s.litterC-=s.stableC;s.litterN-=s.stableN;return {...c,soil:s}});
+ const result={...sim,world:{...sim.world,cells},fertilitySchema:1,enabled:!!factors.protection,factors:{...factors},fertilityLedger:factorLedger(),dailyFertility:null};
+ return {...result,baseline:foodTotals(result)};
+}
+
+function factorAdvance(sim,override=null){
+ const cl=override||weather(sim.world.day,sim.world.seed),area=profile.cellM**2,annualRain=profile.precipMm.reduce((a,b)=>a+b,0),p=factorProfile;
+ const daily=factorLedger();
+ const cells=sim.world.cells.map(c=>{
+  const s={...c.soil},temp=cl.tempC-(c.z-650)*.0065,moisture=Math.min(1,s.water/75),thermal=Math.max(0,Math.min(1,(temp+2)/22)),activity=moisture*thermal;
+  const wet=sim.factors.deposition?p.wetInorganicKgNHaYr/10000*cl.rainMm/annualRain:0,other=sim.factors.deposition?p.otherKgNHaYr/10000/365:0;
+  // Snow deposition is stored in soil mineral pool immediately in this abstraction.
+  s.mineralN+=wet+other;daily.wetN+=wet*area;daily.otherN+=other*area;daily.depositionN+=(wet+other)*area;
+  const release=sim.factors.protection?p.stableReleasePerDay*activity:0;
+  const rc=s.stableC*release,rn=s.stableN*release;s.stableC-=rc;s.stableN-=rn;s.litterC+=rc;s.litterN+=rn;daily.releasedC+=rc*area;daily.releasedN+=rn*area;
+  return {...c,soil:s};
+ });
+ const next=advanceFoodWorld({...sim,world:{...sim.world,cells}},cl);
+ for(const c of next.world.cells){
+  const s=c.soil,temp=cl.tempC-(c.z-650)*.0065,activity=Math.min(1,s.water/75)*Math.max(0,Math.min(1,(temp+2)/22));
+  const f=sim.factors.protection?p.stableTransferPerDay*activity:0,C=s.litterC*f,N=s.litterN*f;s.litterC-=C;s.litterN-=N;s.stableC+=C;s.stableN+=N;daily.protectedC+=C*area;daily.protectedN+=N*area;
+ }
+ const l=next.world.last.ledger;daily.uptakeC=l.carbonUptake*area;daily.soilRespC=l.respiredC*area;daily.leachN=l.leachedN*area;daily.agentRespC=next.dailyFood.respiredC;
+ const ledger=Object.fromEntries(Object.keys(daily).map(k=>[k,sim.fertilityLedger[k]+daily[k]]));
+ return {...next,fertilityLedger:ledger,dailyFertility:daily};
+}
+
+function decodeFactorsBase(raw){
+ const s=decodeFoodWorld(raw);
+ if(s.fertilitySchema!==1||typeof s.enabled!=="boolean"||!s.fertilityLedger||!s.baseline||!Object.keys(factorLedger()).every(k=>Number.isFinite(s.fertilityLedger[k])&&s.fertilityLedger[k]>=0)||!["waterL","C","N"].every(k=>Number.isFinite(s.baseline[k])&&s.baseline[k]>=0))throw Error("invalid fertility schema");
+ for(const c of s.world.cells)if(!["stableC","stableN"].every(k=>Number.isFinite(c.soil[k])&&c.soil[k]>=0))throw Error("invalid stable pool");
+ return s;
+}
+
+function factorReportBase(s){
+ const t=foodTotals(s),f=s.fertilityLedger,area=profile.cellM**2;
+ return {day:s.world.day,enabled:s.enabled,total:t,stableC:s.world.cells.reduce((n,c)=>n+c.soil.stableC*area,0),stableN:s.world.cells.reduce((n,c)=>n+c.soil.stableN*area,0),deltaC:t.C-s.baseline.C,deltaN:t.N-s.baseline.N,ledger:f,residualC:s.baseline.C+f.uptakeC-f.soilRespC-f.agentRespC-s.foodLedger.harvestC-t.C,residualN:s.baseline.N+f.depositionN-f.leachN-s.foodLedger.harvestN-t.N};
+}
+
+const fixationProfile={"hostFraction":0.25,"maxKgNHaYear":100,"costKgCPerKgN":8,"hostTargetCN":18,"nonHostTargetCN":25,"mineralInhibitionKgM2":0.002,"source":"UGA white clover 100–150 lb N/acre/year vigorous stand; model ceiling 100 kg/ha/year illustrative, not calibrated"};
+function fixClamp(v){return Math.max(0,Math.min(1,v))}
+function fixationCell(s,cl,hostFraction,p=fixationProfile){
+ const n={...s}, thermal=fixClamp((cl.tempC-5)/15)*fixClamp((38-cl.tempC)/10),moist=fixClamp(s.water/45)*fixClamp((115-s.water)/40),inhib=1/(1+s.mineralN/p.mineralInhibitionKgM2);
+ const hostC=s.plantC*hostFraction,capacity=hostC/p.hostTargetCN+(s.plantC-hostC)/p.nonHostTargetCN;
+ const gap=Math.max(0,capacity-s.plantN);
+ const fixedN=Math.min(p.maxKgNHaYear/10000/365*hostFraction*thermal*moist*cl.light*inhib,gap/(1+p.costKgCPerKgN/p.hostTargetCN),hostC*.02/p.costKgCPerKgN);
+ const costC=fixedN*p.costKgCPerKgN;
+ n.plantC-=costC;n.plantN+=fixedN;
+ return {soil:n,fixedN,costC};
+}
+function initMicro(w=32,h=24,seed=4801,count=6,factors={deposition:true,protection:true,initialPool:true,fixation:true}){
+ const s=initFactors(w,h,seed,count,factors);
+ return {...s,microSchema:1,fixLedger:{fixedN:0,costC:0},dailyFix:{fixedN:0,costC:0}};
+}
+function microAdvance(s,override=null){
+ const cl=override||weather(s.world.day,s.world.seed),next=factorAdvance(s,cl),area=profile.cellM**2,daily={fixedN:0,costC:0};
+ if(s.factors.fixation)for(const c of next.world.cells){const r=fixationCell(c.soil,{...cl,tempC:cl.tempC-(c.z-650)*.0065},fixationProfile.hostFraction);c.soil=r.soil;daily.fixedN+=r.fixedN*area;daily.costC+=r.costC*area}
+ return {...next,fixLedger:{fixedN:s.fixLedger.fixedN+daily.fixedN,costC:s.fixLedger.costC+daily.costC},dailyFix:daily};
+}
+function microReport(s){const r=factorReportBase(s);return {...r,factors:s.factors,fixLedger:s.fixLedger,residualC:r.residualC-s.fixLedger.costC,residualN:r.residualN+s.fixLedger.fixedN}}
+function decodeMicro(raw){const s=decodeFactorsBase(raw);if(s.microSchema!==1||!s.factors||!["deposition","protection","initialPool","fixation"].every(k=>typeof s.factors[k]==="boolean")||!s.fixLedger||!["fixedN","costC"].every(k=>Number.isFinite(s.fixLedger[k])&&s.fixLedger[k]>=0))throw Error("invalid micro save");return s}
+let sim=initMicro(),world=sim.world,baseline=foodTotals(sim),selected=0,timer=null;const canvas=document.getElementById("map"),ctx=canvas.getContext("2d"),el=id=>document.getElementById(id);const cw=canvas.width/world.w,ch=canvas.height/world.h;
+function draw(){const layer=el("layer").value;ctx.clearRect(0,0,640,360);for(let i=0;i<world.cells.length;i++){const c=world.cells[i],s=c.soil,x=(i%world.w)*cw,y=Math.floor(i/world.w)*ch;let h=100+Math.min(25,s.plantC*70),sat=35,l=27+Math.min(25,s.plantC*70)+(c.z-700)*.06;if(layer==="water"){h=195;sat=65;l=20+s.water/110*45}else if(layer==="height"){h=40;sat=20;l=20+(c.z-650)*.3}else if(layer==="nitrogen"){h=54;sat=70;l=12+Math.min(55,s.mineralN*5500)}else if(layer==="microbe"){h=285;sat=48;l=15+Math.min(55,s.microbeC*450)}else if(s.snow>2){h=200;sat=18;l=75+Math.min(16,s.snow)}else if(c.surface>3){h=199;sat=52;l=35+Math.min(15,c.surface)}ctx.fillStyle="hsl("+h+","+sat+"%,"+Math.max(8,Math.min(93,l))+"%)";ctx.fillRect(x,y,cw+1,ch+1);if(layer==="land"&&s.snow<2&&c.surface<3){for(let j=0;j<8;j++){const px=x+Math.floor(hash01(world.seed+j,i,4)*cw),py=y+Math.floor(hash01(world.seed+j,i,5)*ch);ctx.fillStyle=j%2?"#dde7a71a":"#102d2a33";ctx.fillRect(px,py,2,2)}}}for(const a of sim.agents){if(!a.alive)continue;const x=(a.pos%world.w)*cw+cw/2,y=Math.floor(a.pos/world.w)*ch+ch/2;ctx.fillStyle="#141a1f";ctx.fillRect(x-5,y-5,10,10);ctx.fillStyle=a.last?.noise?"#ff775a":"#f3de82";ctx.fillRect(x-3,y-3,6,6)}for(const e of sim.disturbances){ctx.strokeStyle="#ff775a";ctx.lineWidth=2;ctx.strokeRect((e.cell%world.w)*cw+2,Math.floor(e.cell/world.w)*ch+2,cw-4,ch-4)}ctx.strokeStyle="#ffdf78";ctx.lineWidth=2;ctx.strokeRect((selected%world.w)*cw,Math.floor(selected/world.w)*ch,cw,ch);const c=world.cells[selected],s=c.soil,l=world.last?.ledger,cl=world.last?.climate||weather(world.day,world.seed);el("stats").textContent="Ano "+(Math.floor(world.day/365)+1)+" • Dia "+(world.day%365+1)+" | "+cl.tempC.toFixed(1)+" °C | precipitação "+cl.rainMm.toFixed(1)+" mm\n"+(l?"Água encaminhada: "+(l.routed*profile.cellM**2/1000).toFixed(1)+" m³ • Saída superficial: "+(l.outflow*profile.cellM**2/1000).toFixed(1)+" m³":"Estado inicial");el("cell").textContent="Célula "+selected+" | altitude "+c.z.toFixed(1)+" m\nÁgua no solo "+s.water.toFixed(2)+" mm | neve (equivalente em água) "+s.snow.toFixed(2)+" mm | superfície "+c.surface.toFixed(2)+" mm\nC vegetal "+s.plantC.toFixed(4)+" | C microbiano "+s.microbeC.toFixed(4)+" | N mineral "+s.mineralN.toFixed(6)+" kg/m²";const d=diagnose(sim,totals(newWorld(world.w,world.h,world.seed))),t=foodTotals(sim),f=sim.foodLedger,r=microReport(sim);el("agents").textContent="Agentes vivos "+sim.agents.filter(a=>a.alive).length+"/"+sim.agents.length+" | mortes por falta de energia "+f.deaths+" | decisões "+d.observations+"\nC consumido "+f.eatenC.toFixed(3)+" kg | N consumido "+f.eatenN.toFixed(4)+" kg\nC respirado pelos agentes "+f.respiredC.toFixed(3)+" kg | C colhido "+f.harvestC.toFixed(3)+" kg\nEstoque total C "+t.C.toFixed(2)+" kg | N "+t.N.toFixed(2)+" kg\nModo "+(sim.enabled?"fertilidade experimental":"controle")+" | N atmosférico "+r.ledger.depositionN.toFixed(3)+" kg | N fixado "+r.fixLedger.fixedN.toFixed(3)+" kg | C custo fixação "+r.fixLedger.costC.toFixed(3)+" kg | C protegido "+r.stableC.toFixed(2)+" kg\nResíduo C "+r.residualC.toExponential(2)+" kg | N "+r.residualN.toExponential(2)+" kg\n"+sim.agents.map(a=>"Agente "+a.id+" • "+(a.alive?"reserva "+(a.reserveC/metabolism.reserveMax*100).toFixed(0)+"% | célula "+a.pos:"morto no dia "+a.deathDay)).join("\n");}function tick(n=1,cl=null){for(let i=0;i<n;i++)sim=microAdvance(sim,cl);world=sim.world;draw()}el("step").onclick=()=>tick();el("week").onclick=()=>tick(7);el("year").onclick=()=>tick(365);el("storm").onclick=()=>tick(1,{rainMm:100,tempC:20,light:.35});el("cold").onclick=()=>tick(1,{rainMm:20,tempC:-8,light:.3});el("auto").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("auto").textContent="▶ Simular"}else{timer=setInterval(()=>tick(),300);el("auto").textContent="Ⅱ Pausar"}};el("reset").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("auto").textContent="▶ Simular"}sim=initMicro();world=sim.world;baseline=foodTotals(sim);selected=0;draw()};el("compare").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("auto").textContent="▶ Simular"}sim=initMicro(32,24,4801,6,{deposition:false,protection:false,initialPool:false,fixation:false});world=sim.world;baseline=sim.baseline;selected=0;draw()};el("nofix").onclick=()=>{if(timer){clearInterval(timer);timer=null;el("auto").textContent="▶ Simular"}sim=initMicro(32,24,4801,6,{deposition:true,protection:true,initialPool:true,fixation:false});world=sim.world;baseline=sim.baseline;selected=0;draw()};el("harvest").onclick=()=>{sim=harvestFoodWorld(sim,selected);world=sim.world;el("status").textContent="Vegetação colhida: saída de C/N registrada.";draw()};el("noise").onclick=()=>{sim=addDisturbance(sim,selected,3);el("status").textContent="Perturbação local registrada na célula "+selected;draw()};el("save").onclick=()=>{try{localStorage.setItem("ilha-viva-continental-05",encodeSimulation(sim));el("status").textContent="Estado e memórias salvos neste navegador."}catch(e){el("status").textContent="Não foi possível salvar: "+e.message}};el("load").onclick=()=>{try{const saved=decodeMicro(localStorage.getItem("ilha-viva-continental-05"));if(saved.world.w!==world.w||saved.world.h!==world.h)throw Error("dimensões incompatíveis");sim=saved;world=sim.world;baseline=sim.baseline;draw();el("status").textContent="Estado e memórias recuperados."}catch(e){el("status").textContent="Não foi possível carregar: "+e.message}};el("layer").onchange=draw;canvas.onpointerdown=e=>{const r=canvas.getBoundingClientRect(),x=Math.min(world.w-1,Math.max(0,Math.floor((e.clientX-r.left)/r.width*world.w))),y=Math.min(world.h-1,Math.max(0,Math.floor((e.clientY-r.top)/r.height*world.h)));selected=y*world.w+x;draw()};draw();</script></body></html>

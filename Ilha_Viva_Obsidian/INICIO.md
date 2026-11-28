@@ -1,6 +1,6 @@
 ---
 tags: [ilha-viva, indice]
-versao: "CP-2026-11-27-04"
+versao: "CP-2026-11-27-10"
 ---
 
 > **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
@@ -13,7 +13,7 @@ versao: "CP-2026-11-27-04"
 # Ilha Viva | Central do projeto
 YNOVIQ Studios • 26/11/2026
 
-**Fase atual:** M48-A parcial. Laboratório Continental 01 disponível (diagnóstico ecológico, sem protagonista). Base jogável histórica v0.47. **Começar por [[docs/CHECKPOINT_CONTINUIDADE]].**
+**Fase atual:** M48-A parcial, piloto M48-B. Laboratório Continental 06 com flora funcional; campo jogável com protagonista pendente. Começar por [[docs/CHECKPOINT_CONTINUIDADE]].
 
 ## Navegação
 - [[docs/SKILLS_PROJETO]] • biblioteca de procedimentos reutilizáveis
@@ -163,3 +163,18 @@ QA: 1.095 dias × 192 células = 210.240 células-dia; 4.423 verificações apro
 
 ## CP-2026-11-27-04 | Entrega ao Codex e economia de sessão
 Missão vigente: [[MISSAO_CODEX_M48A]], arquivo `Ilha_Viva_Obsidian/docs/MISSAO_CODEX_M48A.md`. Nova skill `.agents/skills/economia-de-sessao/SKILL.md`: leitura seletiva, trabalho agrupado, testes direcionados e regressão no marco integrado, automação, recuperação de bloqueios e atualização por evidências. Sete skills no total. Base técnica permanece CP-03; nesta revisão apenas procedimentos e documentação, sem novo build, código de jogo, arte ou testes. Próxima ação: executar a missão no checkout do Codex, recuperar atlas original e integrar campo continental em HTML. Não afirmar que Codex executou ou que economia foi medida.
+
+## Laboratório 02
+[HTML no GitHub](https://github.com/yphelipe/Ilha-Viva/blob/main/play/Ilha_Viva_Laboratorio_Continental_02.html) | [[CHECKPOINT_CONTINUIDADE]] (CP-06). Não é o novo campo completo.
+
+## CP-2026-11-27-07
+Laboratório Continental 03 e `scientific/us/food_world.mjs` publicados: fome, consumo de biomassa conservativo, competição proporcional, respiração, retorno de nutrientes, morte por déficit e colheita com exportação C/N. 11.021 verificações do motor e 8 da UI simulada; cinco anos virtuais. Perda líquida C/N continua; coeficientes sintéticos. Sem novo campo com protagonista ou arte definitiva. Ver [[CHECKPOINT_CONTINUIDADE]] e `qa/continental_03.json` para evidências, limitações e próximos passos.
+
+## CP-2026-11-27-08 | Fertilidade experimental
+Laboratório 04 e módulo fertility.mjs publicados. Deposição atmosférica inspirada em Coweeta (6,7 kg N/ha/ano) e estoque orgânico protegido com taxas sintéticas. Dois cenários de 5 anos, 14.674 verificações do motor e 7 da UI simulada. C/N finais maiores na combinação experimental, mas perdas persistem e C colhido menor. Não é calibração de campo nem prova isolada de eficácia. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_04.json. Protagonista e arte final ainda pendentes; preservar históricos. Próximo: teste fatorial, fontes e sumidouros específicos, microbiologia.
+
+## CP-2026-11-27-09 | Simbiose e experimento fatorial
+Módulo microbiology.mjs e Laboratório Continental 05 publicados. Nove cenários de 3 anos, 29.708 verificações do motor e 7 de UI simulada. Separados fatores de deposição, dinâmica do estoque protegido e repartição inicial; teste adicional de fixação simbiótica limitada por hospedeiro agregado, C, N, luz, água e temperatura. Fixação total pequena (0,016396 kg N, custo 0,131166 kg C), apenas no primeiro ano. Não representa microbiologia completa nem calibração. Próximo: gramíneas/leguminosas em pools separados, nodulação e fungos/micorrizas/P; campo integrado quando atlas acessível. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_05.json.
+
+## CP-2026-11-27-10 | Flora funcional
+Laboratório Continental 06 e flora.mjs publicados. Gramíneas/leguminosas possuem C/N próprios, competição, nodulação funcional e crescimento com fixação de N/custo C. 17.683 verificações do motor e 7 da interface simulada; 4 cenários de 3 anos. Mistura fixou 6,184 kg N continuamente nos três anos; sem hospedeiro, zero. Parâmetros sintéticos e agentes abstratos. Atlas original inacessível pelo conector, preservado. Campo jogável e arte final ainda pendentes. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_06.json. HTML primeiro, Godot posterior.

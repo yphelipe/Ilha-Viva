@@ -1,0 +1,62 @@
+{
+  "checks": 11021,
+  "days": 1825,
+  "cells": 120,
+  "decisions": 10950,
+  "maxCarbonResidualKg": 1.3448256397374792e-11,
+  "maxNitrogenResidualKg": 3.503206405519599e-12,
+  "baseline": {
+    "waterL": 816398.7969300172,
+    "C": 7575.829069613482,
+    "N": 439.893162784536
+  },
+  "annual": [
+    {
+      "year": 1,
+      "alive": 6,
+      "Ckg": 3898.775077835523,
+      "Nkg": 392.01289530488344
+    },
+    {
+      "year": 2,
+      "alive": 6,
+      "Ckg": 3765.0948465245733,
+      "Nkg": 389.8075344819551
+    },
+    {
+      "year": 3,
+      "alive": 6,
+      "Ckg": 3432.917711837405,
+      "Nkg": 387.799500507021
+    },
+    {
+      "year": 4,
+      "alive": 6,
+      "Ckg": 3373.934850331243,
+      "Nkg": 386.1471026269862
+    },
+    {
+      "year": 5,
+      "alive": 6,
+      "Ckg": 3233.5774980865085,
+      "Nkg": 384.96713625692087
+    }
+  ],
+  "foodLedger": {
+    "eatenC": 307.2061538461494,
+    "eatenN": 26.6999735054164,
+    "respiredC": 199.32400000000408,
+    "litterC": 107.52215384615016,
+    "litterN": 26.6999735054164,
+    "deaths": 0,
+    "harvestC": 119.65877641141584,
+    "harvestN": 9.377265360988131
+  },
+  "final": {
+    "waterL": 1392895.6195465212,
+    "C": 3233.5774980865085,
+    "N": 384.96713625692087
+  },
+  "uiChecks": 8,
+  "environment": "JS tool runtime, mock DOM/canvas/localStorage; no browser/Android/Node CLI; synthetic coefficients"
+}

@@ -1,0 +1,29 @@
+{
+  "checks": 5508,
+  "days": 1825,
+  "cells": 120,
+  "decisions": 10950,
+  "controlled": {
+    "before": 3,
+    "after": 5,
+    "learnedRisk": 0.5850000000000001
+  },
+  "diagnostic": {
+    "day": 1825,
+    "agents": 6,
+    "observations": 10950,
+    "noiseEncounters": 361,
+    "memories": 141,
+    "delta": {
+      "water": 5764.968226165041,
+      "C": -43.008345774082215,
+      "N": -0.4548813750148355
+    },
+    "flags": [
+      "net_carbon_loss",
+      "net_nitrogen_loss"
+    ]
+  },
+  "uiChecks": 8,
+  "environment": "JS tool runtime; HTML mock DOM/canvas/localStorage; no actual browser, Android or Node CLI"
+}
