@@ -1,0 +1,161 @@
+{
+  "checks": 14674,
+  "daysPerScenario": 1825,
+  "cells": 120,
+  "runs": [
+    {
+      "enabled": false,
+      "annual": [
+        {
+          "year": 1,
+          "C": 3898.7451085043062,
+          "N": 392.0118111872428,
+          "stableC": 0,
+          "depositionN": 0,
+          "alive": 6
+        },
+        {
+          "year": 2,
+          "C": 3765.0066753828646,
+          "N": 389.806336685367,
+          "stableC": 0,
+          "depositionN": 0,
+          "alive": 6
+        },
+        {
+          "year": 3,
+          "C": 3431.241502728576,
+          "N": 387.78559316743525,
+          "stableC": 0,
+          "depositionN": 0,
+          "alive": 6
+        },
+        {
+          "year": 4,
+          "C": 3371.6339815430583,
+          "N": 386.1110379771192,
+          "stableC": 0,
+          "depositionN": 0,
+          "alive": 6
+        },
+        {
+          "year": 5,
+          "C": 3231.6156515472303,
+          "N": 384.9156478723531,
+          "stableC": 0,
+          "depositionN": 0,
+          "alive": 6
+        }
+      ],
+      "maxDailyCResidualKg": 1.3642420526593924e-11,
+      "maxDailyNResidualKg": 3.524291969370097e-12,
+      "report": {
+        "day": 1825,
+        "enabled": false,
+        "total": {
+          "waterL": 1392895.6195465212,
+          "C": 3231.6156515472303,
+          "N": 384.9156478723531
+        },
+        "stableC": 0,
+        "stableN": 0,
+        "deltaC": -4344.2134180662515,
+        "deltaN": -54.977514912182926,
+        "ledger": {
+          "depositionN": 0,
+          "wetN": 0,
+          "otherN": 0,
+          "uptakeC": 22985.717950658698,
+          "soilRespC": 27011.240385848523,
+          "agentRespC": 199.06400000000423,
+          "leachN": 45.599556989975476,
+          "protectedC": 0,
+          "protectedN": 0,
+          "releasedC": 0,
+          "releasedN": 0
+        },
+        "residualC": -1.2278178473934531e-11,
+        "residualN": -3.410605131648481e-12
+      },
+      "harvest": 119.62698287643508
+    },
+    {
+      "enabled": true,
+      "annual": [
+        {
+          "year": 1,
+          "C": 5490.897841963223,
+          "N": 400.75548096031963,
+          "stableC": 2944.646311012452,
+          "depositionN": 8.951375378614733,
+          "alive": 6
+        },
+        {
+          "year": 2,
+          "C": 5443.156994390937,
+          "N": 407.0536950336912,
+          "stableC": 3084.13726257317,
+          "depositionN": 16.922210786480132,
+          "alive": 6
+        },
+        {
+          "year": 3,
+          "C": 5303.444034568056,
+          "N": 413.80228449583285,
+          "stableC": 3201.8625397922638,
+          "depositionN": 25.11496238569445,
+          "alive": 6
+        },
+        {
+          "year": 4,
+          "C": 5314.602466489743,
+          "N": 420.19873775537286,
+          "stableC": 3304.713950694769,
+          "depositionN": 32.64240568569228,
+          "alive": 6
+        },
+        {
+          "year": 5,
+          "C": 5287.6649955077955,
+          "N": 427.8063394828843,
+          "stableC": 3414.879520815965,
+          "depositionN": 41.212044525950304,
+          "alive": 6
+        }
+      ],
+      "maxDailyCResidualKg": 1.9099388737231493e-11,
+      "maxDailyNResidualKg": 1.1937117960769683e-12,
+      "report": {
+        "day": 1825,
+        "enabled": true,
+        "total": {
+          "waterL": 1392895.6195465212,
+          "C": 5287.6649955077955,
+          "N": 427.8063394828843
+        },
+        "stableC": 3414.879520815965,
+        "stableN": 204.48130471569667,
+        "deltaC": -2288.1640741056863,
+        "deltaN": -12.086823301654078,
+        "ledger": {
+          "depositionN": 41.212044525950304,
+          "wetN": 23.152044525949844,
+          "otherN": 18.060000000000354,
+          "uptakeC": 14204.928171374328,
+          "soilRespC": 16212.38444132908,
+          "agentRespC": 199.16400000000428,
+          "leachN": 46.94492017602411,
+          "protectedC": 1079.2613588061167,
+          "protectedN": 101.69446722183615,
+          "releasedC": 304.3818379901536,
+          "releasedN": 16.013162506139523
+        },
+        "residualC": 3.728928277269006e-11,
+        "residualN": -1.7053025658242404e-13
+      },
+      "harvest": 81.54380415089067
+    }
+  ],
+  "uiChecks": 7,
+  "environment": "JS runtime; simulated DOM/canvas/localStorage; no real browser, Node CLI or Android; experimental not calibrated"
+}
