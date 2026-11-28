@@ -9,6 +9,7 @@ let farm = createFarm(COLS, ROWS, 4801);
 let player = {x:805,y:415,dir:'down'};
 const camera = {x:0,y:0};
 let inspected = null, work = null, gait = 0, isMoving = false, isRunning = false;
+let touchRun = false;
 let season = 0, needsPaint = true, lastTime = 0, request = 0, autoTimer = null;
 const keysHeld = new Set(), directions = new Map();
 const groundObjects = [...SCENES].sort((a,b)=>a.y-b.y);
@@ -108,7 +109,7 @@ function frame(time){
     const held=new Set([...directions.values(),...Array.from(keysHeld,k=>keyVectors[k])]);
     const dx=Number(held.has('right'))-Number(held.has('left'));
     const dy=Number(held.has('down'))-Number(held.has('up'));
-    isRunning=keysHeld.has('ShiftLeft')||keysHeld.has('ShiftRight');
+    isRunning=touchRun||keysHeld.has('ShiftLeft')||keysHeld.has('ShiftRight');
     if(work){work.elapsed+=dt;if(work.elapsed>=work.duration)work=null;needsPaint=true}
     isMoving=Boolean((dx||dy)&&move(dx,dy,dt,isRunning));
     if(needsPaint){draw();needsPaint=false}
@@ -121,16 +122,17 @@ function step(days=1) {
 }
 function setAuto(on) {
     if(autoTimer!==null)clearInterval(autoTimer);
-    autoTimer=on?setInterval(()=>{if(!document.hidden)step()},6000):null;
+    autoTimer=on?setInterval(()=>{if(!document.hidden&&!work)step()},6000):null;
     element('auto').setAttribute('aria-pressed',String(on));
 }
 function restore(text) {
     const decoded=decodeFarmSave(text), p=decoded.player;
     if(decoded.farm.world.w!==COLS||decoded.farm.world.h!==ROWS||blocked(p.x,p.y))throw Error('Posição incompatível com o vale.');
-    setAuto(false);keysHeld.clear();directions.clear();work=null;isMoving=false;gait=0;
+    setAuto(false);keysHeld.clear();directions.clear();work=null;isMoving=false;gait=0;touchRun=false;element('run').setAttribute('aria-pressed','false');
     farm=decoded.farm;player=p;inspected=null;follow();updateGround();
 }
-element('next').onclick=()=>step();
+element('next').onclick=()=>{if(!work)step()};
+element('run').onclick=()=>{touchRun=!touchRun;element('run').setAttribute('aria-pressed',String(touchRun));schedule()};
 element('auto').onclick=()=>setAuto(autoTimer===null);
 element('save').onclick=()=>{
     try{localStorage.setItem(slot,encodeFarmSave(farm,player));notice('Partida salva neste navegador.')}
@@ -171,7 +173,7 @@ function updateStock(){
     const {stock,plots}=farm.garden, index=selectedCell();
     const plot=plots.find(p=>p.index===index);
     const description=plot?(plot.plantedDay===null?'Canteiro disponível':'Canteiro plantado há '+(farm.world.day-plot.plantedDay)+' dias'):'Fora da horta';
-    element('stock').textContent=description+' · '+stock.starts+' mudas · Colheita armazenada '+formatted(stock.cropC)+' kg C';
+    element('stock').textContent=description+' · '+stock.starts+' mudas · Colheita armazenada '+formatted(stock.cropC)+' kg C · Cisterna '+formatted((farm.world.steward?.tankMm??0)*100)+' L';
 }
 function drawBeds(g){
     for(const p of farm.garden.plots){
@@ -194,6 +196,7 @@ function drawBeds(g){
     }
 }
 function tend(operation,kind) {
+    if(work){notice('Aguarde a animação terminar.');return}
     const index=selectedCell();
     if(index!==cellAt(player.x,player.y)){notice('Caminhe até a parcela observada para trabalhar.');return}
     const result=operation(farm,index);notice(result.message);
@@ -203,8 +206,9 @@ function tend(operation,kind) {
 }
 element('plant').onclick=()=>tend(plantFarm,'hoe');
 element('harvest').onclick=()=>tend(harvestFarm,'sickle');
+element('water').onclick=()=>tend(waterFarm,'water');
 window.Continental={
-    snapshot:()=>structuredClone({world:farm.world,farm,player,camera,season:seasonNames[season],action:work?.kind??(isMoving?'walk':'idle')}),
+    snapshot:()=>structuredClone({world:farm.world,farm,player,camera,season:seasonNames[season],action:work?.kind??(isMoving?(isRunning?'run':'walk'):'idle')}),
     step,move
 };
 scenery.onload=schedule;scenery.src=SCENE_IMAGE;

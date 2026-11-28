@@ -12,7 +12,7 @@ from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-FIELD = ROOT / 'play/Ilha_Viva_Campo_Continental_02.html'
+FIELD = ROOT / 'play/Ilha_Viva_Campo_Continental_03.html'
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -75,6 +75,17 @@ def test_field(evidence=None):
             if evidence:
                 evidence.mkdir(parents=True, exist_ok=True)
                 page.screenshot(path=str(evidence / 'campo_retrato.png'), full_page=True)
+            page.locator('#plant').tap()
+            page.wait_for_function("Continental.snapshot().action === 'idle'")
+            check('plant consumes one batch of starts', snapshot()['farm']['garden']['stock']['starts'] == 5)
+            page.locator('#plant').tap()
+            check('duplicate planting blocked', snapshot()['farm']['garden']['stock']['starts'] == 5)
+            page.locator('#harvest').tap()
+            check('premature harvest blocked', snapshot()['farm']['garden']['stock']['cropC'] == 0)
+            page.locator('#run').tap()
+            check('mobile run toggle', page.locator('#run').get_attribute('aria-pressed') == 'true')
+            page.locator('#run').tap()
+            check('mobile run toggle off', page.locator('#run').get_attribute('aria-pressed') == 'false')
             page.locator('#next').tap()
             check('tap advances autonomous day', snapshot()['world']['day'] == start['world']['day'] + 1)
             stationary = snapshot()['player']

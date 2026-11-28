@@ -75,6 +75,25 @@ export function harvestFarm(farm,index) {
     message:'Forragem guardada. A vegetação remanescente pode rebrotar.'};
 }
 
+
+// The shared cistern is part of world.totals; transfer water instead of creating it.
+export function waterFarm(farm,index) {
+  const plot=farm.garden.plots.find(p=>p.index===index);
+  if(!plot || plot.plantedDay===null)return {farm,ok:false,message:'Plante um canteiro antes de regar.'};
+  const world=farm.world, steward=world.steward, cell=world.cells[index], soil=cell.soil;
+  if(soil.snow>0 || !world.last?.climate || world.last.climate.tempC-(cell.z-profile.stationElevationM)*.0065<=0)
+    return {farm,ok:false,message:'Aguarde o degelo para regar.'};
+  const mm=Math.min(steward?.tankMm??0,0.4,Math.max(0,75-soil.water));
+  if(mm<=1e-12)return {farm,ok:false,message:soil.water>=75?'O solo já está úmido.':'Cisterna vazia. Aguarde a chuva.'};
+  const water=soil.water+mm, cells=world.cells.slice();
+  cells[index]={...cell,soil:{...soil,water}};
+  const updated={...steward,tankMm:steward.tankMm-mm,
+    plots:steward.plots.map(p=>p.index===index?{...p,waterAfterMm:water}:p)};
+  const garden={...farm.garden,manualWaterL:(farm.garden.manualWaterL??0)+mm*area};
+  return {farm:{...farm,garden,world:{...world,cells,steward:updated}},ok:true,
+    message:'Rega: '+(mm*area).toFixed(0)+' litros retirados da cisterna.'};
+}
+
 export function farmReport(farm) {
   const base = floraReport(farm), s = farm.garden.stock, planted = initialStarts-s.starts;
   return {...base,storedCarbonKg:s.cropC+s.starts*startC,storedNitrogenKg:s.cropN+s.starts*startN,
@@ -86,7 +105,7 @@ export function validateFarm(farm) {
   validateSteward(farm.world);
   const g=farm.garden, s=g?.stock, indices=bedIndices(farm.world);
   if (g?.schema!==1 || !s || !Number.isInteger(s.starts) || s.starts<0 || s.starts>initialStarts ||
-      !nonnegative(s.cropC) || !nonnegative(s.cropN) ||
+      !nonnegative(s.cropC) || !nonnegative(s.cropN) || !nonnegative(g.manualWaterL??0) ||
       Math.abs(s.cropC-farm.foodLedger.harvestC)>1e-8 || Math.abs(s.cropN-farm.foodLedger.harvestN)>1e-8 ||
       !Array.isArray(g.plots) || g.plots.length!==indices.length) throw Error('Estoque ou canteiros inválidos.');
   let planted=0;

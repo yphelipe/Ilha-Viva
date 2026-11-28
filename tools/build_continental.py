@@ -7,7 +7,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'src/continental'
-OUTPUT = ROOT / 'play/Ilha_Viva_Campo_Continental_02.html'
+OUTPUT = ROOT / 'play/Ilha_Viva_Campo_Continental_03.html'
 IMPORT = re.compile(r"^import\s*\{([^}]+)\}\s*from\s*['\"]\./(\w+)\.mjs['\"];?", re.M)
 EXPORT = re.compile(r'^export (?:function|const) (\w+)', re.M)
 
@@ -31,7 +31,7 @@ def science_bundle():
 
     visit('farm')
     return '\n'.join([*modules.values(), 'const {weather,profile} = us_world;',
-                      'const {createFarm,stepFarm,plantFarm,harvestFarm,validateFarm} = us_farm;'])
+                      'const {createFarm,stepFarm,plantFarm,harvestFarm,waterFarm,validateFarm} = us_farm;'])
 
 
 def main():

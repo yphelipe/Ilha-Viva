@@ -53,7 +53,7 @@ class ApprovedAtlas(unittest.TestCase):
         self.assertEqual(used, set(sizes))
 
     def test_standalone_build_embeds_original_hero_and_complete_scene_atlas(self):
-        html = (ROOT / 'play/Ilha_Viva_Campo_Continental_02.html').read_text()
+        html = (ROOT / 'play/Ilha_Viva_Campo_Continental_03.html').read_text()
         source = json.loads((ROOT / 'assets/runtime/ART.json').read_bytes())
         decoder = json.JSONDecoder()
         def embedded(name):

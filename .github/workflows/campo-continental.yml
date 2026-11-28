@@ -1,0 +1,45 @@
+name: Campo continental - build e QA
+on:
+  push:
+    branches: ['missao/campo-continental']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  campo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Testes cientificos e agricultura
+        run: |
+          node scientific/us/farm.test.mjs
+          node scientific/us/flora.test.mjs
+          node scientific/us/steward.test.mjs
+          node scientific/us/climate_canopy.test.mjs
+      - name: Dependencias
+        run: |
+          python -m pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Build offline
+        run: python tools/build_continental.py
+      - name: Atlas e navegador
+        run: |
+          python tests/test_continental_atlas.py
+          python tests/test_continental_browser.py --evidence qa/campo03
+      - name: Artefato do campo e evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ilha-Viva-Campo-Continental-03
+          path: |
+            play/Ilha_Viva_Campo_Continental_03.html
+            qa/campo03/
+          if-no-files-found: warn
+          retention-days: 14
