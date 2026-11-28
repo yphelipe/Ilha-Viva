@@ -195,3 +195,6 @@ CP-11 confirmado: Campo 03 compilado e entregue como HTML/artefato CI; run 46151
 Campo 04: coleta de água conservativa, cobertura orgânica, colheita condicionada a 14 dias/biomassa, analógico tátil, zoom, destaque e progresso do canteiro. 64 verificações de modelo; QA real/artefato pendentes de confirmação CI. Preserva artes e Campo 03. Ver checkpoint mestre.
 
 CP-12 confirmado: Campo 04 compilado e entregue; CI 46154034962, 26 testes Chromium, 64 verificações agrícolas e 17.683 de flora. Ver checkpoint mestre; Android físico pendente.
+
+## CP-2026-11-28-13
+Prévia gráfica local Campo 05: 21 recortes de captura Gemini; alternância entre arte original e candidata; 9 testes locais Chromium. Assets/HTML/ZIP entregues no chat, binários ainda não sincronizados ao GitHub por limitação de transferência. Campo 04 permanece build oficial. PNG original necessário para acabamento final. Ver checkpoint mestre.

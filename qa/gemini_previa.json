@@ -1,0 +1,14 @@
+{
+  "baseCommit": "b64a93085c02ef9ca4d4eb9d34a3b25aa6e32071",
+  "artifact": "Ilha_Viva_Campo_Continental_05_Previa.html",
+  "bytes": 1843919,
+  "sha256": "8ac60e48d70caedd5fb079e838a836a75322736775e19d4e393f76d58727ce9c",
+  "source": "captura JPEG Gemini, não PNG original",
+  "assets": 21,
+  "browser": "144.0.7559.96",
+  "checks": 9,
+  "mode": "Playwright set_content offline",
+  "physicalAndroid": false,
+  "fullRegression": false,
+  "binariesInRepo": false
+}
