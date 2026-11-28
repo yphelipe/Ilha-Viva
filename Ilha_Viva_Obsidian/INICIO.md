@@ -194,3 +194,6 @@ Prévia gráfica local Campo 05: 21 recortes de captura Gemini; alternância ent
 
 ## CP-2026-11-28-14
 Campo 06 local usa prancha integral Gemini 1536×857, 29 objetos recortados e cinco referências de água. Escala revista com protagonista como referência, colisões poligonais, zoom inteiro e câmera ajustada; 12 verificações Chromium. HTML e pacote entregues no chat, ainda não sincronizados ao GitHub. Campo 04 permanece oficial; ver checkpoint mestre. Arte candidata, não aprovação final.
+
+## CP-2026-11-28-15
+Campo 07 local: água superficial evapora, chuva/neve visual, poças, vegetação dependente de biomassa, analógico proporcional. 18 verificações Chromium e dois cenários anuais de balanço hídrico. Fontes e limites no checkpoint. Código físico/UI principal sincronizado; atlas Gemini ainda local. HTML primeiro.

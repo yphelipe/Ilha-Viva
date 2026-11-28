@@ -10,6 +10,7 @@ let player = {x:805,y:415,dir:'down'};
 const camera = {x:0,y:0};
 let inspected = null, work = null, gait = 0, isMoving = false, isRunning = false;
 let touchRun = false, stickVector={x:0,y:0}, stickPointer=null, zoomMode=1;
+let showWeather=true, weatherPhase=0;
 let season = 0, needsPaint = true, lastTime = 0, request = 0, autoTimer = null;
 const keysHeld = new Set(), directions = new Map();
 const groundObjects = [...SCENES].sort((a,b)=>a.y-b.y);
@@ -47,6 +48,8 @@ function updatePanel() {
     element('place').textContent=(inspected===null?'Parcela aos seus pés':'Parcela observada')+' · '+row+' / '+col;
     element('cell').textContent='Água no solo '+formatted(c.soil.water)+' mm · Gramíneas '+formatted(100*c.soil.grassCarbon)+' kg C · Leguminosas '+formatted(100*c.soil.legumeCarbon)+' kg C';
     element('agent').textContent=w.steward?.last?.reason || '';
+    const l=w.last?.ledger;const localTemp=cl.tempC-(c.z-profile.stationElevationM)*.0065;
+    element('hydrology').textContent='Solo: '+(c.soil.water<40?'seco':c.soil.water>85?'muito úmido':'úmido')+' · '+(c.soil.snow>0?'Neve '+formatted(c.soil.snow)+' mm · ':'')+'Água superficial '+formatted(c.surface)+' mm · '+(localTemp<=0?'frio local':'')+' · Evaporação superficial no vale '+formatted((l?.surfaceEvap??0)*100)+' L/dia';
     updateStock();
 }
 function move(dx,dy,seconds,run=false) {
@@ -54,7 +57,7 @@ function move(dx,dy,seconds,run=false) {
     const length=Math.hypot(dx,dy);
     if(!length)return false;
     player.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');
-    const distance=(run?135:82)*Math.min(seconds,.15), n=Math.ceil(distance/2);
+    const distance=(run?135:82)*Math.min(seconds,.15)*Math.min(1,length), n=Math.max(1,Math.ceil(distance/2));
     const sx=distance*dx/length/n, sy=distance*dy/length/n;
     const beforeX=player.x,beforeY=player.y,previousCell=selectedCell();
     for(let i=0;i<n;i++){
@@ -88,6 +91,19 @@ function drawHero() {
     g.drawImage(im,Math.round(-(f.mirror?f.w-f.ax:f.ax)*scale),Math.round(-f.ay*scale),Math.round(f.w*scale),Math.round(f.h*scale));
     g.restore();
 }
+function drawWeather(g){
+ if(!showWeather)return;
+ const cl=environment(),w=fieldCanvas.width,h=fieldCanvas.height;
+ if(cl.rainMm<=0)return;
+ const snow=cl.tempC-(farm.world.cells[cellAt(player.x,player.y)].z-profile.stationElevationM)*.0065<=0;
+ const count=Math.min(95,Math.max(8,Math.round(cl.rainMm*3)));
+ g.save();g.fillStyle=snow?'#edf1ea':'#a5bbc4';g.globalAlpha=snow?.8:.45;
+ for(let i=0;i<count;i++){
+  const x=Math.floor((noiseField(i,91)*w+weatherPhase*(snow?1:3))%w),y=Math.floor((noiseField(i,92)*h+weatherPhase*(snow?2:9))%h);
+  g.fillRect(x,y,snow?2:1,snow?2:5);
+ }
+ g.restore();
+}
 function draw() {
     const g=fieldContext,w=fieldCanvas.width,h=fieldCanvas.height;
     g.imageSmoothingEnabled=false;
@@ -103,6 +119,7 @@ function draw() {
         g.drawImage(scenery,...r,x,y,r[2],r[3]);
     }
     if(!heroDone)drawHero();
+    drawWeather(g);
 }
 function frame(time){
     request=0;
@@ -135,6 +152,8 @@ function restore(text) {
 element('next').onclick=()=>{if(!work)step()};
 element('run').onclick=()=>{touchRun=!touchRun;element('run').setAttribute('aria-pressed',String(touchRun));schedule()};
 element('auto').onclick=()=>setAuto(autoTimer===null);
+element('weather-view').onclick=()=>{showWeather=!showWeather;element('weather-view').setAttribute('aria-pressed',String(showWeather));schedule()};
+setInterval(()=>{if(!document.hidden&&showWeather&&environment().rainMm>0){weatherPhase=(weatherPhase+1)%10000;schedule()}},120);
 element('zoom').onclick=()=>{zoomMode=zoomMode===1?1.35:1;element('zoom').setAttribute('aria-pressed',String(zoomMode!==1));resizeField()};
 element('save').onclick=()=>{
     try{localStorage.setItem(slot,encodeFarmSave(farm,player));notice('Partida salva neste navegador.')}

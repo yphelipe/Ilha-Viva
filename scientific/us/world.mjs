@@ -35,10 +35,16 @@ export function weather(day,seed){
     light:hours/24,daylightHours:hours,rainMm:rain,month:m};
 }
 
+// Experimental daily surface-water evaporation, mm per cell. Not a calibrated ET model.
+export function surfaceEvaporation(available,tempC,light){
+  if(tempC<=0||available<=0)return 0;
+  const potential=Math.min(6,0.16*tempC*Math.max(0,Math.min(1,light)));
+  return Math.min(available,potential);
+}
 export function advance(world,override=null,reverse=false){
   const {w,h,cells}=world,cl=override||weather(world.day,world.seed);
   const next=cells.map(c=>({z:c.z,soil:null,surface:0}));
-  const ledger={precipitation:0,evap:0,soilEvap:0,transpiration:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0};
+  const ledger={precipitation:0,evap:0,soilEvap:0,surfaceEvap:0,transpiration:0,drainage:0,outflow:0,carbonUptake:0,respiredC:0,leachedN:0,routed:0};
   const order=Array.from({length:cells.length},(_,i)=>reverse?cells.length-1-i:i);
   const transfers=[];
   for(const i of order){
@@ -49,7 +55,10 @@ export function advance(world,override=null,reverse=false){
     const {state,flux}=stepSoil(s,{rainMm:cl.rainMm,tempC,light:cl.light});
     next[i].soil=state;
     for(const k of ["precipitation","evap","soilEvap","transpiration","drainage","carbonUptake","respiredC","leachedN"])ledger[k]+=flux[k];
-    const available=c.surface-intake+flux.runoff;
+    const pooled=c.surface-intake+flux.runoff;
+    const surfaceLoss=surfaceEvaporation(pooled,tempC,cl.light);
+    ledger.surfaceEvap+=surfaceLoss;ledger.evap+=surfaceLoss;
+    const available=pooled-surfaceLoss;
     let target=-1,best=c.z;
     for(const [dx,dy] of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=w||ny>=h)continue;const j=ny*w+nx;if(cells[j].z<best){best=cells[j].z;target=j}}
     const edge=x===0||y===0||x===w-1||y===h-1;

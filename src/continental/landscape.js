@@ -83,7 +83,7 @@ function paintGround(world,season) {
         else if(c.soil.snow>1 && noiseField(i,14)<Math.min(.9,c.soil.snow/14))color='#e1e4d6';
         else {
             const patch=Math.sin(x/65+Math.sin(y/70))+Math.cos((x+y)/83);
-            color=grass[variation>.82?2:patch>0?1:variation>.38?3:4];
+            color=c.soil.water<35&&variation>.45?'#a99b69':c.soil.water>85&&variation>.45?'#61744f':grass[variation>.82?2:patch>0?1:variation>.38?3:4];
         }
         g.fillStyle=color;g.fillRect(x,y,2+Math.floor(variation*6),1);
         if(channel>riverWidth(y)+3 && trail>20 && variation>.83){
@@ -105,6 +105,14 @@ function paintGround(world,season) {
                 }
             }
         }
+    }
+    // Pools are visual proxies for actual cell surface storage, not additional water.
+    for(let i=0;i<world.cells.length;i++){
+      const c=world.cells[i];if(c.surface<2||c.soil.snow>1)continue;
+      const x=(i%COLS+.5)*CELL_W,y=(Math.floor(i/COLS)+.5)*CELL_H;
+      if(Math.abs(x-riverX(y))<riverWidth(y)+30||Math.abs(y-pathY(x))<28||blocked(x,y))continue;
+      const width=Math.min(26,Math.round(5+Math.sqrt(c.surface)*3));
+      for(let j=-3;j<=3;j++){const ww=Math.max(2,Math.round(width*Math.sqrt(1-j*j/16)));g.fillStyle=j===-2?'#9aa99a':'#778e86';g.fillRect(Math.round(x-ww/2),y+j,ww,1)}
     }
     // Ponte fixa acima do leito, inclusive em dias de canal seco.
     g.fillStyle='#534e3f';g.fillRect(bridgeLeft,bridgeY-15,104,31);

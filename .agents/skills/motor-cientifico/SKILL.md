@@ -28,3 +28,6 @@ Usar ensaio fatorial com mesmas condições iniciais totais, seed, duração e i
 
 ## Aprendizado CP-10
 Separar grupos funcionais com estoques reais C/N e agregados de compatibilidade que não contam em duplicidade. Resolver competição por N a partir de demanda simultânea; fixação condicionada a hospedeiro, custo de C e disponibilidade ambiental, e testar ausência de hospedeiro. Reconciliar os subestoques depois de consumo/colheita e verificar persistência. Referência flora.test.mjs, 17.683 verificações em runtime JS. Nodulação é índice e não população real. Refatorar orquestração duplicada após integração.
+
+## Aprendizado CP-15
+Separar evaporação superficial de evaporação do solo e transpiração, limitar fluxo pelo estoque e somar uma única vez ao balanço total. Testar solo seco, frio, escuro, 365 dias com cisterna do hortelão e malha base. Efeito visual não adiciona água. Coeficientes não calibrados.

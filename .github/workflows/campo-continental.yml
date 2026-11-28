@@ -19,6 +19,7 @@ jobs:
           python-version: '3.12'
       - name: Testes cientificos e agricultura
         run: |
+          node scientific/us/surface_water.test.mjs
           node scientific/us/farm.test.mjs
           node scientific/us/flora.test.mjs
           node scientific/us/steward.test.mjs

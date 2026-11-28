@@ -1,0 +1,16 @@
+{
+  "source": "Campo 06 local CP-14",
+  "artifact": "Ilha_Viva_Campo_Continental_07.html",
+  "bytes": 2057134,
+  "sha256": "32370e00eaa5f9656dcb351d1923be20aae01e975648efd2f673df817beb5e35",
+  "browser": "144.0.7559.96",
+  "checks": 18,
+  "daysPerScenario": 365,
+  "maxResidualMmBase": 5.087485988042317e-12,
+  "maxResidualMmFarm": 6.164846411138569e-12,
+  "annualSurfaceEvapSumMmBase": 576.0852335180847,
+  "annualSurfaceEvapSumMmFarm": 1311.1962335908213,
+  "physicalAndroid": false,
+  "fullRegression": false,
+  "sourceArtInRepo": false
+}
