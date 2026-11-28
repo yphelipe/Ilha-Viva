@@ -19,3 +19,6 @@ Para roteamento espacial, calcular disponibilidades a partir do estado anterior,
 
 ## Aprendizado verificado CP-07
 Para consumo concorrente, agrupar demandas por célula, limitar ao estoque acessível, distribuir proporcionalmente e retirar massa uma única vez. Converter densidades por área antes de combinar com estoques absolutos dos agentes. Respiração, detritos, exportação por colheita e carcaças devem fechar C/N. Testar competição por estoque insuficiente, morte sem alimento, conservação diária e persistência. Evidência: food_world.test.mjs (732b085c), 11.021 verificações no runtime JS. Parâmetros não calibrados; balanço fechado não implica equilíbrio ecológico.
+
+## Aprendizado verificado CP-08
+Separar estoques orgânicos ativos/protegidos por transferências, sem alterar massa inicial total. Contabilizar deposição atmosférica como fluxo de fronteira, converter kg/ha para kg/m² e validar balanços acumulados, incluindo exportação por colheita. Comparar cenários com mesmas seeds e estoques totais; para inferência causal, variar um fator de cada vez e explicitar repartição inicial. Evidência: fertility.test.mjs (4af6c504), 14.674 verificações em JS. Balanço numérico não prova equilíbrio nem calibração. Não ajustar coeficientes apenas para ocultar perda.
