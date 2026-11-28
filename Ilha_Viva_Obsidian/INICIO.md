@@ -1,6 +1,6 @@
 ---
 tags: [ilha-viva, indice]
-versao: "CP-2026-11-27-08"
+versao: "CP-2026-11-27-09"
 ---
 
 > **Vigência 27/11/2026 | CP-2026-11-27-01:** região continental fictícia dos EUA, piloto Apalaches, expansão por ecorregiões; Madagascar/Amazônia são históricos. Mundo autônomo e ciência integrada, protagonista preservado. M48-A parcial: célula de solo experimental implementada; novo HTML ainda não existe. Retomar por [[CHECKPOINT_CONTINUIDADE]] e [[AMBIENTACAO_EUA]]. As notas anteriores conflitantes são histórico.
@@ -13,7 +13,7 @@ versao: "CP-2026-11-27-08"
 # Ilha Viva | Central do projeto
 YNOVIQ Studios • 26/11/2026
 
-**Fase atual:** M48-A parcial. Laboratório Continental 04: fertilidade experimental, deposição atmosférica e estoques orgânicos. Campo com protagonista pendente. Começar por [[docs/CHECKPOINT_CONTINUIDADE]].
+**Fase atual:** M48-A parcial. Laboratório Continental 05: fertilidade, experimento fatorial e fixação simbiótica experimental; campo com protagonista pendente. Começar por [[docs/CHECKPOINT_CONTINUIDADE]].
 
 ## Navegação
 - [[docs/SKILLS_PROJETO]] • biblioteca de procedimentos reutilizáveis
@@ -172,3 +172,6 @@ Laboratório Continental 03 e `scientific/us/food_world.mjs` publicados: fome, c
 
 ## CP-2026-11-27-08 | Fertilidade experimental
 Laboratório 04 e módulo fertility.mjs publicados. Deposição atmosférica inspirada em Coweeta (6,7 kg N/ha/ano) e estoque orgânico protegido com taxas sintéticas. Dois cenários de 5 anos, 14.674 verificações do motor e 7 da UI simulada. C/N finais maiores na combinação experimental, mas perdas persistem e C colhido menor. Não é calibração de campo nem prova isolada de eficácia. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_04.json. Protagonista e arte final ainda pendentes; preservar históricos. Próximo: teste fatorial, fontes e sumidouros específicos, microbiologia.
+
+## CP-2026-11-27-09 | Simbiose e experimento fatorial
+Módulo microbiology.mjs e Laboratório Continental 05 publicados. Nove cenários de 3 anos, 29.708 verificações do motor e 7 de UI simulada. Separados fatores de deposição, dinâmica do estoque protegido e repartição inicial; teste adicional de fixação simbiótica limitada por hospedeiro agregado, C, N, luz, água e temperatura. Fixação total pequena (0,016396 kg N, custo 0,131166 kg C), apenas no primeiro ano. Não representa microbiologia completa nem calibração. Próximo: gramíneas/leguminosas em pools separados, nodulação e fungos/micorrizas/P; campo integrado quando atlas acessível. Ver [[CHECKPOINT_CONTINUIDADE]] e qa/continental_05.json.
